@@ -1,5 +1,8 @@
 from django.db import models
 
+#Notes on schema reasoning:
+#-Surrogate key used since compostie keys are not fully supported. New solutions may be needed
+# If queries on courseClasses are sluggish. Remember to keep the schema seed friendly.
 
 class Faculty(models.Model):
     code = models.CharField(max_length=2, unique=True, null=False)
@@ -27,7 +30,7 @@ class Course(models.Model):
     subject = models.ForeignKey('Course',on_delete=models.CASCADE)
 
 class Term(models.Model):
-    code = models.IntegerField()
+    code = models.IntegerField(unique=True, null=False)
     title = models.CharField(max_length=40, blank=True, null=True)
     startDate = models.DateField(blank=True, null=True)
     endDate = models.DateField(blank=True, null=True)
