@@ -8,7 +8,6 @@ class Faculty(models.Model):
     code = models.CharField(max_length=2, unique=True, null=False)
     name = models.CharField(max_length=60, blank=True, null=True)
 
-
 class Department(models.Model):
     code = models.CharField(max_length=10, unique=True, null=False)
     name = models.CharField(max_length=100, blank=True, null=True)
@@ -39,51 +38,51 @@ class CourseClass(models.Model):
     code = models.IntegerField(unique=True,null=False)
     section = models.CharField(max_length=5, blank=True, null=True)
     component = models.CharField(max_length=3, blank=True, null=True)
-    classType = models.CharField(db_column='classType', max_length=1, blank=True, null=True)  # Field name made lowercase.
-    status = models.CharField(db_column='classStatus', max_length=1, blank=True, null=True)  # Field name made lowercase.
-    enrollStatus = models.CharField(db_column='enrollStatus', max_length=1, blank=True, null=True)  # Field name made lowercase.
+    classType = models.CharField(max_length=1, blank=True, null=True)
+    status = models.CharField(max_length=1, blank=True, null=True)
+    enrollStatus = models.CharField(max_length=1, blank=True, null=True)
     capacity = models.IntegerField(blank=True, null=True)
-    startDate = models.DateField(db_column='startDate', blank=True, null=True)  # Field name made lowercase.
-    endDate = models.DateField(db_column='endDate', blank=True, null=True)  # Field name made lowercase.
+    startDate = models.DateField(blank=True, null=True)
+    endDate = models.DateField(blank=True, null=True)
     session = models.CharField(max_length=33, blank=True, null=True)
     campus = models.CharField(max_length=4, blank=True, null=True)
     location = models.CharField(max_length=32, blank=True, null=True)
-    autoEnroll = models.CharField(db_column='autoEnroll', max_length=5, blank=True, null=True)  # Field name made lowercase.
-    topic = models.CharField(db_column='classTopic', max_length=64, blank=True, null=True)  # Field name made lowercase.
-    notes = models.CharField(db_column='classNotes', max_length=400, blank=True, null=True)  # Field name made lowercase.
+    autoEnroll = models.CharField(max_length=5, blank=True, null=True)
+    topic = models.CharField(max_length=64, blank=True, null=True)
+    notes = models.CharField(max_length=400, blank=True, null=True)
     consent = models.CharField(max_length=16, blank=True, null=True)
-    gradingBasis = models.CharField(db_column='gradingBasis', max_length=16, blank=True, null=True)  # Field name made lowercase.
-    instructionMode = models.CharField(db_column='instructionMode', max_length=16, blank=True, null=True)  # Field name made lowercase.
+    gradingBasis = models.CharField(max_length=16, blank=True, null=True)
+    instructionMode = models.CharField(max_length=16, blank=True, null=True)
     units = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
-    classUrl = models.CharField(db_column='classURL', max_length=64, blank=True, null=True)  # Field name made lowercase.
-    instructorUId = models.CharField(db_column='instructorUId', max_length=12, blank=True, null=True)  # Field name made lowercase.
-    examStatus = models.CharField(db_column='examStatus', max_length=9, blank=True, null=True)  # Field name made lowercase.
-    examDate = models.DateField(db_column='examDate', blank=True, null=True)  # Field name made lowercase.
-    examStartTime = models.CharField(db_column='examStartTime', max_length=8, blank=True, null=True)  # Field name made lowercase.
-    examEndTime = models.CharField(db_column='examEndTime', max_length=8, blank=True, null=True)  # Field name made lowercase.
-    examLocation = models.CharField(db_column='examLocation', max_length=16, blank=True, null=True)  # Field name made lowercase.
-    asString = models.CharField(db_column='asString', max_length=32, blank=True, null=True)  # Field name made lowercase.
+    classUrl = models.CharField(max_length=64, blank=True, null=True)
+    instructorUId = models.CharField(max_length=12, blank=True, null=True)
+    examStatus = models.CharField(max_length=9, blank=True, null=True)
+    examDate = models.DateField(blank=True, null=True)
+    examStartTime = models.CharField(max_length=8, blank=True, null=True)
+    examEndTime = models.CharField(max_length=8, blank=True, null=True)
+    examLocation = models.CharField(max_length=16, blank=True, null=True)
+    asString = models.CharField(max_length=32, blank=True, null=True)
     term = models.ForeignKey('Term',on_delete=models.CASCADE)
     course = models.ForeignKey('Course',on_delete=models.CASCADE)
 
-class Classtime(models.Model):
-    classtime = models.IntegerField(db_column='classTime', primary_key=True, blank=True, null=True)  # Field name made lowercase.
-    class_field = models.IntegerField(db_column='class', blank=True, null=True)  # Field renamed because it was a Python reserved word.
+class ClassTime(models.Model):
+    code = models.IntegerField(unique=True,null=False)
     day = models.CharField(max_length=7, blank=True, null=True)
-    starttime = models.CharField(db_column='startTime', max_length=8, blank=True, null=True)  # Field name made lowercase.
-    endtime = models.CharField(db_column='endTime', max_length=9, blank=True, null=True)  # Field name made lowercase.
+    startTime = models.CharField(max_length=8, blank=True, null=True)
+    endTime = models.CharField(max_length=9, blank=True, null=True)
     location = models.CharField(max_length=16, blank=True, null=True)
-    enddate = models.DateField(db_column='endDate', blank=True, null=True)  # Field name made lowercase.
-    startdate = models.DateField(db_column='startDate', blank=True, null=True)  # Field name made lowercase.
+    endDate = models.DateField(blank=True, null=True)
+    startDate = models.DateField(blank=True, null=True)
+    courseClass = models.ForeignKey('CourseClass',on_delete=models.CASCADE)
+
 
 class Textbook(models.Model):
-    class_field = models.IntegerField(db_column='class', blank=True, null=True)  # Field renamed because it was a Python reserved word.
-    textbook = models.CharField(unique=True, max_length=16, blank=True, null=True)
-    uofatxstatus = models.CharField(db_column='uOfATxStatus', max_length=3, blank=True, null=True)  # Field name made lowercase.
-    uofatxtitle = models.CharField(db_column='uOfATxTitle', max_length=64, blank=True, null=True)  # Field name made lowercase.
-    uofatxisbn = models.CharField(db_column='uOfATxISBN', max_length=13, blank=True, null=True)  # Field name made lowercase.
-    uofatxauthor = models.CharField(db_column='uOfATxAuthor', max_length=32, blank=True, null=True)  # Field name made lowercase.
-    uofatxpublisher = models.CharField(db_column='uOfATxPublisher', max_length=32, blank=True, null=True)  # Field name made lowercase.
-    uofatxedition = models.IntegerField(db_column='uOfATxEdition', blank=True, null=True)  # Field name made lowercase.
-    uofatxyear = models.IntegerField(db_column='uOfATxYear', blank=True, null=True)  # Field name made lowercase.
-
+    code = models.CharField(max_length=16,unique=True,null=False)
+    status = models.CharField(max_length=3, blank=True, null=True)
+    title = models.CharField(max_length=64, blank=True, null=True)
+    isbn = models.CharField(max_length=13, blank=True, null=True)
+    author = models.CharField(max_length=32, blank=True, null=True)
+    publisher = models.CharField(max_length=32, blank=True, null=True)
+    edition = models.IntegerField(blank=True, null=True)
+    year = models.IntegerField(blank=True, null=True)
+    courseClass= models.ForeignKey('CourseClass',on_delete=models.CASCADE)
