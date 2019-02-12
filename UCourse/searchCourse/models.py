@@ -24,7 +24,7 @@ class Course(models.Model):
     title = models.CharField(max_length=120, blank=True, null=True)
     description = models.CharField(max_length=1600, blank=True, null=True)
     career = models.CharField(max_length=10, blank=True, null=True)
-    units = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
+    units = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     asString = models.CharField(max_length=12, blank=True, null=True)
     subject = models.ForeignKey('Subject',on_delete=models.CASCADE)
 
@@ -53,7 +53,7 @@ class CourseClass(models.Model):
     consent = models.CharField(max_length=16, blank=True, null=True)
     gradingBasis = models.CharField(max_length=16, blank=True, null=True)
     instructionMode = models.CharField(max_length=16, blank=True, null=True)
-    units = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
+    units = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     classUrl = models.CharField(max_length=64, blank=True, null=True)
     instructorUId = models.CharField(max_length=12, blank=True, null=True)
     examStatus = models.CharField(max_length=9, blank=True, null=True)
