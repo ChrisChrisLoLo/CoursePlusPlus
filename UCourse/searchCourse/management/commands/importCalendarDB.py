@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = 'Load the course calendar into the application'
 
     def handle(self,*args,**kwargs):
-        conn = sqlite3.connect('./scriptResources/calendar.db')
+        conn = sqlite3.connect('./scriptResources/transformed.sqlite3')
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
         os.system('ls')
