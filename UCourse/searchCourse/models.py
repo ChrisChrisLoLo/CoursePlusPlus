@@ -76,13 +76,13 @@ class ClassTime(models.Model):
     courseClass = models.ForeignKey('CourseClass',on_delete=models.CASCADE)
 
 
-class Textbook(models.Model):
-    code = models.CharField(max_length=16,unique=True,null=False)
-    status = models.CharField(max_length=3, blank=True, null=True)
-    title = models.CharField(max_length=64, blank=True, null=True)
-    isbn = models.CharField(max_length=13, blank=True, null=True)
-    author = models.CharField(max_length=32, blank=True, null=True)
-    publisher = models.CharField(max_length=32, blank=True, null=True)
-    edition = models.IntegerField(blank=True, null=True)
-    year = models.IntegerField(blank=True, null=True)
-    courseClass= models.ForeignKey('CourseClass',on_delete=models.CASCADE)
+# class Textbook(models.Model):
+#     code = models.CharField(max_length=16,unique=True,null=False)
+#     status = models.CharField(max_length=3, blank=True, null=True)
+#     title = models.CharField(max_length=64, blank=True, null=True)
+#     isbn = models.CharField(max_length=13, blank=True, null=True)
+#     author = models.CharField(max_length=32, blank=True, null=True)
+#     publisher = models.CharField(max_length=32, blank=True, null=True)
+#     edition = models.IntegerField(blank=True, null=True)
+#     year = models.IntegerField(blank=True, null=True)
+#     courseClass= models.ForeignKey('CourseClass',on_delete=models.CASCADE)

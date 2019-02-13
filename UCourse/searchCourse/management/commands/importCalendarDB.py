@@ -12,7 +12,7 @@ class Command(BaseCommand):
         conn = sqlite3.connect('./scriptResources/transformed.sqlite3')
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
-
+        print("SSSSSSSSSSSSSS")
 
         #Get Faculties
         cur.execute('SELECT * FROM faculties')
@@ -74,8 +74,6 @@ class Command(BaseCommand):
         cur.execute('SELECT * FROM terms')
         row = cur.fetchone()
         while(row):
-            #print(row['units'])
-            #print(type(row['units']))
             Term.objects.get_or_create(
                 code =  row['term'],
                 title = row['termTitle'],
@@ -85,4 +83,58 @@ class Command(BaseCommand):
             row = cur.fetchone()
 
         #Get CourseClass
-        cur.execute('SELECT * FROM ')
+        cur.execute('SELECT * FROM classes')
+        row = cur.fetchone()
+        while(row):
+            termObj = Term.objects.get(code = row['term'])
+            courseObj = Course.objects.get(code = row['course'])
+            CourseClass.objects.get_or_create(
+                code =  row['class'],
+                section = row['section'],
+                component = row['component'],
+                classType = row['classType'],
+                status = row['classStatus'],
+                enrollStatus = row['enrollStatus'],
+                capacity = row['capacity'],
+                startDate = row['startDate'],
+                endDate = row['endDate'],
+                session = row['session'],
+                campus = row['campus'],
+                location = row['location'],
+                autoEnroll = row['autoEnroll'],
+                topic = row['classTopic'],
+                notes = row['classNotes'],
+                consent = row['consent'],
+                gradingBasis = row['gradingBasis'],
+                instructionMode = row['instructionMode'],
+                units = row['units'],
+                classUrl = row['classUrl'],
+                instructorUId = row['instructorUId'],
+                examStatus = row['examStatus'],
+                examDate = row['examDate'],
+                examStartTime = row['examStartTime'],
+                examEndTime = row['examEndTime'],
+                examLocation = row['examLocation'],
+                asString = row['asString'],
+                term = termObj,
+                course = courseObj
+                )
+            row = cur.fetchone()
+
+        #Get ClassTime
+        cur.execute('SELECT * FROM classTimes')
+        row = cur.fetchone()
+        while(row):
+            courseClassObj = CourseClass.objects.get(code = row['class'])
+            print(row['classTime'],row['day'],row['startTime'],row['endTime'],row['endDate'],row['startDate'])
+            ClassTime.objects.get_or_create(
+                code =  row['classTime'],
+                day = row['day'],
+                startTime = row['startTime'],
+                endTime = row['endTime'],
+                location = row['location'],
+                endDate = row['endDate'],
+                startDate = row['startDate'],
+                courseClass = courseClassObj
+                )
+            row = cur.fetchone()
