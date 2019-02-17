@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 from quickstart import views
+from searchCourse.views import FacultyViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
+router.register(r'faculties',FacultyViewSet)
 
 
 urlpatterns = [
