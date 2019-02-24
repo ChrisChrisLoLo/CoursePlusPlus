@@ -1,27 +1,32 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-//import "./App.css";
-import NavbarComp from "./components/NavbarComp.js"
 import { Container, Row, Col } from "reactstrap"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import NavbarComp from "./components/NavbarComp.js"
+import HomePage from "./components/pages/HomePage.js"
+import NotFoundErrPage from "./components/pages/NotFoundErrPage.js"
+import logo from "./logo.svg";
 
+//import "./App.css";
 
 class App extends Component {
   render() {
     console.log(NavbarComp);
     return (
       <div>
-        <head>
-          <title>Hello, world!</title>
-        </head>
         <body>
-          <NavbarComp />
-          <Container>
-            <Row>
-              <Col>
-                <h1>UCourse</h1>
-              </Col>
-            </Row>
-          </Container>
+          <Router>
+            <div>
+              <NavbarComp />
+              <Container>
+                <Switch>
+                  <Route exact path="/" component={HomePage} />
+                  {/* <Route path="/about" component={About} />
+                    <Route path="/topics" component={Topics} /> */}
+                  <Route component={NotFoundErrPage} />
+                </Switch>
+              </Container>
+            </div>
+          </Router>
         </body>
       </div >
     );
