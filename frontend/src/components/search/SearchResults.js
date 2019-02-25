@@ -8,23 +8,22 @@ import axios from "axios";
 
 export default class SearchResults extends React.Component {
 	state = {
-		persons: []
+		coursesData: null
 	}
 
 	componentDidMount() {
-		axios.get("https://jsonplaceholder.typicode.com/users")
+		console.log(process.env);
+		axios.get(process.env.REACT_APP_API_URL + "/api/courses/")
 			.then(res => {
-				const persons = res.data;
-				this.setState({ persons });
+				const coursesData = res.data;
+				this.setState({ coursesData });
 			})
 	}
 	render() {
 		return (
 			<div>
 				<h3>Results</h3>
-				<ul>
-					{this.state.persons.map(person => <li>{person.name}</li>)}
-				</ul>
+
 				<Col sm="9">
 
 				</Col>

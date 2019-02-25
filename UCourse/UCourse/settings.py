@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    #Cors middleware on top since that's what was recommended.
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'UCourse.urls'
@@ -132,4 +136,10 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
   os.path.join(BASE_DIR,'./../front-end/dist'),
+]
+
+# CORS origin whitelist - should only contain localhost and the name of the prod domain
+
+CORS_ORIGIN_WHITELIST = [
+    'localhost:3000',
 ]

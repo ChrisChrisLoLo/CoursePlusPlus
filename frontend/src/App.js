@@ -17,7 +17,7 @@ class App extends Component {
         <Router>
           <div>
             <NavbarComp />
-            <Container fluid="true">
+            <Container fluid={true}>
               <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route path="/search" component={SearchPage} />
