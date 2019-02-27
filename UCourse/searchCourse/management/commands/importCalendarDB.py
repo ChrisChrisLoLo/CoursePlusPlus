@@ -14,12 +14,22 @@ class Command(BaseCommand):
         cur = conn.cursor()
         print("SSSSSSSSSSSSSS")
 
+        #Remove all tables
+        Faculty.objects.all().delete()
+        Department.objects.all().delete()
+        Subject.objects.all().delete()
+        Course.objects.all().delete()
+        Term.objects.all().delete()
+        CourseClass.objects.all().delete()
+        ClassTime.objects.all().delete()
+
+
         #Get Faculties
         cur.execute('SELECT * FROM faculties')
         row = cur.fetchone()
         while(row):
             print(row['facultyCode'],row['faculty'])
-            Faculty.objects.get_or_create(
+            Faculty.objects.create(
                 code =  row['facultyCode'],
                 name =  row['faculty']
                 )
@@ -31,7 +41,7 @@ class Command(BaseCommand):
         while(row):
             print(row['facultyCode'],row['departmentCode'],row['department'])
             facultyObj = Faculty.objects.get(code = row['facultyCode']) 
-            Department.objects.get_or_create(
+            Department.objects.create(
                 code =  row['departmentCode'],
                 name =  row['department'],
                 faculty = facultyObj
@@ -43,7 +53,7 @@ class Command(BaseCommand):
         row = cur.fetchone()
         while(row):
             deptObj = Department.objects.get(code = row['departmentCode']) 
-            Subject.objects.get_or_create(
+            Subject.objects.create(
                 code =  row['subject'],
                 name =  row['subjectTitle'],
                 department = deptObj
@@ -58,7 +68,7 @@ class Command(BaseCommand):
             #print(row['units'])
             #print(type(row['units']))
             subjObj = Subject.objects.get(code = row['subject']) 
-            Course.objects.get_or_create(
+            Course.objects.create(
                 code =  row['course'],
                 catalogCode =  row['catalog'],
                 title = row['courseTitle'],
@@ -74,7 +84,7 @@ class Command(BaseCommand):
         cur.execute('SELECT * FROM terms')
         row = cur.fetchone()
         while(row):
-            Term.objects.get_or_create(
+            Term.objects.create(
                 code =  row['term'],
                 title = row['termTitle'],
                 startDate = row['startDate'],
@@ -88,8 +98,9 @@ class Command(BaseCommand):
         while(row):
             termObj = Term.objects.get(code = row['term'])
             courseObj = Course.objects.get(code = row['course'])
-            CourseClass.objects.get_or_create(
+            CourseClass.objects.create(
                 code =  row['class'],
+                calendarCode = row['classCode'],
                 section = row['section'],
                 component = row['component'],
                 classType = row['classType'],
@@ -127,7 +138,7 @@ class Command(BaseCommand):
         while(row):
             courseClassObj = CourseClass.objects.get(code = row['class'])
             print(row['classTime'],row['day'],row['startTime'],row['endTime'],row['endDate'],row['startDate'])
-            ClassTime.objects.get_or_create(
+            ClassTime.objects.create(
                 code =  row['classTime'],
                 day = row['day'],
                 startTime = row['startTime'],

@@ -35,7 +35,8 @@ class Term(models.Model):
     endDate = models.DateField(blank=True, null=True)
 
 class CourseClass(models.Model):
-    code = models.IntegerField(unique=True,null=False)
+    code = models.IntegerField(unique=True, null=False)
+    calendarCode = models.IntegerField(null=False)
     section = models.CharField(max_length=5, blank=True, null=True)
     component = models.CharField(max_length=3, blank=True, null=True)
     classType = models.CharField(max_length=1, blank=True, null=True)
