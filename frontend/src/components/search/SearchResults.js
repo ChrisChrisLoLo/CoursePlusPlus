@@ -24,9 +24,7 @@ export default class SearchResults extends React.Component {
 			<div>
 				<h3>Results</h3>
 
-				<Col sm="9">
 
-				</Col>
 			</div>
 		);
 	}

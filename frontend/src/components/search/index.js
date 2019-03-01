@@ -4,8 +4,9 @@ import {
 	Col
 } from 'reactstrap';
 
-import SearchForm from "./SearchForm.js";
+import CourseListForm from "./CourseListForm.js";
 import SearchResults from "./SearchResults.js";
+import CourseSingleForm from "./CourseSingleForm.js";
 
 export default class SearchPage extends React.Component {
 	render() {
@@ -17,8 +18,13 @@ export default class SearchPage extends React.Component {
 					</Col>
 				</Row>
 				<Row>
-					<SearchForm />
-					<SearchResults />
+					<Col sm="3">
+						<CourseSingleForm />
+						<CourseListForm />
+					</Col>
+					<Col sm="9">
+						<SearchResults />
+					</Col>
 				</Row>
 			</div>
 		);
