@@ -11,6 +11,9 @@ import {
 	DropdownItem
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
+import logo from "./../logo.png";
+
+
 export default class Example extends React.Component {
 	constructor(props) {
 		super(props);
@@ -29,7 +32,11 @@ export default class Example extends React.Component {
 		return (
 			<div>
 				<Navbar color="light" light expand="md">
-					<NavLink to="/" className="navbar-brand">UCourse+</NavLink>
+					<NavLink to="/" className="navbar-brand">
+						<img src={logo} height="30" width="30" alt="Logo" className="d-inline-block mr-1" />
+						UCoursePlus
+					</NavLink>
+
 					<NavbarToggler onClick={this.toggle} />
 					<Collapse isOpen={this.state.isOpen} navbar>
 						<Nav className="ml-auto" navbar>
