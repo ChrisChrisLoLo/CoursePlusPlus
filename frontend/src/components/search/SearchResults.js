@@ -1,34 +1,40 @@
 import React from "react";
 import {
-	Col,
-	Card,
-	CardBody,
 } from 'reactstrap';
-import axios from "axios";
+
+import ResultItem from "./ResultItem"
 
 export default class SearchResults extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			coursesData: null
-		}
 	}
 
-
-	componentDidMount() {
-		console.log(process.env);
-		axios.get(process.env.REACT_APP_API_URL + "/api/courses/")
-			.then(res => {
-				const coursesData = res.data;
-				this.setState({ coursesData });
-			})
-	}
 	render() {
+		console.log(this.props.courseListData)
+		//console.log(this.props.courseListData.next)
+		// const resultsList = this.props.courseListData.results.map((course) =>
+		// 	<ResultItem />
+		// );
+		let results;
+		if (this.props.courseListData) {
+
+			results = this.props.courseListData.results;
+			//If empty
+			if (results === undefined || results.length == 0) {
+				results = <h3>No Results Found.</h3>
+			}
+			else {
+				results = results.map((course) =>
+					<ResultItem course={course} key={course.id} />
+				);
+			}
+		}
+		else {
+			results = <h3>Loading...</h3>;
+		}
 		return (
 			<div>
-				<h3>Results</h3>
-
-
+				{results}
 			</div>
 		);
 	}

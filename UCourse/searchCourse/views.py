@@ -25,7 +25,9 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
 
     def filterByParam(self,paramName,queryset):
         #Cast as upper
-        queryParam = self.request.query_params.get(paramName, None).upper()
+        print(paramName)
+        queryParam = self.request.query_params.get(paramName, None)
+        print(queryParam)
         if queryParam is not None:
             queryset = queryset.filter(**{paramName:queryParam})
         return queryset

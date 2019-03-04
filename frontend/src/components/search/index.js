@@ -3,6 +3,7 @@ import {
 	Row,
 	Col
 } from 'reactstrap';
+import axios from "axios";
 
 import CourseListForm from "./CourseListForm.js";
 import SearchResults from "./SearchResults.js";
@@ -11,7 +12,7 @@ import CourseSingleForm from "./CourseSingleForm.js";
 export default class SearchPage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { subjCode: "", courseNum: "" };
+		this.state = { subjCode: "", courseNum: "", courseListData: null };
 		this.onSubjChange = this.onSubjChange.bind(this);
 		this.onCourseChange = this.onCourseChange.bind(this);
 		this.onSingleCourseSubmit = this.onSingleCourseSubmit.bind(this);
@@ -26,10 +27,22 @@ export default class SearchPage extends React.Component {
 	onSingleCourseSubmit(event) {
 		let queryRequest = this.state.subjCode.toUpperCase() + " " + this.state.courseNum.toString()
 		console.log(queryRequest);
-
+		axios.get(process.env.REACT_APP_API_URL + "/api/courses/?asString=" + queryRequest)
+			.then(res => {
+				const coursesData = res.data;
+				this.setState({ courseListData: coursesData });
+			})
 		event.preventDefault();
 	}
 
+	componentDidMount() {
+		console.log(process.env);
+		axios.get(process.env.REACT_APP_API_URL + "/api/courses/")
+			.then(res => {
+				const coursesData = res.data;
+				this.setState({ courseListData: coursesData });
+			})
+	}
 
 	render() {
 		return (
@@ -51,7 +64,9 @@ export default class SearchPage extends React.Component {
 						<CourseListForm />
 					</Col>
 					<Col sm="9">
-						<SearchResults />
+						<SearchResults
+							courseListData={this.state.courseListData}
+						/>
 					</Col>
 				</Row>
 			</div>
