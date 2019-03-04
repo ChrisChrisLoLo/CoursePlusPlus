@@ -36,6 +36,8 @@ export default class SearchPage extends React.Component {
 	}
 
 	componentDidMount() {
+		//Scroll to top whenever more results are loaded.
+		//window.scrollTo(0, 0)
 		console.log(process.env);
 		axios.get(process.env.REACT_APP_API_URL + "/api/courses/")
 			.then(res => {
