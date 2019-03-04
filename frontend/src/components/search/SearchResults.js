@@ -7,9 +7,13 @@ import {
 import axios from "axios";
 
 export default class SearchResults extends React.Component {
-	state = {
-		coursesData: null
+	constructor(props) {
+		super(props);
+		this.state = {
+			coursesData: null
+		}
 	}
+
 
 	componentDidMount() {
 		console.log(process.env);

@@ -2,6 +2,8 @@ from django.shortcuts import render
 from searchCourse.models import *
 from searchCourse.serializers import *
 from rest_framework import generics,viewsets
+from rest_framework.response import Response
+
 # Create your views here.
 
 class FacultyViewSet(viewsets.ReadOnlyModelViewSet):
@@ -19,6 +21,32 @@ class SubjectViewSet(viewsets.ReadOnlyModelViewSet):
 class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+    QUERY_PARAMS = ("asString",)
+
+    def filterByParam(self,paramName,queryset):
+        #Cast as upper
+        queryParam = self.request.query_params.get(paramName, None).upper()
+        if queryParam is not None:
+            queryset = queryset.filter(**{paramName:queryParam})
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+
+        queryset = self.filter_queryset(self.get_queryset())
+        ##queryset = queryset.filter(**{"id":1})
+        #Filter based on queryParams
+        for queryParam in self.QUERY_PARAMS:
+            queryset = self.filterByParam(queryParam,queryset)
+
+
+        #print("SDF")
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 class TermViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Term.objects.all()
