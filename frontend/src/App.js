@@ -11,7 +11,6 @@ import NotFoundErrPage from "./components/pages/NotFoundErrPage.js"
 
 class App extends Component {
   render() {
-    console.log(NavbarComp);
     return (
       <div>
         <Router>

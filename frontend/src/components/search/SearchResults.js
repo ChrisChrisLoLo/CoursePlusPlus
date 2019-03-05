@@ -46,14 +46,13 @@ export default class SearchResults extends React.Component {
 		console.log(results)
 		return (
 			<div>
-				<Container>
+				<Container fluid={true}>
 					{data &&
 						<Row className="justify-content-between">
 							<Col sm={{ size: 'auto' }}>
-								<p>{data.count} Results Found</p>
 							</Col>
 							<Col sm={{ size: 'auto' }}>
-								<p>HI</p>
+								<p>{data.count} Results Found</p>
 							</Col>
 						</Row>
 					}
