@@ -26,44 +26,57 @@ export default class SearchPage extends React.Component {
 	}
 	onSingleCourseSubmit(event) {
 
-		let queryRequest = this.state.subjCode.toUpperCase() + " " + this.state.courseNum.toString()
+		let queryRequest = this.state.subjCode.toUpperCase() + "%20" + this.state.courseNum.toString()
 		console.log(queryRequest);
 
 
 		this.props.history.push("/search/?asString=" + queryRequest);
 
-		// axios.get(process.env.REACT_APP_API_URL + "/api/courses/?asString=" + queryRequest)
-		// 	.then(res => {
-		// 		const coursesData = res.data;
-		// 		this.setState({ courseListData: coursesData });
-		// 	})
-		event.preventDefault();
-	}
-
-	componentDidMount() {
-		//Scroll to top whenever more results are loaded.
-		//window.scrollTo(0, 0)
-
-		// const queryRegex = new RegExp("[?].*");
-		// const queryParams = window.location.href.match(queryRegex);
-		// console.log(process.env);
-		// axios.get(process.env.REACT_APP_API_URL + "/api/courses/" + queryParams)
-		// 	.then(res => {
-		// 		const coursesData = res.data;
-		// 		this.setState({ courseListData: coursesData });
-		// 	})
-		const queryRegex = new RegExp("[?].*");
-		const queryParams = window.location.href.match(queryRegex);
-		console.log(process.env);
-		axios.get(process.env.REACT_APP_API_URL + "/api/courses/" + queryParams)
+		axios.get(process.env.REACT_APP_API_URL + "/api/courses/?asString=" + queryRequest)
 			.then(res => {
 				const coursesData = res.data;
 				this.setState({ courseListData: coursesData });
 			})
+		event.preventDefault();
 	}
 
+	componentDidMount() {
+
+		//const queryRegex = new RegExp("[?].*");
+		//const queryParams = window.location.href.match(queryRegex) || "";
+		console.log(process.env);
+		axios.get(process.env.REACT_APP_API_URL + "/api/courses/" + this.props.location.search)
+			.then(res => {
+				const coursesData = res.data;
+				this.setState({ courseListData: coursesData });
+			})
+
+	}
+
+	componentDidUpdate(prevProps) {
+		//Scroll to top whenever more results are loaded.
+		window.scrollTo(0, 0)
+		console.log(this.props);
+		console.log(prevProps);
+		if (this.props.location.search !== prevProps.location.search) {
+			axios.get(process.env.REACT_APP_API_URL + "/api/courses/" + this.props.location.search)
+				.then(res => {
+					const coursesData = res.data;
+					this.setState({ courseListData: coursesData });
+				})
+		}
+		// console.log("PROPS: ");
+		// console.log(this.props);
+		// axios.get(process.env.REACT_APP_API_URL + "/api/courses/" + this.props.queryParams)
+		// 	.then(res => {
+		// 		const coursesData = res.data;
+		// 		this.setState({ courseListData: coursesData });
+		// 	})
+	}
+
+
 	render() {
-		console.log("RENDERED");
+		console.log(this.state);
 		return (
 			<div>
 				<Row>
@@ -85,7 +98,6 @@ export default class SearchPage extends React.Component {
 					<Col sm="9">
 						<SearchResults
 							courseListData={this.state.courseListData}
-
 						/>
 					</Col>
 				</Row>
