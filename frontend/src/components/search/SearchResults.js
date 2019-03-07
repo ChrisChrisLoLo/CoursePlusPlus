@@ -17,12 +17,6 @@ export default class SearchResults extends React.Component {
 		super(props);
 	}
 
-	static propTypes = {
-		match: PropTypes.object.isRequired,
-		location: PropTypes.object.isRequired,
-		history: PropTypes.object.isRequired
-	};
-
 	componentDidMount() {
 		//Scroll to top whenever more results are loaded.
 		//window.scrollTo(0, 0)
@@ -30,17 +24,17 @@ export default class SearchResults extends React.Component {
 	}
 
 	//Take the pagination URL from the API and push the given page to the react router history.
-	calcPaginationURL(paginationURL) {
-		console.log(this.props);
-		if (!paginationURL) return;
+	// calcPaginationURL(paginationURL) {
+	// 	console.log(this.props);
+	// 	if (!paginationURL) return;
 
-		let searchParams = this.props.search || "?";
-		let curURL = this.props.location + searchParams;
+	// 	let searchParams = this.props.search || "?";
+	// 	let curURL = this.props.location + searchParams;
 
-		let queryRegExp = new RegExp("(page=)[0-9]+");
-		let pageQuery = paginationURL.match(queryRegExp);
-		this.props.history.push(curURL + pageQuery);
-	}
+	// 	let queryRegExp = new RegExp("(page=)[0-9]+");
+	// 	let pageQuery = paginationURL.match(queryRegExp);
+	// 	this.props.history.push(curURL + pageQuery);
+	// }
 
 	render() {
 		//console.log(this.props.courseListData.next)
@@ -85,12 +79,12 @@ export default class SearchResults extends React.Component {
 						<Row className="justify-content-between">
 							<Col sm={{ size: 'auto' }}>
 								{data.previous &&
-									<Button color="primary" onClick={this.calcPaginationURL(data.prev)}>Prev</Button>
+									<Button color="primary" onClick={() => { this.props.calcPaginationURL(data.previous) }}>Prev</Button>
 								}
 							</Col>
 							<Col sm={{ size: 'auto' }}>
 								{data.next &&
-									<Button color="primary" onClick={this.calcPaginationURL(data.next)}>Next</Button>
+									<Button color="primary" onClick={() => { this.props.calcPaginationURL(data.next) }}>Next</Button>
 								}
 							</Col>
 						</Row>

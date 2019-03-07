@@ -16,6 +16,7 @@ export default class SearchPage extends React.Component {
 		this.onSubjChange = this.onSubjChange.bind(this);
 		this.onCourseChange = this.onCourseChange.bind(this);
 		this.onSingleCourseSubmit = this.onSingleCourseSubmit.bind(this);
+		this.calcPaginationURL = this.calcPaginationURL.bind(this);
 	}
 
 	onSubjChange(event) {
@@ -38,6 +39,18 @@ export default class SearchPage extends React.Component {
 				this.setState({ courseListData: coursesData });
 			})
 		event.preventDefault();
+	}
+
+	calcPaginationURL(paginationURL) {
+		let searchParams = this.props.location.search || "?";
+		console.log(this.props.location);
+		let curURL = this.props.location.pathname + "?";// + searchParams;
+		console.log(curURL);
+
+		let queryRegExp = new RegExp("(page=)[0-9]+");
+		let pageQuery = paginationURL.match(queryRegExp);
+		let outputPageQuery = pageQuery ? pageQuery[0] : "";
+		this.props.history.push(curURL + outputPageQuery);
 	}
 
 	componentDidMount() {
@@ -98,6 +111,7 @@ export default class SearchPage extends React.Component {
 					<Col sm="9">
 						<SearchResults
 							courseListData={this.state.courseListData}
+							calcPaginationURL={this.calcPaginationURL}
 						/>
 					</Col>
 				</Row>
