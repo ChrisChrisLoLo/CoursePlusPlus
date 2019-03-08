@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from searchCourse.models import *
 from searchCourse.serializers import *
+from searchCourse.paginations import *
 from rest_framework import generics,viewsets
 from rest_framework.response import Response
 
@@ -17,10 +18,12 @@ class DepartmentViewSet(viewsets.ReadOnlyModelViewSet):
 class SubjectViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
+    pagination_class = SubjectListPagination
 
 class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+    pagination_class = CourseListPagination
     QUERY_PARAMS = ("asString",)
 
     def filterByParam(self,paramName,queryset):
