@@ -63,7 +63,6 @@ export default class SearchPage extends React.Component {
 				const coursesData = res.data;
 				this.setState({ courseListData: coursesData });
 			})
-
 	}
 
 	componentDidUpdate(prevProps) {
