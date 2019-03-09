@@ -15,7 +15,20 @@ export default class CourseListForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { subjData: null }
+		this.state = { subjData: null, chosenSubj: "", minCourse: "100", maxCourse: "1000" };
+		this.onChosenSubjChange = this.onChosenSubjChange.bind(this);
+		this.onMinCourseChange = this.onMinCourseChange.bind(this);
+		this.onMaxCourseChange = this.onMaxCourseChange.bind(this);
+	}
+
+	onChosenSubjChange(e) {
+		this.setState({ chosenSubj: e.target.value });
+	}
+	onMinCourseChange(e) {
+		this.setState({ minCourse: e.target.value });
+	}
+	onMaxCourseChange(e) {
+		this.setState({ maxCourse: e.target.value });
 	}
 
 	componentDidMount() {
@@ -25,13 +38,17 @@ export default class CourseListForm extends React.Component {
 				this.setState({ subjData: data });
 			})
 	}
+	handleMultiCourseSubmit(event) {
+		this.props.onMultiCourseSubmit(event);
+	}
+
 
 	render() {
 		let subjOptions;
 		if (this.state.subjData) {
 			const subject = this.state.subjData.results;
 			subjOptions = subject.map((subject) =>
-				<option value={subject.id}>{subject.code + " - " + subject.name}</option>
+				<option value={subject.id} key={subject.id}>{subject.code + " - " + subject.name}</option>
 			);
 		}
 		return (
@@ -43,15 +60,15 @@ export default class CourseListForm extends React.Component {
 					<Form>
 						<FormGroup>
 							<Label for="subjectSelect">Subject</Label>
-							<Input type="select" name="subject" id="subjectSelect">
+							<Input type="select" name="subject" id="subjectSelect" onChange={this.onChosenSubjChange}>
 								{subjOptions}
 							</Input>
 						</FormGroup>
 
 						<FormGroup>
-							<Label for="minCourseNum">Min Course Number</Label>
-							<Input type="select" name="minCourseNum" id="minCourseNum">
-								<option selected>100</option>
+							<Label for="minCourse">Min Course Number</Label>
+							<Input type="select" name="minCourse" id="minCourse" onChange={this.onMinCourseChange} value={this.state.minCourse}>
+								<option>100</option>
 								<option>200</option>
 								<option>300</option>
 								<option>400</option>
@@ -65,8 +82,8 @@ export default class CourseListForm extends React.Component {
 						</FormGroup>
 
 						<FormGroup>
-							<Label for="maxCourseNum">Max Course Number</Label>
-							<Input type="select" name="maxCourseNum" id="maxCourseNum">
+							<Label for="maxCourse">Max Course Number</Label>
+							<Input type="select" name="maxCourse" id="maxCourse" onChange={this.onMaxCourseChange} value={this.state.maxCourse}>
 								<option>100</option>
 								<option>200</option>
 								<option>300</option>
@@ -76,11 +93,11 @@ export default class CourseListForm extends React.Component {
 								<option>700</option>
 								<option>800</option>
 								<option>900</option>
-								<option selected>1000</option>
+								<option>1000</option>
 							</Input>
 						</FormGroup>
 
-						<Button onClick={""}>Search</Button>
+						<Button onClick={(event) => this.handleMultiCourseSubmit(event)}>Search</Button>
 					</Form>
 				</CardBody>
 			</Card>
