@@ -1,5 +1,6 @@
 import React from "react";
 import {
+	Button,
 	Card,
 	CardBody,
 	CardHeader,
@@ -79,7 +80,7 @@ export default class CourseListForm extends React.Component {
 							</Input>
 						</FormGroup>
 
-
+						<Button onClick={""}>Search</Button>
 					</Form>
 				</CardBody>
 			</Card>

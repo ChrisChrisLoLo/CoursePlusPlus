@@ -16,6 +16,7 @@ export default class SearchPage extends React.Component {
 		this.onSubjChange = this.onSubjChange.bind(this);
 		this.onCourseChange = this.onCourseChange.bind(this);
 		this.onSingleCourseSubmit = this.onSingleCourseSubmit.bind(this);
+		this.onMultiCourseSubmit = this.onMultiCourseSubmit.bind(this);
 		this.calcPaginationURL = this.calcPaginationURL.bind(this);
 	}
 
@@ -40,6 +41,9 @@ export default class SearchPage extends React.Component {
 			})
 		event.preventDefault();
 	}
+	onMultiCourseSubmit(event) {
+		event.preventDefault();
+	}
 
 	calcPaginationURL(paginationURL) {
 		let searchParams = this.props.location.search || "?";
@@ -54,7 +58,6 @@ export default class SearchPage extends React.Component {
 	}
 
 	componentDidMount() {
-
 		//const queryRegex = new RegExp("[?].*");
 		//const queryParams = window.location.href.match(queryRegex) || "";
 		console.log(process.env);
@@ -77,13 +80,6 @@ export default class SearchPage extends React.Component {
 					this.setState({ courseListData: coursesData });
 				})
 		}
-		// console.log("PROPS: ");
-		// console.log(this.props);
-		// axios.get(process.env.REACT_APP_API_URL + "/api/courses/" + this.props.queryParams)
-		// 	.then(res => {
-		// 		const coursesData = res.data;
-		// 		this.setState({ courseListData: coursesData });
-		// 	})
 	}
 
 
@@ -105,7 +101,9 @@ export default class SearchPage extends React.Component {
 							onCourseChange={this.onCourseChange}
 							onSingleCourseSubmit={this.onSingleCourseSubmit}
 						/>
-						<CourseListForm />
+						<CourseListForm
+							onMultiCourseSubmit={this.onMultiCourseSubmit}
+						/>
 					</Col>
 					<Col sm="9">
 						<SearchResults
