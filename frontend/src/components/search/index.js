@@ -12,23 +12,15 @@ import CourseSingleForm from "./CourseSingleForm.js";
 export default class SearchPage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { subjCode: "", courseNum: "", courseListData: null };
-		this.onSubjChange = this.onSubjChange.bind(this);
-		this.onCourseChange = this.onCourseChange.bind(this);
+		this.state = { courseListData: null };
 		this.onSingleCourseSubmit = this.onSingleCourseSubmit.bind(this);
 		this.onMultiCourseSubmit = this.onMultiCourseSubmit.bind(this);
 		this.calcPaginationURL = this.calcPaginationURL.bind(this);
 	}
 
-	onSubjChange(event) {
-		this.setState({ subjCode: event.target.value });
-	}
-	onCourseChange(event) {
-		this.setState({ courseNum: event.target.value });
-	}
-	onSingleCourseSubmit(event) {
+	onSingleCourseSubmit(event, subjCode, courseNum) {
 
-		let queryRequest = this.state.subjCode.toUpperCase() + "%20" + this.state.courseNum.toString()
+		let queryRequest = subjCode.toUpperCase() + "%20" + courseNum.toString()
 		console.log(queryRequest);
 
 
@@ -97,8 +89,6 @@ export default class SearchPage extends React.Component {
 						<CourseSingleForm
 							subjCode={this.state.subjCode}
 							courseNum={this.state.courseNum}
-							onSubjChange={this.onSubjChange}
-							onCourseChange={this.onCourseChange}
 							onSingleCourseSubmit={this.onSingleCourseSubmit}
 						/>
 						<CourseListForm

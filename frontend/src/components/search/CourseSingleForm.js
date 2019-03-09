@@ -11,19 +11,21 @@ import {
 export default class CourseSingleForm extends React.Component {
     constructor(props) {
         super(props);
-        this.handleSubjChange = this.handleSubjChange.bind(this);
-        this.handleCourseChange = this.handleCourseChange.bind(this);
+        this.state = { subjCode: "", courseNum: "" }
+        this.onSubjChange = this.onSubjChange.bind(this);
+        this.onCourseChange = this.onCourseChange.bind(this);
         this.handleSingleCourseSubmit = this.handleSingleCourseSubmit.bind(this);
     }
 
-    handleSubjChange(event) {
-        this.props.onSubjChange(event);
+    onSubjChange(event) {
+        this.setState({ subjCode: event.target.value });
     }
-    handleCourseChange(event) {
-        this.props.onCourseChange(event);
+    onCourseChange(event) {
+        this.setState({ courseNum: event.target.value });
     }
-    handleSingleCourseSubmit(event) {
-        this.props.onSingleCourseSubmit(event);
+    handleSingleCourseSubmit(event, subjCode, courseNum) {
+        console.log(subjCode, courseNum);
+        this.props.onSingleCourseSubmit(event, subjCode, courseNum);
     }
 
 
@@ -41,8 +43,8 @@ export default class CourseSingleForm extends React.Component {
                                 id="subjectCode"
                                 maxLength={5}
                                 placeholder="COURS"
-                                value={this.props.subjCode}
-                                onChange={this.handleSubjChange}
+                                value={this.state.subjCode}
+                                onChange={this.onSubjChange}
                             />
                         </FormGroup>
                         <FormGroup>
@@ -54,12 +56,12 @@ export default class CourseSingleForm extends React.Component {
                                 max={999}
                                 min={100}
                                 placeholder="101"
-                                value={this.props.courseNum}
-                                onChange={this.handleCourseChange}
+                                value={this.state.courseNum}
+                                onChange={this.onCourseChange}
                             />
 
                         </FormGroup>
-                        <Button onClick={this.handleSingleCourseSubmit} >Search</Button>
+                        <Button onClick={(event) => this.handleSingleCourseSubmit(event, this.state.subjCode, this.state.courseNum)} >Search</Button>
                     </Form>
 
                 </CardBody>
