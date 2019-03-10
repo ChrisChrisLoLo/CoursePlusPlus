@@ -15,7 +15,7 @@ export default class CourseListForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { subjData: null, chosenSubj: "", minCourse: "100", maxCourse: "1000" };
+		this.state = { subjData: null, chosenSubj: "1", minCourse: "100", maxCourse: "1000" };
 		this.onChosenSubjChange = this.onChosenSubjChange.bind(this);
 		this.onMinCourseChange = this.onMinCourseChange.bind(this);
 		this.onMaxCourseChange = this.onMaxCourseChange.bind(this);
@@ -39,7 +39,7 @@ export default class CourseListForm extends React.Component {
 			})
 	}
 	handleMultiCourseSubmit(event) {
-		this.props.onMultiCourseSubmit(event);
+		this.props.onMultiCourseSubmit(event, this.state.chosenSubj, this.state.minCourse, this.state.maxCourse);
 	}
 
 
@@ -60,7 +60,7 @@ export default class CourseListForm extends React.Component {
 					<Form>
 						<FormGroup>
 							<Label for="subjectSelect">Subject</Label>
-							<Input type="select" name="subject" id="subjectSelect" onChange={this.onChosenSubjChange}>
+							<Input type="select" name="subject" id="subjectSelect" onChange={this.onChosenSubjChange} value={this.state.chosenSubj}>
 								{subjOptions}
 							</Input>
 						</FormGroup>

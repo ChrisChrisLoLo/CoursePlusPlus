@@ -33,17 +33,19 @@ export default class SearchPage extends React.Component {
 		event.preventDefault();
 	}
 
-	onMultiCourseSubmit(event) {
-		// let queryRequest = subjCode.toUpperCase() + "%20" + courseNum.toString()
-		// console.log(queryRequest);
+	onMultiCourseSubmit(event, subjNum, minCourse, maxCourse) {
+		const queryRequest = "subject=" + subjNum + "&"
+			+ "minCourse=" + minCourse + "&"
+			+ "maxCourse=" + maxCourse;
+		console.log(queryRequest);
 
-		// this.props.history.push("/search/?asString=" + queryRequest);
+		this.props.history.push("/search/?" + queryRequest);
 
-		// axios.get(process.env.REACT_APP_API_URL + "/api/courses/?asString=" + queryRequest)
-		// 	.then(res => {
-		// 		const coursesData = res.data;
-		// 		this.setState({ courseListData: coursesData });
-		// 	})
+		axios.get(process.env.REACT_APP_API_URL + "/api/courses/?" + queryRequest)
+			.then(res => {
+				const coursesData = res.data;
+				this.setState({ courseListData: coursesData });
+			})
 		event.preventDefault();
 	}
 
