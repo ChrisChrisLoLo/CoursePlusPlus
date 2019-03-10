@@ -77,7 +77,7 @@ export default class CourseListForm extends React.Component {
 								<option>700</option>
 								<option>800</option>
 								<option>900</option>
-								<option>1000</option>
+								<option>999</option>
 							</Input>
 						</FormGroup>
 
@@ -93,7 +93,7 @@ export default class CourseListForm extends React.Component {
 								<option>700</option>
 								<option>800</option>
 								<option>900</option>
-								<option>1000</option>
+								<option>999</option>
 							</Input>
 						</FormGroup>
 

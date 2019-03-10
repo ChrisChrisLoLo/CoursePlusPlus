@@ -20,8 +20,9 @@ class Subject(models.Model):
 
 class Course(models.Model):
     code = models.IntegerField(unique=True, null=False)
-    #Catalog code is the 101 in COURS 101. Code is the id given to it by the LDAP system
-    catalogCode = models.IntegerField(blank=True, null=True)
+    #Catalog code is the code the 101 in COURS 101. Code is the id given to it by the LDAP system
+    #Catalog code not an int since there can alphabetical chars in them
+    catalogCode = models.CharField(max_length=5, blank=True, null=True)
     title = models.CharField(max_length=120, blank=True, null=True)
     description = models.CharField(max_length=1600, blank=True, null=True)
     career = models.CharField(max_length=10, blank=True, null=True)

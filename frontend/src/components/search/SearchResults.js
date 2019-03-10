@@ -79,12 +79,12 @@ export default class SearchResults extends React.Component {
 						<Row className="justify-content-between">
 							<Col sm={{ size: 'auto' }}>
 								{data.previous &&
-									<Button color="primary" onClick={() => { this.props.calcPaginationURL(data.previous) }}>Prev</Button>
+									<Button color="primary" onClick={() => { this.props.changePaginationURL(data.previous) }}>Prev</Button>
 								}
 							</Col>
 							<Col sm={{ size: 'auto' }}>
 								{data.next &&
-									<Button color="primary" onClick={() => { this.props.calcPaginationURL(data.next) }}>Next</Button>
+									<Button color="primary" onClick={() => { this.props.changePaginationURL(data.next) }}>Next</Button>
 								}
 							</Col>
 						</Row>
