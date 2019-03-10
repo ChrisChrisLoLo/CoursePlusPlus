@@ -15,7 +15,7 @@ export default class CourseListForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { subjData: null, chosenSubj: "1", minCourse: "100", maxCourse: "1000" };
+		this.state = { subjData: null, chosenSubj: "1", minCourse: "100", maxCourse: "999" };
 		this.onChosenSubjChange = this.onChosenSubjChange.bind(this);
 		this.onMinCourseChange = this.onMinCourseChange.bind(this);
 		this.onMaxCourseChange = this.onMaxCourseChange.bind(this);
@@ -97,10 +97,10 @@ export default class CourseListForm extends React.Component {
 							</Input>
 						</FormGroup>
 
-						<Button onClick={(event) => this.handleMultiCourseSubmit(event)}>Search</Button>
+						<Button onClick={(event) => this.handleMultiCourseSubmit(event)} color={"primary"}>Search</Button>
 					</Form>
 				</CardBody>
-			</Card>
+			</Card >
 		);
 	}
 }

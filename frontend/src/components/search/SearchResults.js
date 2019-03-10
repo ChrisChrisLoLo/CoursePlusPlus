@@ -4,6 +4,7 @@ import {
 	Row,
 	Col,
 	Container,
+	Spinner,
 } from 'reactstrap';
 import {
 	withRouter,
@@ -58,16 +59,16 @@ export default class SearchResults extends React.Component {
 			}
 		}
 		else {
-			output = <h3>Loading...</h3>;
+			output = <Spinner style={{ width: "3rem", height: "3rem", color: "primary" }} />;
 		}
 		return (
 			<div>
 				<Container fluid={true}>
 					{data &&
 						<Row className="justify-content-between">
-							<Col sm={{ size: 'auto' }}>
+							<Col sm={{ size: "auto" }}>
 							</Col>
-							<Col sm={{ size: 'auto' }}>
+							<Col sm={{ size: "auto" }}>
 								<p>{data.count} Results Found</p>
 							</Col>
 						</Row>
@@ -77,12 +78,12 @@ export default class SearchResults extends React.Component {
 
 					{data &&
 						<Row className="justify-content-between">
-							<Col sm={{ size: 'auto' }}>
+							<Col sm={{ size: "auto" }}>
 								{data.previous &&
 									<Button color="primary" onClick={() => { this.props.changePaginationURL(data.previous) }}>Prev</Button>
 								}
 							</Col>
-							<Col sm={{ size: 'auto' }}>
+							<Col sm={{ size: "auto" }}>
 								{data.next &&
 									<Button color="primary" onClick={() => { this.props.changePaginationURL(data.next) }}>Next</Button>
 								}
