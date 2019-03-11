@@ -8,16 +8,24 @@ import {
     Collapse,
 
 } from 'reactstrap';
+import axios from "axios";
 
 export default class ResultItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { cardOpen: false };
+        this.state = { cardOpen: false, courseClassData: null };
         this.toggleOpen = this.toggleOpen.bind(this);
     }
 
     toggleOpen(e) {
-        this.setState({ cardOpen: !this.state.cardOpen });
+        if (!this.state.courseClassData) {
+            axios.get(process.env.REACT_APP_API_URL + "/api/classes/")
+                .then(res => {
+                    const courseClassResData = res.data;
+                    this.setState({ courseClassData: courseClassResData });
+                })
+            this.setState({ cardOpen: !this.state.cardOpen });
+        }
     }
 
     render() {
