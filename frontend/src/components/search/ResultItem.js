@@ -19,17 +19,44 @@ export default class ResultItem extends React.Component {
 
     toggleOpen(e) {
         if (!this.state.courseClassData) {
-            axios.get(process.env.REACT_APP_API_URL + "/api/classes/")
+            axios.get(process.env.REACT_APP_API_URL + "/api/classes/?course=" + this.props.course.id)
                 .then(res => {
                     const courseClassResData = res.data;
                     this.setState({ courseClassData: courseClassResData });
-                })
-            this.setState({ cardOpen: !this.state.cardOpen });
+                });
         }
+        this.setState({ cardOpen: !this.state.cardOpen });
     }
 
     render() {
         const course = this.props.course;
+        let results;
+        let output;
+        const data = this.state.courseClassData;
+
+
+        if (data) {
+            results = data.results;
+
+            //If empty
+            if (results === undefined || results.length === 0) {
+                output = <p>No Classes Found.</p>
+            }
+            else {
+                output = results.map((courseClass) =>
+                    <Card>
+                        <CardHeader>{courseClass.calendarCode}</CardHeader>
+                        <CardBody>
+                            <p>{courseClass.startDate}</p>
+                            <p>{courseClass.endDate}</p>
+                            <CardText>{courseClass.description || "No description available."}</CardText>
+                        </CardBody>
+                    </Card>
+                );
+            }
+        }
+
+
         return (
             <Card>
                 <CardHeader>{course.asString}</CardHeader>
@@ -38,7 +65,7 @@ export default class ResultItem extends React.Component {
                     <CardText>{course.description || "No description available."}</CardText>
                     <Button onClick={this.toggleOpen} size="sm">Classes</Button>
                     <Collapse isOpen={this.state.cardOpen}>
-                        <h3>HIIIIIIII</h3>
+                        {output}
                     </Collapse>
                 </CardBody>
 
