@@ -25,8 +25,13 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
             print(filterParamName,urlParamVal)
         return queryset
 
-    def handleUrlParam(self, urlParamName,queryset):
+    def handleUrlParam(self, urlParamName):
         raise NotImplementedException
+
+    def filterWithUrlParams(self,queryset):
+        for urlParam in self.request.query_params.items():    
+            queryset = self.handleUrlParam(urlParam[0],queryset)
+        return queryset
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -34,9 +39,8 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
         #Filter based on queryParams
         # for queryParam in self.QUERY_PARAMS:
         #     queryset = self.filterByParam(queryParam,queryset)
-        for urlParam in request.query_params.items():
-            
-            queryset = self.handleUrlParam(urlParam[0],queryset)
+
+        queryset = self.filterWithUrlParams(queryset)
             
         page = self.paginate_queryset(queryset)
         if page is not None:
