@@ -15,7 +15,7 @@ export default class CourseListForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { subjData: null, chosenSubj: "1", termData: null, minCourse: "100", maxCourse: "999" };
+		this.state = { subjData: null, chosenSubj: "", termData: null, minCourse: "100", maxCourse: "999" };
 		this.onChosenSubjChange = this.onChosenSubjChange.bind(this);
 		this.onMinCourseChange = this.onMinCourseChange.bind(this);
 		this.onMaxCourseChange = this.onMaxCourseChange.bind(this);
@@ -78,6 +78,7 @@ export default class CourseListForm extends React.Component {
 						<FormGroup>
 							<Label for="subjectSelect">Subject</Label>
 							<Input type="select" name="subject" id="subjectSelect" onChange={this.onChosenSubjChange} value={this.state.chosenSubj}>
+								<option value="">All Subjects</option>
 								{subjOptions}
 							</Input>
 						</FormGroup>
