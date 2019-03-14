@@ -15,7 +15,7 @@ export default class CourseListForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { subjData: null, chosenSubj: "1", minCourse: "100", maxCourse: "999" };
+		this.state = { subjData: null, chosenSubj: "1", termData: null, minCourse: "100", maxCourse: "999" };
 		this.onChosenSubjChange = this.onChosenSubjChange.bind(this);
 		this.onMinCourseChange = this.onMinCourseChange.bind(this);
 		this.onMaxCourseChange = this.onMaxCourseChange.bind(this);
@@ -44,6 +44,14 @@ export default class CourseListForm extends React.Component {
 
 
 	render() {
+		let termOptions;
+		if (this.state.termData) {
+			const term = this.state.termData.results;
+			termOptions = term.map((term) =>
+				<option value={term.id} key={term.id}>HIIIIIIIIIIII</option>
+			);
+		}
+
 		let subjOptions;
 		if (this.state.subjData) {
 			const subject = this.state.subjData.results;
@@ -51,6 +59,8 @@ export default class CourseListForm extends React.Component {
 				<option value={subject.id} key={subject.id}>{subject.code + " - " + subject.name}</option>
 			);
 		}
+
+
 		return (
 			<Card>
 				<CardHeader>
@@ -58,6 +68,13 @@ export default class CourseListForm extends React.Component {
 				</CardHeader>
 				<CardBody>
 					<Form>
+						<FormGroup>
+							<Label for="termSelect">Term</Label>
+							<Input type="term" name="term" id="termSelect" onChange={this.onChosenSubjChange} value={this.state.chosenSubj}>
+								{subjOptions}
+							</Input>
+						</FormGroup>
+
 						<FormGroup>
 							<Label for="subjectSelect">Subject</Label>
 							<Input type="select" name="subject" id="subjectSelect" onChange={this.onChosenSubjChange} value={this.state.chosenSubj}>
