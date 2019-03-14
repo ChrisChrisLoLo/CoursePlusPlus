@@ -33,15 +33,7 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = self.handleUrlParam(urlParam[0],queryset)
         return queryset
 
-    def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
-        ##queryset = queryset.filter(**{"id":1})
-        #Filter based on queryParams
-        # for queryParam in self.QUERY_PARAMS:
-        #     queryset = self.filterByParam(queryParam,queryset)
-
-        queryset = self.filterWithUrlParams(queryset)
-            
+    def returnPaginatedResponse(self,queryset):
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
@@ -50,6 +42,7 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
 
 class FacultyViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Faculty.objects.all()
@@ -82,6 +75,10 @@ class CourseViewSet(searchModelViewSet):
         print(queryset)
         return queryset
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.filterWithUrlParams(queryset)
+        return self.returnPaginatedResponse(queryset)
 
 class TermViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Term.objects.all()
@@ -97,6 +94,13 @@ class CourseClassViewSet(searchModelViewSet):
             queryset = self.filterByParam(urlParamName,False,queryset)
         return queryset
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.filterWithUrlParams(queryset)
+
+        queryset = queryset.order_by("-startDate")[:5]
+        
+        return self.returnPaginatedResponse(queryset)
 
 class ClassTimeViewSet(searchModelViewSet):
     queryset = ClassTime.objects.all()
@@ -107,3 +111,11 @@ class ClassTimeViewSet(searchModelViewSet):
         if urlParamName == "courseClass":
             queryset = self.filterByParam(urlParamName,False,queryset)
         return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.filterWithUrlParams(queryset)
+
+        
+
+        return self.returnPaginatedResponse(queryset)
