@@ -18,8 +18,9 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
         urlParamVal = self.request.query_params.get(urlParamName, None)
         if not filterParamName:
             filterParamName = urlParamName
-        if urlParamVal is not None:
+        if urlParamVal:
             if urlParamIsInt:
+                print(urlParamVal)
                 urlParamVal = int(urlParamVal)
             queryset = queryset.filter(**{filterParamName:urlParamVal})
             print(filterParamName,urlParamVal)
@@ -37,7 +38,6 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
-            print(serializer.data)
             return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
@@ -63,7 +63,7 @@ class CourseViewSet(searchModelViewSet):
     pagination_class = CourseListPagination
 
     def handleUrlParam(self, urlParamName,queryset):
-        print(urlParamName)
+        #print(urlParamName)
         if urlParamName == "asString" or urlParamName == "subject":
             queryset = self.filterByParam(urlParamName,False,queryset)
         if urlParamName == "subject":
@@ -72,7 +72,7 @@ class CourseViewSet(searchModelViewSet):
             queryset = self.filterByParam(urlParamName,True,queryset,"catalogCode__gte")
         elif urlParamName == "maxCourse":
             queryset = self.filterByParam(urlParamName,True,queryset,"catalogCode__lte")
-        print(queryset)
+        #print(queryset)
         return queryset
 
     def list(self, request, *args, **kwargs):
@@ -89,7 +89,7 @@ class CourseClassViewSet(searchModelViewSet):
     serializer_class = CourseClassSerializer
 
     def handleUrlParam(self, urlParamName,queryset):
-        print(urlParamName)
+        #print(urlParamName)
         if urlParamName == "course":
             queryset = self.filterByParam(urlParamName,False,queryset)
         return queryset
@@ -107,7 +107,7 @@ class ClassTimeViewSet(searchModelViewSet):
     serializer_class = ClassTimeSerializer
 
     def handleUrlParam(self, urlParamName,queryset):
-        print(urlParamName)
+        #print(urlParamName)
         if urlParamName == "courseClass":
             queryset = self.filterByParam(urlParamName,False,queryset)
         return queryset

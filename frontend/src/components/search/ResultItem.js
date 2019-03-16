@@ -34,17 +34,14 @@ export default class ResultItem extends React.Component {
         let output;
         const data = this.state.courseClassData;
 
-
         if (data) {
             results = data.results;
-
-            //If empty
             if (results === undefined || results.length === 0) {
                 output = <p>No Classes Found.</p>
             }
             else {
                 output = results.map((courseClass) =>
-                    <Card>
+                    <Card key={courseClass.id}>
                         <CardHeader>{courseClass.calendarCode}</CardHeader>
                         <CardBody>
                             <p>{courseClass.startDate}</p>
@@ -55,7 +52,6 @@ export default class ResultItem extends React.Component {
                 );
             }
         }
-
 
         return (
             <Card>
@@ -68,7 +64,6 @@ export default class ResultItem extends React.Component {
                         {output}
                     </Collapse>
                 </CardBody>
-
             </Card>
         );
     }

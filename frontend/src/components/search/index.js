@@ -33,8 +33,9 @@ export default class SearchPage extends React.Component {
 		event.preventDefault();
 	}
 
-	onMultiCourseSubmit(event, subjNum, minCourse, maxCourse) {
+	onMultiCourseSubmit(event, subjNum, termNum, minCourse, maxCourse) {
 		const queryRequest = "subject=" + subjNum + "&"
+			+ "termNum=" + termNum + "&"
 			+ "minCourse=" + minCourse + "&"
 			+ "maxCourse=" + maxCourse;
 		console.log(queryRequest);
