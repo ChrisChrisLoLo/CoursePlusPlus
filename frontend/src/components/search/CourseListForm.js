@@ -15,14 +15,18 @@ export default class CourseListForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { subjData: null, chosenSubj: "1", minCourse: "100", maxCourse: "999" };
+		this.state = { subjData: null, chosenSubj: "", termData: null, chosenTerm: "", minCourse: "100", maxCourse: "999" };
 		this.onChosenSubjChange = this.onChosenSubjChange.bind(this);
+		this.onChosenTermChange = this.onChosenTermChange.bind(this);
 		this.onMinCourseChange = this.onMinCourseChange.bind(this);
 		this.onMaxCourseChange = this.onMaxCourseChange.bind(this);
 	}
 
 	onChosenSubjChange(e) {
 		this.setState({ chosenSubj: e.target.value });
+	}
+	onChosenTermChange(e) {
+		this.setState({ chosenTerm: e.target.value });
 	}
 	onMinCourseChange(e) {
 		this.setState({ minCourse: e.target.value });
@@ -37,9 +41,14 @@ export default class CourseListForm extends React.Component {
 				const data = res.data;
 				this.setState({ subjData: data });
 			})
+		axios.get(process.env.REACT_APP_API_URL + "/api/terms/")
+			.then(res => {
+				const data = res.data;
+				this.setState({ termData: data });
+			})
 	}
 	handleMultiCourseSubmit(event) {
-		this.props.onMultiCourseSubmit(event, this.state.chosenSubj, this.state.minCourse, this.state.maxCourse);
+		this.props.onMultiCourseSubmit(event, this.state.chosenSubj, this.state.chosenTerm, this.state.minCourse, this.state.maxCourse);
 	}
 
 
@@ -51,6 +60,15 @@ export default class CourseListForm extends React.Component {
 				<option value={subject.id} key={subject.id}>{subject.code + " - " + subject.name}</option>
 			);
 		}
+
+		let termOptions;
+		if (this.state.termData) {
+			const term = this.state.termData.results;
+			termOptions = term.map((term) =>
+				<option value={term.id} key={term.id}>{term.title}</option>
+			);
+		}
+
 		return (
 			<Card>
 				<CardHeader>
@@ -59,8 +77,17 @@ export default class CourseListForm extends React.Component {
 				<CardBody>
 					<Form>
 						<FormGroup>
+							<Label for="termSelect">Term</Label>
+							<Input type="select" name="term" id="termSelect" onChange={this.onChosenTermChange} value={this.state.chosenTerm}>
+								<option value="">All Terms</option>
+								{termOptions}
+							</Input>
+						</FormGroup>
+
+						<FormGroup>
 							<Label for="subjectSelect">Subject</Label>
 							<Input type="select" name="subject" id="subjectSelect" onChange={this.onChosenSubjChange} value={this.state.chosenSubj}>
+								<option value="">All Subjects</option>
 								{subjOptions}
 							</Input>
 						</FormGroup>
