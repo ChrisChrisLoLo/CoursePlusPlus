@@ -46,6 +46,9 @@ export default class Example extends React.Component {
 							<NavItem>
 								<NavLink to="/scheduleBuilder/" className="nav-link">Schedule Builder</NavLink>
 							</NavItem>
+							<NavItem>
+								<NavLink to="/auth/" className="nav-link">Log In</NavLink>
+							</NavItem>
 							<UncontrolledDropdown nav inNavbar>
 								<DropdownToggle nav caret>
 									Options
