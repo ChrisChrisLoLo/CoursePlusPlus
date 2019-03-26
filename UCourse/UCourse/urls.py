@@ -17,24 +17,26 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 from rest_framework import routers
+from rest_framework.authtoken import views as authTokenViews
 from quickstart import views
 from searchCourse.views import *
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
-router.register(r'faculties',FacultyViewSet)
-router.register(r'departments',DepartmentViewSet)
-router.register(r'subjects',SubjectViewSet)
-router.register(r'courses',CourseViewSet)
-router.register(r'terms',TermViewSet)
-router.register(r'classes',CourseClassViewSet)
-router.register(r'classtimes',ClassTimeViewSet)
+router.register(r'faculties', FacultyViewSet)
+router.register(r'departments', DepartmentViewSet)
+router.register(r'subjects', SubjectViewSet)
+router.register(r'courses', CourseViewSet)
+router.register(r'terms', TermViewSet)
+router.register(r'classes', CourseClassViewSet)
+router.register(r'classtimes', ClassTimeViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-token-auth/', authTokenViews.obtain_auth_token),
     path('', TemplateView.as_view(template_name='index.html'))
 ]

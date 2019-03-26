@@ -26,7 +26,7 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
             print(filterParamName, urlParamVal)
         return queryset
 
-    def handleUrlParam(self, urlParamName):
+    def handleUrlParam(self, urlParamName, queryset):
         raise NotImplementedException
 
     def filterWithUrlParams(self, queryset):
