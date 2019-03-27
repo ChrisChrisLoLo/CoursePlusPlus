@@ -1,5 +1,9 @@
 import React from "react";
 import {
+    Card,
+    CardHeader,
+    CardBody,
+    Button,
     Form,
     FormGroup,
     Label,
@@ -7,18 +11,24 @@ import {
 } from 'reactstrap';
 import axios from "axios";
 
-export default class AuthPage extends React.Component {
+export default class LoginForm extends React.Component {
     render() {
         console.log(this.state);
         return (
-            <Form>
-                <FormGroup>
-                    <Label for="username">Username</Label>
-                    <Input type="text" id="username"/>
-                    <Label for="password">Password</Label>
-                    <Input type="password" id="password"/>
-                </FormGroup>
-            </Form>
+            <Card>
+                <CardHeader>Login</CardHeader>
+                <CardBody>
+                    <Form>
+                        <FormGroup>
+                            <Label for="username">Username</Label>
+                            <Input type="text" id="username"/>
+                            <Label for="password">Password</Label>
+                            <Input type="password" id="password"/>
+                            <Button>Login</Button>
+                        </FormGroup>
+                    </Form>
+                </CardBody>
+            </Card>
         );
     }
 }

@@ -5,6 +5,8 @@ import {
 } from 'reactstrap';
 import axios from "axios";
 
+import LoginForm from "./LoginForm";
+
 export default class AuthPage extends React.Component {
     render() {
         console.log(this.state);
@@ -16,9 +18,11 @@ export default class AuthPage extends React.Component {
                     </Col>
                 </Row>
                 <Row>
+                    <Col xs="2" sm="3" md="4"></Col>
                     <Col>
-                        <h1>FORM</h1>
+                        <LoginForm/>
                     </Col>
+                    <Col xs="2" sm="3" md="4"></Col>
                 </Row>
             </div>
         );
