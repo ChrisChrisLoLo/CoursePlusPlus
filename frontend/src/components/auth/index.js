@@ -8,8 +8,19 @@ import axios from "axios";
 import LoginForm from "./LoginForm";
 
 export default class AuthPage extends React.Component {
+    constructor(props) {
+		super(props);
+		this.state = { formType: "logIn" };
+	}
+
     render() {
         console.log(this.state);
+        let displayedForm = <h3>Form could not be found</h3>;
+        switch(this.state.formType){
+            case "logIn":
+                displayedForm = <LoginForm/>
+                break;
+        }
         return (
             <div>
                 <Row>
@@ -20,7 +31,7 @@ export default class AuthPage extends React.Component {
                 <Row>
                     <Col xs="2" sm="3" md="4"></Col>
                     <Col>
-                        <LoginForm/>
+                        {displayedForm}
                     </Col>
                     <Col xs="2" sm="3" md="4"></Col>
                 </Row>
