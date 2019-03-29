@@ -38,13 +38,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Rest
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_auth',
+    # Authentication
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    # Social Providers
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'corsheaders',
 ]
 
+SITE_ID = 1
+
 MIDDLEWARE = [
-    #Cors middleware on top since that's what was recommended.
+    # Cors middleware on top since that's what was recommended.
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,7 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+
 ]
 
 ROOT_URLCONF = 'UCourse.urls'
@@ -61,7 +74,7 @@ ROOT_URLCONF = 'UCourse.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'./../front-end/dist')],
+        'DIRS': [os.path.join(BASE_DIR, './../front-end/dist')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,12 +87,12 @@ TEMPLATES = [
     },
 ]
 
-#REST_FRAMEWORK
+# REST_FRAMEWORK
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    #Page size is more of a safe gaurd than a default
+    # Page size is more of a safe gaurd than a default
     'PAGE_SIZE': 100,
 }
 
@@ -137,7 +150,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-  os.path.join(BASE_DIR,'./../front-end/dist'),
+    os.path.join(BASE_DIR, './../front-end/dist'),
 ]
 
 # CORS origin whitelist - should only contain localhost and the name of the prod domain

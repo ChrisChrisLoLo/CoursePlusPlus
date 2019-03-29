@@ -36,7 +36,7 @@ router.register(r'classtimes', ClassTimeViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api-token-auth/', authTokenViews.obtain_auth_token),
+    path('api/rest-auth/', include('rest_auth.urls')),
+    path('api/rest-auth/registration/', include('rest_auth.registration.urls')),
     path('', TemplateView.as_view(template_name='index.html'))
 ]
