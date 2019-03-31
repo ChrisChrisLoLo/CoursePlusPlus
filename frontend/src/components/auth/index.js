@@ -6,11 +6,18 @@ import {
 import axios from "axios";
 
 import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 export default class AuthPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = { formType: "logIn" };
+        this.changeForm = this.changeForm.bind(this);
+    }
+
+    changeForm(e, newForm) {
+        this.setState({ formType: newForm });
+        e.preventDefault();
     }
 
     render() {
@@ -18,7 +25,10 @@ export default class AuthPage extends React.Component {
         let displayedForm = <h3>Form could not be found</h3>;
         switch (this.state.formType) {
             case "logIn":
-                displayedForm = <LoginForm history={this.props.history} />
+                displayedForm = <LoginForm history={this.props.history} changeForm={this.changeForm} />
+                break;
+            case "register":
+                displayedForm = <RegisterForm history={this.props.history} changeForm={this.changeForm} />
                 break;
         }
         return (
