@@ -9,16 +9,16 @@ import LoginForm from "./LoginForm";
 
 export default class AuthPage extends React.Component {
     constructor(props) {
-		super(props);
-		this.state = { formType: "logIn" };
-	}
+        super(props);
+        this.state = { formType: "logIn" };
+    }
 
     render() {
         console.log(this.state);
         let displayedForm = <h3>Form could not be found</h3>;
-        switch(this.state.formType){
+        switch (this.state.formType) {
             case "logIn":
-                displayedForm = <LoginForm/>
+                displayedForm = <LoginForm history={this.props.history} />
                 break;
         }
         return (

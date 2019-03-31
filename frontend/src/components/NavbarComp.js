@@ -52,7 +52,7 @@ export default class Example extends React.Component {
 							<UncontrolledDropdown nav inNavbar>
 								<DropdownToggle nav caret>
 									Options
-				  			</DropdownToggle>
+				  				</DropdownToggle>
 								<DropdownMenu right>
 									<DropdownItem>
 										Option 1
