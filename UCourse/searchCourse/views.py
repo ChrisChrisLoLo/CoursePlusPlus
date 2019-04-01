@@ -86,7 +86,7 @@ class CourseViewSet(searchModelViewSet):
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         queryset = self.filterWithUrlParams(queryset)
-        queryset = queryset.order_by("asString", "subject__code")
+        queryset = queryset.order_by("asString", "subject__code").distinct()
         return self.returnPaginatedResponse(queryset)
 
 
