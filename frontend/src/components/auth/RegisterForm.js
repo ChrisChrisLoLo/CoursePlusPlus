@@ -16,7 +16,7 @@ import { targetPropType } from "reactstrap/lib/utils";
 export default class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { username: "", password: "", passwordConf: "", registerErr: false }
+        this.state = { username: "", password: "", passwordConf: "", usernameErr: "", passwordErr: "", password2Err: "", registerErr: false }
 
         this.attemptRegister = this.attemptRegister.bind(this);
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -25,7 +25,7 @@ export default class RegisterForm extends React.Component {
     }
 
     attemptRegister(e) {
-        axios.post(process.env.REACT_APP_API_URL + "/api/rest-auth/login/", {
+        axios.post(process.env.REACT_APP_API_URL + "/api/rest-auth/registration/", {
             username: this.state.username,
             password1: this.state.password,
             password2: this.state.passwordConf
@@ -63,7 +63,7 @@ export default class RegisterForm extends React.Component {
                         <FormGroup>
                             {errMessage}
                             <Label for="username">Username</Label>
-                            <Input type="text" id="username" onChange={this.handleUsernameChange} value={this.state.username} />
+                            <Input type="text" id="username" onChange={this.handleUsernameChange} value={this.state.username} required={true} />
                             <Label for="password">Password</Label>
                             <Input type="password" id="password" onChange={this.handlePasswordChange} value={this.state.password} />
                             <Label for="passwordConf" >Confirm Password</Label>
