@@ -129,3 +129,8 @@ class ClassTimeViewSet(searchModelViewSet):
         queryset = self.filterWithUrlParams(queryset)
 
         return self.returnPaginatedResponse(queryset)
+
+
+class ClassCartViewSet(viewsets.ModelViewSet):
+    queryset = ClassCart.objects.all()
+    serializer_class = ClassCartSerializer

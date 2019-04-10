@@ -34,7 +34,7 @@ export default class LoginForm extends React.Component {
             this.props.history.push("/");
         }).catch(err => {
             this.setState({ loginErr: true });
-        });;
+        });
         e.preventDefault();
     }
 
