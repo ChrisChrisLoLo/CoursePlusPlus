@@ -48,9 +48,7 @@ export default class LoginForm extends React.Component {
 
 
     render() {
-        const errMessage = this.state.loginErr
-            ? <Alert color="danger"> Invalid credentials </Alert>
-            : null;
+        const errMessage = this.state.loginErr ? <Alert color="danger"> Invalid credentials </Alert> : null;
 
         return (
             <Card>
@@ -63,7 +61,7 @@ export default class LoginForm extends React.Component {
                             <Input type="text" id="username" onChange={this.handleUsernameChange} value={this.state.username} />
                             <Label for="password" >Password</Label>
                             <Input type="password" id="password" onChange={this.handlePasswordChange} value={this.state.password} />
-                            <Button onClick={this.attemptLogin}>Login</Button>
+                            <Button  onClick={this.attemptLogin}>Login</Button>
                         </FormGroup>
                         <Button onClick={(e) => this.props.changeForm(e, "register")} color="link">Register</Button>
                     </Form>
