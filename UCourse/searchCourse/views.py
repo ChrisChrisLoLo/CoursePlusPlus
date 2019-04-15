@@ -2,7 +2,8 @@ from django.shortcuts import render
 from searchCourse.models import *
 from searchCourse.serializers import *
 from searchCourse.paginations import *
-from rest_framework import generics, viewsets
+from searchCourse.permissions import *
+from rest_framework import generics, viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.exceptions import APIException
 
@@ -134,3 +135,4 @@ class ClassTimeViewSet(searchModelViewSet):
 class ClassCartViewSet(viewsets.ModelViewSet):
     queryset = ClassCart.objects.all()
     serializer_class = ClassCartSerializer
+    permission_classes = (permissions.IsAuthenticated,IsOwner)

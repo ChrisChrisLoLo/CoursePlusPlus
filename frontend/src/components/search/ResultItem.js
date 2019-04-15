@@ -47,6 +47,7 @@ export default class ResultItem extends React.Component {
                             <p>{courseClass.startDate}</p>
                             <p>{courseClass.endDate}</p>
                             <CardText>{courseClass.description || "No description available."}</CardText>
+                            <Button size="sm" onClick={console.log("HIIIII")}>Add to builder</Button>
                         </CardBody>
                     </Card>
                 );
