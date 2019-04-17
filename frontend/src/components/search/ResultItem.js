@@ -10,6 +10,8 @@ import {
 } from 'reactstrap';
 import axios from "axios";
 
+import ResultItemClass from "./ResultItemClass";
+
 export default class ResultItem extends React.Component {
     constructor(props) {
         super(props);
@@ -41,15 +43,7 @@ export default class ResultItem extends React.Component {
             }
             else {
                 output = results.map((courseClass) =>
-                    <Card key={courseClass.id}>
-                        <CardHeader>{courseClass.calendarCode}</CardHeader>
-                        <CardBody>
-                            <p>{courseClass.startDate}</p>
-                            <p>{courseClass.endDate}</p>
-                            <CardText>{courseClass.description || "No description available."}</CardText>
-                            <Button size="sm" onClick={console.log("HIIIII")}>Add to builder</Button>
-                        </CardBody>
-                    </Card>
+                    <ResultItemClass courseClass={courseClass} key={courseClass.id}/>
                 );
             }
         }

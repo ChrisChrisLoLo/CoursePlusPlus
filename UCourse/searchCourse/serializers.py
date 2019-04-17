@@ -46,5 +46,7 @@ class ClassTimeSerializer(serializers.ModelSerializer):
 
 class ClassCartSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ClassTime
+        model = ClassCart
         fields = '__all__'
+
+    def save(self):
