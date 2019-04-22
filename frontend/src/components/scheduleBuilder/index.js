@@ -4,6 +4,7 @@ import {
     Col
 } from 'reactstrap';
 import axios from "axios";
+import ScheduleGrid from "./ScheduleGrid"
 
 export default class ScheduleBuilderPage extends React.Component {
     render() {
@@ -17,7 +18,7 @@ export default class ScheduleBuilderPage extends React.Component {
                 </Row>
                 <Row>
                     <Col>
-                        <h1>BUILDER</h1>
+                        <ScheduleGrid/>
                     </Col>
                 </Row>
             </div>
