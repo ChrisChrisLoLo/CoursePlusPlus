@@ -31,6 +31,7 @@ router.register(r'courses', CourseViewSet)
 router.register(r'terms', TermViewSet)
 router.register(r'classes', CourseClassViewSet)
 router.register(r'classtimes', ClassTimeViewSet)
+router.register(r'classCart', ClassCartViewSet)
 
 
 urlpatterns = [

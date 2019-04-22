@@ -2,7 +2,8 @@ from django.shortcuts import render
 from searchCourse.models import *
 from searchCourse.serializers import *
 from searchCourse.paginations import *
-from rest_framework import generics, viewsets
+from searchCourse.permissions import *
+from rest_framework import generics, viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.exceptions import APIException
 
@@ -134,3 +135,18 @@ class ClassTimeViewSet(searchModelViewSet):
 class ClassCartViewSet(viewsets.ModelViewSet):
     queryset = ClassCart.objects.all()
     serializer_class = ClassCartSerializer
+    permission_classes = (permissions.IsAuthenticated,IsOwner)
+
+    #Override the create method so that the user is set as the owner in the data model
+    def create(self, request, *args, **kwargs):
+
+        request.data['owner'] = request.user.id
+
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    # def create(self, request):
+    #     obj = ClassCart.objects.create(owner=request.user,courseClass_id=request.data["courseClass"])

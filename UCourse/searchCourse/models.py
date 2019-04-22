@@ -91,7 +91,7 @@ class ClassTime(models.Model):
 
 class ClassCart(models.Model):
     courseClass = models.ForeignKey('CourseClass', on_delete=models.CASCADE)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
 
 # class Textbook(models.Model):

@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 import axios from "axios";
 import { targetPropType } from "reactstrap/lib/utils";
+import FormText from "reactstrap/es/FormText";
 
 export default class LoginForm extends React.Component {
     constructor(props) {
@@ -28,8 +29,11 @@ export default class LoginForm extends React.Component {
             username: this.state.username,
             password: this.state.password
         }).then(res => {
+            //Store token in a cookie
             document.cookie = "accessToken=" + res.data.key;
             let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+            // axios.defaults.headers.common['Authorization'] = cookieValue;
+
             //console.log(cookieValue)
             this.props.history.push("/");
         }).catch(err => {
@@ -55,14 +59,16 @@ export default class LoginForm extends React.Component {
                 <CardHeader>Login</CardHeader>
                 <CardBody>
                     <Form>
+                        {errMessage}
                         <FormGroup>
-                            {errMessage}
                             <Label for="username">Username</Label>
                             <Input type="text" id="username" onChange={this.handleUsernameChange} value={this.state.username} />
+                        </FormGroup>
+                        <FormGroup>
                             <Label for="password" >Password</Label>
                             <Input type="password" id="password" onChange={this.handlePasswordChange} value={this.state.password} />
-                            <Button  onClick={this.attemptLogin}>Login</Button>
                         </FormGroup>
+                        <Button  onClick={this.attemptLogin}>Login</Button>
                         <Button onClick={(e) => this.props.changeForm(e, "register")} color="link">Register</Button>
                     </Form>
                 </CardBody>

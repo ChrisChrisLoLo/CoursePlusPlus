@@ -46,5 +46,15 @@ class ClassTimeSerializer(serializers.ModelSerializer):
 
 class ClassCartSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ClassTime
+        model = ClassCart
         fields = '__all__'
+
+    def create(self, validated_data):
+        #Copied from the django rest framework-modified to get or create records (prevent duplicates)
+
+        ModelClass = self.Meta.model
+
+        instance = ModelClass._default_manager.get_or_create(**validated_data)[0]
+
+        return instance
+
