@@ -133,15 +133,14 @@ class ClassTimeViewSet(searchModelViewSet):
 
 
 class ClassCartViewSet(viewsets.ModelViewSet):
-    queryset = ClassCart.objects.all()
+    queryset = ClassCart.objects.all().prefetch_related("courseClass")
     serializer_class = ClassCartSerializer
     permission_classes = (permissions.IsAuthenticated,IsOwner)
 
-    #Override the create method so that the user is set as the owner in the data model
+    # Override the create method so that the user is set as the owner in the data model
     def create(self, request, *args, **kwargs):
 
         request.data['owner'] = request.user.id
-
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
