@@ -4,6 +4,7 @@ import {
     Col
 } from 'reactstrap';
 import axios from "axios/index";
+import ClassCart from "./ClassCart/ClassCart"
 import ScheduleGrid from "./ScheduleGrid/ScheduleGrid"
 
 export default class ScheduleBuilderPage extends React.Component {
@@ -18,6 +19,7 @@ export default class ScheduleBuilderPage extends React.Component {
                 </Row>
                 <Row>
                     <Col sm={"3"}>
+                        <ClassCart/>
                     </Col>
                     <Col sm={"9"}>
                         <ScheduleGrid/>
