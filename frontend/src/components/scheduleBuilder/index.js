@@ -8,6 +8,10 @@ import ClassCart from "./ClassCart/ClassCart"
 import ScheduleGrid from "./ScheduleGrid/ScheduleGrid"
 
 export default class ScheduleBuilderPage extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {coursesSelected:[]}
+    }
     render() {
         console.log(this.state);
         return (
