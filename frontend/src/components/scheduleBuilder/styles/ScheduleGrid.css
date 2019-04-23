@@ -3,7 +3,9 @@
   /*Time title col + col for each day*/
   grid-template-columns: 30px repeat(7,1fr);
   /*Day title row + row for each 15 minute segment from 8 AM to 9 PM*/
-  grid-template-rows: 30px repeat(calc(13*4),20px)
+  grid-template-rows: 30px repeat(calc(13*4),20px);
+  border-style: solid;
+  border-width: 1px;
 }
 
 .grid-test-1{

@@ -3,8 +3,9 @@ import {
     Row,
     Col
 } from 'reactstrap';
-import axios from "axios";
-import "./styles/ScheduleGrid.css";
+import axios from "axios/index";
+import ScheduleItem from "./ScheduleItem"
+import "../styles/ScheduleGrid.css";
 
 export default class ScheduleGrid extends React.Component {
     render() {
