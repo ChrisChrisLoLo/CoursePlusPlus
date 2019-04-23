@@ -9,7 +9,7 @@ import {
 
 } from 'reactstrap';
 import axios from "axios";
-import getAuthToken from "../../lib/getAuthToken";
+import getAuthToken from "../../userLib/getAuthToken";
 
 export default class ResultItemClass extends React.Component {
     constructor(props) {
