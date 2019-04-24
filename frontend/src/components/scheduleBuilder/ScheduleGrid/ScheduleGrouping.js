@@ -50,11 +50,13 @@ export default class ScheduleGrouping extends React.Component {
 
         const rowStart = (hourStart - HOUR_OFFSET) + ROW_OFFSET;
         const rowEnd = (hourEnd - HOUR_OFFSET) + ROW_OFFSET;
+
+
         //Determine count of blocks
         const dayLetters = classtime.day.trim().split("");
-
         return dayLetters.map((dayLetter)=>{
-            return <ScheduleItem key={courseClass.id} courseClass={courseClass} rowStart={rowStart} rowEnd={rowEnd} col={DAY_COL_MAP[dayLetter]}/>;
+            const col = DAY_COL_MAP[dayLetter];
+            return <ScheduleItem key={col} courseClass={courseClass} rowStart={rowStart} rowEnd={rowEnd} col={col}/>;
         });
     }
 
