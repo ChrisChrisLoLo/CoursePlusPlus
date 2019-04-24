@@ -40,7 +40,7 @@ export default class ScheduleBuilderPage extends React.Component {
                         <ClassCart handleCourseClassAdd={this.handleCourseClassAdd} handleCourseClassRemove={this.handleCourseClassRemove}/>
                     </Col>
                     <Col sm={"9"}>
-                        <ScheduleGrid/>
+                        <ScheduleGrid courses={this.state.coursesSelected}/>
                     </Col>
                 </Row>
             </div>
