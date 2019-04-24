@@ -19,7 +19,6 @@ export default class ClassCart extends React.Component {
     componentDidMount() {
     //const queryRegex = new RegExp("[?].*");
     //const queryParams = window.location.href.match(queryRegex) || "";
-    console.log(process.env);
     axios.get(process.env.REACT_APP_API_URL + "/api/classCart/",{
             headers:{Authorization:getAuthToken()}
         }).then(res => {
@@ -31,8 +30,13 @@ export default class ClassCart extends React.Component {
     render() {
         const results = this.state.coursesInCart.results;
         const cart = results ?
-            results.map((course) =>
-                <CartItem id={course.id} course={course}/>
+            results.map((courseCart) =>
+                <CartItem
+                    key={courseCart.id}
+                    course={courseCart.courseClass}
+                    handleCourseClassAdd = {this.props.handleCourseClassAdd}
+                    handleCourseClassRemove = {this.props.handleCourseClassRemove}
+                />
             ):
             <p>No Results Found</p>;
 

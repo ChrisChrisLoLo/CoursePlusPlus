@@ -11,16 +11,16 @@ export default class ScheduleBuilderPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {coursesSelected:[]}
-        this.handleCourseClassAdd = this.handleCourseClassAdd.bind();
-        this.handleCourseClassRemove = this.handleCourseClassRemove.bind();
+        this.handleCourseClassAdd = this.handleCourseClassAdd.bind(this);
+        this.handleCourseClassRemove = this.handleCourseClassRemove.bind(this);
     }
 
-    handleCourseClassAdd(e,courseClassProp){
-        const newList = this.state.coursesSelected.append(courseClassProp);
+    handleCourseClassAdd(courseClassProp){
+        const newList = this.state.coursesSelected.concat(courseClassProp);
         this.setState({coursesSelected:newList});
     }
 
-    handleCourseClassRemove(e,courseClassProp){
+    handleCourseClassRemove(courseClassProp){
         const newList = this.state.coursesSelected.filter((courseClass) => {
             return courseClass.id !== courseClassProp.id;
         });
@@ -28,7 +28,6 @@ export default class ScheduleBuilderPage extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <Row>
