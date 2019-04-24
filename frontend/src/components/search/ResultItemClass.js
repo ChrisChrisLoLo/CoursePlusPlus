@@ -22,7 +22,6 @@ export default class ResultItemClass extends React.Component {
         },{
             headers:{Authorization:getAuthToken()}
         }).then(res => {
-            console.log("HIIII")
         });
 
     }
