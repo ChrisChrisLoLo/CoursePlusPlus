@@ -34,6 +34,7 @@ export default class RegisterForm extends React.Component {
             password2: this.state.passwordConf
         }).then(res => {
             console.log(res)
+            this.props.history.push("/");
         }).catch(err => {
             this.setState({ registerErr: err.response });
         });

@@ -6,7 +6,7 @@ import NavbarComp from "./components/NavbarComp.js";
 import HomePage from "./components/pages/HomePage.js";
 import AuthPage from "./components/auth/index.js";
 import SearchPage from "./components/search/index.js";
-import ScheduleBuilderPage from "./components/scheduleBuilder/index.js";
+import ScheduleBuilderPage from "./components/scheduleBuilder";
 import NotFoundErrPage from "./components/pages/NotFoundErrPage.js";
 
 

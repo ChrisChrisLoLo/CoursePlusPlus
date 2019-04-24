@@ -49,6 +49,8 @@ class ClassCartSerializer(serializers.ModelSerializer):
         model = ClassCart
         fields = '__all__'
 
+    courseClass = CourseClassSerializer()
+
     def create(self, validated_data):
         #Copied from the django rest framework-modified to get or create records (prevent duplicates)
 
