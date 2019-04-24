@@ -7,7 +7,6 @@ import {
 	Form,
 	FormGroup,
 	Label,
-	Col,
 	Input,
 } from "reactstrap";
 import axios from "axios";

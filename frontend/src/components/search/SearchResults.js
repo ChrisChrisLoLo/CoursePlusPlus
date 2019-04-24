@@ -6,11 +6,7 @@ import {
 	Container,
 	Spinner,
 } from 'reactstrap';
-import {
-	withRouter,
-} from 'react-router-dom';
 
-import PropTypes from "prop-types";
 import ResultItem from "./ResultItem"
 
 export default class SearchResults extends React.Component {

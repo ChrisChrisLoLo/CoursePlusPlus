@@ -8,11 +8,6 @@ import {
     FormGroup,
     Input,
 } from 'reactstrap';
-import CartItem from "./CartItem";
-
-import axios from "axios";
-import getAuthToken from "../../../userLib/getAuthToken";
-
 
 export default class ClassCart extends React.Component {
     constructor(props) {

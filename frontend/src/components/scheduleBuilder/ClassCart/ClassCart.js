@@ -1,12 +1,8 @@
 import React from "react";
 import {
-    Button,
     Card,
     CardBody,
     CardHeader,
-    Form,
-    FormGroup,
-    Input,
 } from 'reactstrap';
 import CartItem from "./CartItem";
 
