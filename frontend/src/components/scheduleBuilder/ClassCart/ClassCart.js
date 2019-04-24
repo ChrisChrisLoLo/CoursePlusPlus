@@ -40,7 +40,6 @@ export default class ClassCart extends React.Component {
                 headers:{Authorization:getAuthToken()}
             }).then(res => {
 
-
                 let coursesData = res.data;
 
                 coursesData = this.mapRelatedClasstimes(coursesData)

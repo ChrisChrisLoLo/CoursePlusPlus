@@ -14,9 +14,9 @@ export default class ScheduleGrouping extends React.Component {
 
     render() {
         console.log(this.state);
-        const style = "col-start" + this.props.row + ";" + this.props.col + ";";
+        const style = "col-start" + this.props.row + ";" + this.props.col;
         return (
-            <div style={style}>
+            <div style={{style}}>
                 <h5>CONTENT</h5>
             </div>
         );
