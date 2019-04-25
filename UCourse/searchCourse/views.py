@@ -23,9 +23,8 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
         if urlParamVal:
             if urlParamIsInt:
                 print(urlParamVal)
-                urlParamVal = int(urlParamVal)
+                urlParamVal = int(urlParamVal.strip("/"))
             queryset = queryset.filter(**{filterParamName: urlParamVal})
-            print(filterParamName, urlParamVal)
         return queryset
 
     def handleUrlParam(self, urlParamName, queryset):
@@ -130,7 +129,7 @@ class ClassTimeViewSet(searchModelViewSet):
     def handleUrlParam(self, urlParamName, queryset):
         # print(urlParamName)
         if urlParamName == "courseClass":
-            queryset = self.filterByParam(urlParamName, False, queryset)
+            queryset = self.filterByParam(urlParamName, True, queryset)
         else:
             raise ParseError(detail=urlParamName+" is an invalid parameter")
         return queryset
