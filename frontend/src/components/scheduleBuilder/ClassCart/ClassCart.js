@@ -21,17 +21,17 @@ export default class ClassCart extends React.Component {
         //const queryParams = window.location.href.match(queryRegex) || "";
         axios.get(process.env.REACT_APP_API_URL + "/api/classCart/",{
                 headers:{Authorization:getAuthToken()}
-            }).then(res => {
+            }).then(async res => {
 
                 let classCart = res.data.results;
 
-                classCart = this.mapForeignKey(classCart,"courseClass","/api/classes/");
-                console.log(classCart)
+                await this.mapForeignKey(classCart,"courseClass","/api/classes/").then((res)=>{console.log(res);classCart = res});
+                console.log(classCart);
                 //this.mapRelatedData(class)
-                classCart.forEach(classCartItem=>{
-                    console.log(classCartItem)
-                    console.log(classCartItem.courseClass)
-                    console.log(classCartItem.fk)
+                classCart.forEach((classCartItem)=>{
+                    console.log(classCartItem);
+                    console.log(classCartItem.courseClass);
+                    console.log(classCartItem.fk);
                     classCartItem.courseClass = this.mapPrimaryKey(classCartItem.courseClass, "classtime","/api/classtimes/?courseClass=")
                 });
                 //coursesData = this.mapRelatedClasstimes(coursesData)
@@ -66,24 +66,28 @@ export default class ClassCart extends React.Component {
     }
 
     //Maps an foreign key property on an object into the resource of that ID
-    mapForeignKey(itemToMap,fk,resourceURL){
+    async mapForeignKey(itemToMap,fk,resourceURL){
         const promises = [];
 
         if(Array.isArray(itemToMap)){
+            console.log("ARRAAAAAAYYY")
             itemToMap.forEach(item=>{
                promises.push(
                     axios.get(process.env.REACT_APP_API_URL + resourceURL + item[fk] + "/")
-                        .then(res => {item["fk"] = res.data})
+                        .then(res => {item[fk] = res.data})
                )
             });
             //Wait until all promises have been settled
-            Promise.all(promises).then(()=>{return itemToMap});
+            // return await Promise.all(promises).then(()=>{console.log(itemToMap);return itemToMap});
+            await Promise.all(promises);
+            return Promise.resolve(itemToMap);
         }
         else{
-            axios.get(process.env.REACT_APP_API_URL + resourceURL + itemToMap[fk] + "/")
-                        .then(res => {itemToMap["fk"] = res.data;
+            await axios.get(process.env.REACT_APP_API_URL + resourceURL + itemToMap[fk] + "/")
+                        .then(res => {itemToMap[fk] = res.data;
                             return itemToMap});
         }
+
         // console.log(itemToMap)
         // return itemToMap
     }
