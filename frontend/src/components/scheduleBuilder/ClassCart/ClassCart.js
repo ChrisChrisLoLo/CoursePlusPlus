@@ -25,19 +25,24 @@ export default class ClassCart extends React.Component {
 
                 let classCart = res.data.results;
 
-                await this.mapForeignKey(classCart,"courseClass","/api/classes/").then((res)=>{console.log(res);classCart = res});
+                await this.mapForeignKey(classCart,"courseClass","/api/classes/")
+                    .then((res)=>{console.log(res);classCart = res});
 
-                //this.mapRelatedData(class)
+                const promiseArr = [];
                 classCart.forEach((classCartItem)=>{
-                    console.log(classCartItem);
-                    console.log(classCartItem.courseClass);
-                    console.log(classCartItem.fk);
-                    classCartItem.courseClass = this.mapPrimaryKey(classCartItem.courseClass, "classtime","/api/classtimes/?courseClass=")
+                    promiseArr.push(
+                        this.mapPrimaryKey(classCartItem.courseClass, "classtime","/api/classtimes/?courseClass=")
+                            .then((res)=>{classCartItem.courseClass=res}));
                 });
-                //coursesData = this.mapRelatedClasstimes(coursesData)
 
+                await Promise.all(promiseArr);
+                //coursesData = this.mapRelatedClasstimes(coursesData)
+                return Promise.resolve(classCart)
+
+            }).then((res)=>{
                 //Need to wait until all requests are done
-                this.setState({ classesInCart: classCart });
+                this.setState({ classesInCart: res });
+                console.log("STATE");
                 console.log(this.state.classesInCart);
             })
 	}
@@ -50,8 +55,7 @@ export default class ClassCart extends React.Component {
             itemToMap.forEach(item=>{
                promises.push(
                     axios.get(process.env.REACT_APP_API_URL + resourceURL + item.id + "/")
-                        .then(res => {item[targetPropertyName] = res.data})
-               )
+                        .then(res => {item[targetPropertyName] = res.data}));
             });
             //Wait until all promises have been settled
             await Promise.all(promises);
@@ -113,7 +117,7 @@ export default class ClassCart extends React.Component {
     // }
 
     render() {
-        const results = this.state.classesInCart.results;
+        const results = this.state.classesInCart;
         const cart = results ?
             results.map((classCart) =>
                 <CartItem
