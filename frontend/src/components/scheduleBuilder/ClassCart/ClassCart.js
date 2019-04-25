@@ -25,8 +25,15 @@ export default class ClassCart extends React.Component {
 
                 let classCart = res.data.results;
 
-                this.mapRelatedData(classCart,"courseClass","/api/classes/?id=");
-
+                classCart = this.mapForeignKey(classCart,"courseClass","/api/classes/");
+                console.log(classCart)
+                //this.mapRelatedData(class)
+                classCart.forEach(classCartItem=>{
+                    console.log(classCartItem)
+                    console.log(classCartItem.courseClass)
+                    console.log(classCartItem.fk)
+                    classCartItem.courseClass = this.mapPrimaryKey(classCartItem.courseClass, "classtime","/api/classtimes/?courseClass=")
+                });
                 //coursesData = this.mapRelatedClasstimes(coursesData)
 
                 //Need to wait until all requests are done
@@ -35,23 +42,50 @@ export default class ClassCart extends React.Component {
             })
 	}
 
-	//Map related to an array of items. Mutates data.
-	mapRelatedData(item,relatedName,relatedURL){
+	//Takes a primary key of an object, uses it to get related data, and adds related data as an array to the object
+	mapPrimaryKey(itemToMap,targetPropertyName,resourceURL){
         const promises = [];
 
-        if(Array.isArray(item)){
-            item.forEach(item=>{
+        if(Array.isArray(itemToMap)){
+            itemToMap.forEach(item=>{
                promises.push(
-                    axios.get(process.env.REACT_APP_API_URL + relatedURL + item[relatedName])
-                        .then(res => {item[relatedName] = res.data.results})
+                    axios.get(process.env.REACT_APP_API_URL + resourceURL + item.id + "/")
+                        .then(res => {item[targetPropertyName] = res.data})
                )
             });
-            Promise.all(promises);
+            //Wait until all promises have been settled
+            Promise.all(promises).then(()=>{return itemToMap});
         }
         else{
-            axios.get(process.env.REACT_APP_API_URL + relatedURL + item[relatedName])
-                        .then(res => {item[relatedName] = res.data.results})
+            axios.get(process.env.REACT_APP_API_URL + resourceURL + itemToMap.id + "/")
+                .then(res => {itemToMap[targetPropertyName] = res.data;
+                    return itemToMap})
         }
+        // console.log(itemToMap)
+        // return itemToMap
+    }
+
+    //Maps an foreign key property on an object into the resource of that ID
+    mapForeignKey(itemToMap,fk,resourceURL){
+        const promises = [];
+
+        if(Array.isArray(itemToMap)){
+            itemToMap.forEach(item=>{
+               promises.push(
+                    axios.get(process.env.REACT_APP_API_URL + resourceURL + item[fk] + "/")
+                        .then(res => {item["fk"] = res.data})
+               )
+            });
+            //Wait until all promises have been settled
+            Promise.all(promises).then(()=>{return itemToMap});
+        }
+        else{
+            axios.get(process.env.REACT_APP_API_URL + resourceURL + itemToMap[fk] + "/")
+                        .then(res => {itemToMap["fk"] = res.data;
+                            return itemToMap});
+        }
+        // console.log(itemToMap)
+        // return itemToMap
     }
 
 	mapRelatedClasstimes(classCartData) {

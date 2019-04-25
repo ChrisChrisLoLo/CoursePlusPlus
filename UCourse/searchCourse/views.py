@@ -5,6 +5,7 @@ from searchCourse.paginations import *
 from searchCourse.permissions import *
 from rest_framework import generics, viewsets, permissions, status
 from rest_framework.response import Response
+from rest_framework.exceptions import ParseError
 from rest_framework.exceptions import APIException
 
 
@@ -68,19 +69,24 @@ class CourseViewSet(searchModelViewSet):
 
     def handleUrlParam(self, urlParamName, queryset):
         # print(urlParamName)
-        if urlParamName == "asString" or urlParamName == "subject":
+        if urlParamName == "asString":
             queryset = self.filterByParam(urlParamName, False, queryset)
-        if urlParamName == "subject":
+        elif urlParamName == "subject":
             queryset = self.filterByParam(urlParamName, True, queryset)
         elif urlParamName == "minCourse":
             queryset = self.filterByParam(
-                urlParamName, True, queryset, "catalogCode__gte")
+                urlParamName, True, queryset, "catalogCode__gte"
+            )
         elif urlParamName == "maxCourse":
             queryset = self.filterByParam(
-                urlParamName, True, queryset, "catalogCode__lte")
+                urlParamName, True, queryset, "catalogCode__lte"
+            )
         elif urlParamName == "termNum":
             queryset = self.filterByParam(
-                urlParamName, True, queryset, "courseclass__term_id")
+                urlParamName, True, queryset, "courseclass__term_id"
+            )
+        else:
+            raise ParseError(detail=urlParamName+" is an invalid parameter")
         # print(queryset)
         return queryset
 
@@ -104,6 +110,8 @@ class CourseClassViewSet(searchModelViewSet):
         # print(urlParamName)
         if urlParamName == "course":
             queryset = self.filterByParam(urlParamName, False, queryset)
+        else:
+            raise ParseError(detail=urlParamName+" is an invalid parameter")
         return queryset
 
     def list(self, request, *args, **kwargs):
@@ -123,6 +131,8 @@ class ClassTimeViewSet(searchModelViewSet):
         # print(urlParamName)
         if urlParamName == "courseClass":
             queryset = self.filterByParam(urlParamName, False, queryset)
+        else:
+            raise ParseError(detail=urlParamName+" is an invalid parameter")
         return queryset
 
     def list(self, request, *args, **kwargs):
