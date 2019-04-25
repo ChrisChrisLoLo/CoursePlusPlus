@@ -1,12 +1,8 @@
 import React from "react";
 import {
-    Button,
     Card,
     CardBody,
     CardHeader,
-    Form,
-    FormGroup,
-    Input,
 } from 'reactstrap';
 import CartItem from "./CartItem";
 
@@ -20,23 +16,50 @@ export default class ClassCart extends React.Component {
         this.state={coursesInCart:[]};
     }
 
+    mapRelatedClasstimes(courseCartData) {
+        const promises = [];
+
+        //Mutate the courses data to have classtimes attached
+        courseCartData.results.forEach(courseCart=>{
+            promises.push(
+                axios.get(process.env.REACT_APP_API_URL + "/api/classtimes/?courseClass=" +courseCart.courseClass.id)
+                    .then(res => {courseCart.courseClass.classtimes = res.data.results})
+            );
+        });
+
+        //Wait until all promises have been settled
+        Promise.all(promises);
+
+        return courseCartData;
+    }
+
     componentDidMount() {
-    //const queryRegex = new RegExp("[?].*");
-    //const queryParams = window.location.href.match(queryRegex) || "";
-    console.log(process.env);
-    axios.get(process.env.REACT_APP_API_URL + "/api/classCart/",{
-            headers:{Authorization:getAuthToken()}
-        }).then(res => {
-            const coursesData = res.data;
-            this.setState({ coursesInCart: coursesData });
-        })
+        //const queryRegex = new RegExp("[?].*");
+        //const queryParams = window.location.href.match(queryRegex) || "";
+        axios.get(process.env.REACT_APP_API_URL + "/api/classCart/",{
+                headers:{Authorization:getAuthToken()}
+            }).then(res => {
+
+                let coursesData = res.data;
+
+                coursesData = this.mapRelatedClasstimes(coursesData)
+
+                //Need to wait until all requests are done
+                this.setState({ coursesInCart: coursesData });
+                console.log(this.state.coursesInCart);
+            })
 	}
 
     render() {
         const results = this.state.coursesInCart.results;
         const cart = results ?
-            results.map((course) =>
-                <CartItem id={course.id} course={course}/>
+            results.map((courseCart) =>
+                <CartItem
+                    key={courseCart.id}
+                    course={courseCart.courseClass}
+                    handleCourseClassAdd = {this.props.handleCourseClassAdd}
+                    handleCourseClassRemove = {this.props.handleCourseClassRemove}
+                />
             ):
             <p>No Results Found</p>;
 

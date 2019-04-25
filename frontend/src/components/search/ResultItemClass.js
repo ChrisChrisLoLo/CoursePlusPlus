@@ -5,8 +5,6 @@ import {
     CardBody,
     CardHeader,
     CardText,
-    Collapse,
-
 } from 'reactstrap';
 import axios from "axios";
 import getAuthToken from "../../userLib/getAuthToken";
@@ -24,7 +22,6 @@ export default class ResultItemClass extends React.Component {
         },{
             headers:{Authorization:getAuthToken()}
         }).then(res => {
-            console.log("HIIII")
         });
 
     }
