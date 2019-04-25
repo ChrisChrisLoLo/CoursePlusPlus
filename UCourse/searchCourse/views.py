@@ -133,7 +133,7 @@ class ClassTimeViewSet(searchModelViewSet):
 
 
 class ClassCartViewSet(viewsets.ModelViewSet):
-    queryset = ClassCart.objects.all().prefetch_related("courseClass")
+    queryset = ClassCart.objects.all()
     serializer_class = ClassCartSerializer
     permission_classes = (permissions.IsAuthenticated,IsOwner)
 

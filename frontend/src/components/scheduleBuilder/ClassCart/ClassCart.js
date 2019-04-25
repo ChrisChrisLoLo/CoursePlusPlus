@@ -13,24 +13,7 @@ import getAuthToken from "../../../userLib/getAuthToken";
 export default class ClassCart extends React.Component {
     constructor(props) {
         super(props);
-        this.state={coursesInCart:[]};
-    }
-
-    mapRelatedClasstimes(courseCartData) {
-        const promises = [];
-
-        //Mutate the courses data to have classtimes attached
-        courseCartData.results.forEach(courseCart=>{
-            promises.push(
-                axios.get(process.env.REACT_APP_API_URL + "/api/classtimes/?courseClass=" +courseCart.courseClass.id)
-                    .then(res => {courseCart.courseClass.classtimes = res.data.results})
-            );
-        });
-
-        //Wait until all promises have been settled
-        Promise.all(promises);
-
-        return courseCartData;
+        this.state={classesInCart:[]};
     }
 
     componentDidMount() {
@@ -40,23 +23,61 @@ export default class ClassCart extends React.Component {
                 headers:{Authorization:getAuthToken()}
             }).then(res => {
 
-                let coursesData = res.data;
+                let classCart = res.data.results;
 
-                coursesData = this.mapRelatedClasstimes(coursesData)
+                this.mapRelatedData(classCart,"courseClass","/api/classes/?id=");
+
+                //coursesData = this.mapRelatedClasstimes(coursesData)
 
                 //Need to wait until all requests are done
-                this.setState({ coursesInCart: coursesData });
-                console.log(this.state.coursesInCart);
+                this.setState({ classesInCart: classCart });
+                console.log(this.state.classesInCart);
             })
 	}
 
+	//Map related to an array of items. Mutates data.
+	mapRelatedData(item,relatedName,relatedURL){
+        const promises = [];
+
+        if(Array.isArray(item)){
+            item.forEach(item=>{
+               promises.push(
+                    axios.get(process.env.REACT_APP_API_URL + relatedURL + item[relatedName])
+                        .then(res => {item[relatedName] = res.data.results})
+               )
+            });
+            Promise.all(promises);
+        }
+        else{
+            axios.get(process.env.REACT_APP_API_URL + relatedURL + item[relatedName])
+                        .then(res => {item[relatedName] = res.data.results})
+        }
+    }
+
+	mapRelatedClasstimes(classCartData) {
+        const promises = [];
+
+        //Mutate the classs data to have classtimes attached
+        classCartData.results.forEach(classCart=>{
+            promises.push(
+                axios.get(process.env.REACT_APP_API_URL + "/api/classtimes/?courseClass=" +classCart.courseClass.id)
+                    .then(res => {classCart.courseClass.classtimes = res.data.results})
+            );
+        });
+
+        //Wait until all promises have been settled
+        Promise.all(promises);
+
+        return classCartData;
+    }
+
     render() {
-        const results = this.state.coursesInCart.results;
+        const results = this.state.classesInCart.results;
         const cart = results ?
-            results.map((courseCart) =>
+            results.map((classCart) =>
                 <CartItem
-                    key={courseCart.id}
-                    course={courseCart.courseClass}
+                    key={classCart.id}
+                    course={classCart.courseClass}
                     handleCourseClassAdd = {this.props.handleCourseClassAdd}
                     handleCourseClassRemove = {this.props.handleCourseClassRemove}
                 />
