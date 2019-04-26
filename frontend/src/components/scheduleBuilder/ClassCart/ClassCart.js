@@ -31,7 +31,7 @@ export default class ClassCart extends React.Component {
                 const promiseArr = [];
                 classCart.forEach((classCartItem)=>{
                     promiseArr.push(
-                        this.mapPrimaryKey(classCartItem.courseClass, "classtime","/api/classtimes/?courseClass=")
+                        this.mapPrimaryKey(classCartItem.courseClass, "classtimes","/api/classtimes/?courseClass=")
                             .then((res)=>{classCartItem.courseClass=res}));
                 });
 

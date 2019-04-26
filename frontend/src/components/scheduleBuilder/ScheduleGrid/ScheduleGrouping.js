@@ -28,6 +28,8 @@ export default class ScheduleGrouping extends React.Component {
     }
 
     courseClassToScheduleItems(courseClass){
+        console.log("COURSECLASS")
+        console.log(courseClass)
         //TODO: ONLY CONVERTS THE FIRST CLASS TIME. MAY BE AN ISSUE
         //The first row/col should have table headings, hence the offset
         const COL_OFFSET = 1;
@@ -49,9 +51,13 @@ export default class ScheduleGrouping extends React.Component {
                         "U":6+COL_OFFSET
                         }
 
-        if (courseClass.classtimes.length === 0) return;
+        if (courseClass.classtimes.results === null || courseClass.classtimes.results.length === 0){
+            console.warn("Adding class failed, no classtimes were found");
+            return;
+        }
 
-        const classtime = courseClass.classtimes[0];
+        const classtime = courseClass.classtimes.results[0];
+        console.log(classtime)
 
         //Determine the length of the block(s)
         const hourStart = Math.round(this.timeStringToHours(classtime.startTime));
