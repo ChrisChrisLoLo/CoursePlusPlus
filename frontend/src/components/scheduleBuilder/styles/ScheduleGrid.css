@@ -8,6 +8,10 @@
   border-width: 1px;
 }
 
+.grid-item{
+  background-color: powderblue;
+}
+
 .grid-test-1{
   grid-column-start: 4;
   grid-column-end: 6;
