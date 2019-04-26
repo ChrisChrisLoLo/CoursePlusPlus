@@ -9,6 +9,8 @@ from rest_framework.exceptions import ParseError
 from rest_framework.exceptions import APIException
 
 
+URL_PARAM_WHITELIST = ["page"]
+
 # Create your views here.
 
 # A superclass that adds methods to allow for searches via the querystring.
@@ -32,7 +34,9 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
 
     def filterWithUrlParams(self, queryset):
         for urlParam in self.request.query_params.items():
-            queryset = self.handleUrlParam(urlParam[0], queryset)
+            urlParamName = urlParam[0]
+            if urlParamName not in URL_PARAM_WHITELIST:
+                queryset = self.handleUrlParam(urlParamName, queryset)
         return queryset
 
     def returnPaginatedResponse(self, queryset):

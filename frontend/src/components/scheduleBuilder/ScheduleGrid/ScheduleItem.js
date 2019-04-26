@@ -22,7 +22,9 @@ export default class ScheduleItem extends React.Component {
 
         return (
             <div className={"grid-item"} style={style}>
-                <h5>CONTENT</h5>
+                <p></p>
+                <p></p>
+                <p></p>
             </div>
         );
     }
