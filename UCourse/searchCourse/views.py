@@ -3,7 +3,7 @@ from searchCourse.models import *
 from searchCourse.serializers import *
 from searchCourse.paginations import *
 from searchCourse.permissions import *
-from rest_framework import generics, viewsets, permissions, status
+from rest_framework import mixins, viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.exceptions import ParseError
 from rest_framework.exceptions import APIException
@@ -145,7 +145,8 @@ class ClassTimeViewSet(searchModelViewSet):
         return self.returnPaginatedResponse(queryset)
 
 
-class ClassCartViewSet(viewsets.ModelViewSet):
+class ClassCartViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,searchModelViewSet):
+
     queryset = ClassCart.objects.all()
     serializer_class = ClassCartSerializer
     permission_classes = (permissions.IsAuthenticated,IsOwner)
@@ -162,3 +163,18 @@ class ClassCartViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     # def create(self, request):
     #     obj = ClassCart.objects.create(owner=request.user,courseClass_id=request.data["courseClass"])
+
+    def handleUrlParam(self, urlParamName, queryset):
+        # print(urlParamName)
+        if urlParamName == "courseClass__term":
+            queryset = self.filterByParam(urlParamName, True, queryset)
+        else:
+            raise ParseError(detail=urlParamName+" is an invalid parameter")
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.filterWithUrlParams(queryset)
+        queryset = queryset.prefetch_related("courseClass").prefetch_related("courseClass__classtime_set")
+
+        return self.returnPaginatedResponse(queryset)
