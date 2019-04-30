@@ -31,33 +31,45 @@ class TermSerializer(serializers.ModelSerializer):
         model = Term
         fields = '__all__'
 
+
 class ClassTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassTime
         fields = '__all__'
 
+
 class CourseClassSerializer(serializers.ModelSerializer):
-    classtime_set = ClassTimeSerializer(read_only=True, many=True)
     class Meta:
         model = CourseClass
         fields = '__all__'
 
+class CourseClassRelatedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CourseClass
+        fields = '__all__'
+
+    classtime_set = ClassTimeSerializer(read_only=True, many=True)
 
 
 class ClassCartSerializer(serializers.ModelSerializer):
-    courseClass = CourseClassSerializer(read_only=True)
-
     class Meta:
         model = ClassCart
         fields = '__all__'
 
-
     def create(self, validated_data):
-        #Copied from the django rest framework-modified to get or create records (prevent duplicates)
-
+        # Copied from the django rest framework-modified to get or create records (prevent duplicates)
         ModelClass = self.Meta.model
-
         instance = ModelClass._default_manager.get_or_create(**validated_data)[0]
-
         return instance
+
+
+class ClassCartRelatedSerializer(ClassCartSerializer):
+    class Meta:
+        model = ClassCart
+        fields = '__all__'
+
+    courseClass = CourseClassSerializer(read_only=True)
+
+
+
 

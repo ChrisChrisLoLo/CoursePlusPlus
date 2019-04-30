@@ -3,6 +3,7 @@ from searchCourse.models import *
 from searchCourse.serializers import *
 from searchCourse.paginations import *
 from searchCourse.permissions import *
+
 from rest_framework import mixins, viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.exceptions import ParseError
@@ -150,6 +151,16 @@ class ClassCartViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,searchMo
     queryset = ClassCart.objects.all()
     serializer_class = ClassCartSerializer
     permission_classes = (permissions.IsAuthenticated,IsOwner)
+
+    #Override to optionally get related information depending on what is needed
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return ClassCartRelatedSerializer
+        if self.action == 'retrieve':
+            return ClassCartRelatedSerializer
+        if self.action == 'create':
+            return ClassCartSerializer
+        return serializers.Default  # I dont' know what you want for create/destroy/update
 
     # Override the create method so that the user is set as the owner in the data model
     def create(self, request, *args, **kwargs):
