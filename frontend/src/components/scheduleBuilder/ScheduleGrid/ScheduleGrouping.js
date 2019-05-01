@@ -47,7 +47,7 @@ export default class ScheduleGrouping extends React.Component {
                         "F":4+COL_OFFSET,
                         "S":5+COL_OFFSET,
                         "U":6+COL_OFFSET
-                        }
+                        };
 
         if (courseClass.classtimes.length === 0) return;
 
