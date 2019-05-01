@@ -161,3 +161,5 @@ STATICFILES_DIRS = [
 CORS_ORIGIN_WHITELIST = [
     'localhost:3000',
 ]
+
+APPEND_SLASH = True

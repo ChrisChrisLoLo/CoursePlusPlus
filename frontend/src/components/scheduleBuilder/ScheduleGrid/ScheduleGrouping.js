@@ -28,10 +28,13 @@ export default class ScheduleGrouping extends React.Component {
     }
 
     courseClassToScheduleItems(courseClass){
+        console.log("COURSECLASS")
+        console.log(courseClass)
         //TODO: ONLY CONVERTS THE FIRST CLASS TIME. MAY BE AN ISSUE
         //The first row/col should have table headings, hence the offset
-        const COL_OFFSET = 1;
-        const ROW_OFFSET = 1;
+        //Also, grid cols/rows start at one :(
+        const COL_OFFSET = 2;
+        const ROW_OFFSET = 2;
 
         //end time ends at __:50 or __:20, but we want whole hours for our grid rows
         const END_TIME_OFFSET = 10/60;
@@ -39,26 +42,32 @@ export default class ScheduleGrouping extends React.Component {
         //Schedule starts at 08:00, so offset by this amount
         const HOUR_OFFSET = 8;
 
+        const BLOCKS_PER_HOUR = 4;
 
-        const DAY_COL_MAP = {"M":COL_OFFSET,
-                        "T":1+COL_OFFSET,
-                        "W":2+COL_OFFSET,
-                        "R":3+COL_OFFSET,
-                        "F":4+COL_OFFSET,
-                        "S":5+COL_OFFSET,
-                        "U":6+COL_OFFSET
-                        };
+        const DAY_COL_MAP = {
+                        "U":+COL_OFFSET,
+                        "M":1+COL_OFFSET,
+                        "T":2+COL_OFFSET,
+                        "W":3+COL_OFFSET,
+                        "R":4+COL_OFFSET,
+                        "F":5+COL_OFFSET,
+                        "S":6+COL_OFFSET
+                        }
 
-        if (courseClass.classtimes.length === 0) return;
+        if (courseClass.classtimes.results === null || courseClass.classtimes.results.length === 0){
+            console.warn("Adding class failed, no classtimes were found");
+            return;
+        }
 
-        const classtime = courseClass.classtimes[0];
+        const classtime = courseClass.classtimes.results[0];
+        console.log(classtime)
 
         //Determine the length of the block(s)
-        const hourStart = Math.round(this.timeStringToHours(classtime.startTime));
-        const hourEnd = Math.round(this.timeStringToHours(classtime.endTime) + END_TIME_OFFSET);
-
-        const rowStart = (hourStart - HOUR_OFFSET) + ROW_OFFSET;
-        const rowEnd = (hourEnd - HOUR_OFFSET) + ROW_OFFSET;
+        const hourStart = this.timeStringToHours(classtime.startTime);
+        const hourEnd = this.timeStringToHours(classtime.endTime) + END_TIME_OFFSET;
+        console.log(hourStart,hourEnd);
+        const rowStart = Math.round((hourStart - HOUR_OFFSET)*BLOCKS_PER_HOUR) + ROW_OFFSET;
+        const rowEnd = Math.round((hourEnd - HOUR_OFFSET)*BLOCKS_PER_HOUR) + ROW_OFFSET;
 
 
         //Determine count of blocks
@@ -75,9 +84,9 @@ export default class ScheduleGrouping extends React.Component {
 
 
         return (
-            <div>
+            <React.Fragment>
                 {scheduleItems}
-            </div>
+            </React.Fragment>
         );
     }
 }

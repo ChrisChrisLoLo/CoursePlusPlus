@@ -3,10 +3,14 @@ from searchCourse.models import *
 from searchCourse.serializers import *
 from searchCourse.paginations import *
 from searchCourse.permissions import *
-from rest_framework import generics, viewsets, permissions, status
+
+from rest_framework import mixins, viewsets, permissions, status
 from rest_framework.response import Response
+from rest_framework.exceptions import ParseError
 from rest_framework.exceptions import APIException
 
+
+URL_PARAM_WHITELIST = ["page"]
 
 # Create your views here.
 
@@ -22,9 +26,8 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
         if urlParamVal:
             if urlParamIsInt:
                 print(urlParamVal)
-                urlParamVal = int(urlParamVal)
+                urlParamVal = int(urlParamVal.strip("/"))
             queryset = queryset.filter(**{filterParamName: urlParamVal})
-            print(filterParamName, urlParamVal)
         return queryset
 
     def handleUrlParam(self, urlParamName, queryset):
@@ -32,7 +35,9 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
 
     def filterWithUrlParams(self, queryset):
         for urlParam in self.request.query_params.items():
-            queryset = self.handleUrlParam(urlParam[0], queryset)
+            urlParamName = urlParam[0]
+            if urlParamName not in URL_PARAM_WHITELIST:
+                queryset = self.handleUrlParam(urlParamName, queryset)
         return queryset
 
     def returnPaginatedResponse(self, queryset):
@@ -68,19 +73,24 @@ class CourseViewSet(searchModelViewSet):
 
     def handleUrlParam(self, urlParamName, queryset):
         # print(urlParamName)
-        if urlParamName == "asString" or urlParamName == "subject":
+        if urlParamName == "asString":
             queryset = self.filterByParam(urlParamName, False, queryset)
-        if urlParamName == "subject":
+        elif urlParamName == "subject":
             queryset = self.filterByParam(urlParamName, True, queryset)
         elif urlParamName == "minCourse":
             queryset = self.filterByParam(
-                urlParamName, True, queryset, "catalogCode__gte")
+                urlParamName, True, queryset, "catalogCode__gte"
+            )
         elif urlParamName == "maxCourse":
             queryset = self.filterByParam(
-                urlParamName, True, queryset, "catalogCode__lte")
+                urlParamName, True, queryset, "catalogCode__lte"
+            )
         elif urlParamName == "termNum":
             queryset = self.filterByParam(
-                urlParamName, True, queryset, "courseclass__term_id")
+                urlParamName, True, queryset, "courseclass__term_id"
+            )
+        else:
+            raise ParseError(detail=urlParamName+" is an invalid parameter")
         # print(queryset)
         return queryset
 
@@ -104,6 +114,8 @@ class CourseClassViewSet(searchModelViewSet):
         # print(urlParamName)
         if urlParamName == "course":
             queryset = self.filterByParam(urlParamName, False, queryset)
+        else:
+            raise ParseError(detail=urlParamName+" is an invalid parameter")
         return queryset
 
     def list(self, request, *args, **kwargs):
@@ -122,7 +134,9 @@ class ClassTimeViewSet(searchModelViewSet):
     def handleUrlParam(self, urlParamName, queryset):
         # print(urlParamName)
         if urlParamName == "courseClass":
-            queryset = self.filterByParam(urlParamName, False, queryset)
+            queryset = self.filterByParam(urlParamName, True, queryset)
+        else:
+            raise ParseError(detail=urlParamName+" is an invalid parameter")
         return queryset
 
     def list(self, request, *args, **kwargs):
@@ -132,10 +146,21 @@ class ClassTimeViewSet(searchModelViewSet):
         return self.returnPaginatedResponse(queryset)
 
 
-class ClassCartViewSet(viewsets.ModelViewSet):
-    queryset = ClassCart.objects.all().prefetch_related("courseClass")
+class ClassCartViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,searchModelViewSet):
+
+    queryset = ClassCart.objects.all()
     serializer_class = ClassCartSerializer
     permission_classes = (permissions.IsAuthenticated,IsOwner)
+
+    #Override to optionally get related information depending on what is needed
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return ClassCartRelatedSerializer
+        if self.action == 'retrieve':
+            return ClassCartRelatedSerializer
+        if self.action == 'create':
+            return ClassCartSerializer
+        return serializers.Default  # I dont' know what you want for create/destroy/update
 
     # Override the create method so that the user is set as the owner in the data model
     def create(self, request, *args, **kwargs):
@@ -149,3 +174,18 @@ class ClassCartViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     # def create(self, request):
     #     obj = ClassCart.objects.create(owner=request.user,courseClass_id=request.data["courseClass"])
+
+    def handleUrlParam(self, urlParamName, queryset):
+        # print(urlParamName)
+        if urlParamName == "courseClass__term":
+            queryset = self.filterByParam(urlParamName, True, queryset)
+        else:
+            raise ParseError(detail=urlParamName+" is an invalid parameter")
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.filterWithUrlParams(queryset)
+        queryset = queryset.prefetch_related("courseClass").prefetch_related("courseClass__classtime_set")
+
+        return self.returnPaginatedResponse(queryset)
