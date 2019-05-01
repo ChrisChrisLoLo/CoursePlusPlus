@@ -17,8 +17,6 @@ export default class ClassCart extends React.Component {
     }
 
     componentDidMount() {
-        //const queryRegex = new RegExp("[?].*");
-        //const queryParams = window.location.href.match(queryRegex) || "";
         axios.get(process.env.REACT_APP_API_URL + "/api/classCart/",{
                 headers:{Authorization:getAuthToken()}
             }).then(async res => {
