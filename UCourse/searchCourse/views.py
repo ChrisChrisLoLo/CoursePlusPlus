@@ -178,7 +178,7 @@ class ClassCartViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,searchMo
     def handleUrlParam(self, urlParamName, queryset):
         # print(urlParamName)
         if urlParamName == "term":
-            queryset = self.filterByParam("courseClass__term", True, queryset)
+            queryset = self.filterByParam(urlParamName, True, queryset, "courseClass__term")
         else:
             raise ParseError(detail=urlParamName+" is an invalid parameter")
         return queryset
