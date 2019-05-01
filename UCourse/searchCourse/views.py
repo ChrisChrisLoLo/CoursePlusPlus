@@ -102,7 +102,7 @@ class CourseViewSet(searchModelViewSet):
 
 
 class TermViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Term.objects.all()
+    queryset = Term.objects.all().order_by("-startDate")
     serializer_class = TermSerializer
 
 
@@ -177,15 +177,15 @@ class ClassCartViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,searchMo
 
     def handleUrlParam(self, urlParamName, queryset):
         # print(urlParamName)
-        if urlParamName == "courseClass__term":
-            queryset = self.filterByParam(urlParamName, True, queryset)
+        if urlParamName == "term":
+            queryset = self.filterByParam("courseClass__term", True, queryset)
         else:
             raise ParseError(detail=urlParamName+" is an invalid parameter")
         return queryset
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-        queryset = self.filterWithUrlParams(queryset)
         queryset = queryset.prefetch_related("courseClass").prefetch_related("courseClass__classtime_set")
+        queryset = self.filterWithUrlParams(queryset)
 
         return self.returnPaginatedResponse(queryset)

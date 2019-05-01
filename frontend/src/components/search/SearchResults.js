@@ -14,11 +14,6 @@ export default class SearchResults extends React.Component {
 		super(props);
 	}
 
-	componentDidMount() {
-		//Scroll to top whenever more results are loaded.
-		//window.scrollTo(0, 0)
-
-	}
 
 	//Take the pagination URL from the API and push the given page to the react router history.
 	// calcPaginationURL(paginationURL) {
