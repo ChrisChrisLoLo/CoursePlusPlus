@@ -37,7 +37,7 @@ export default class ClassCart extends React.Component {
 
         const results = this.state.classesInCart;
         console.log(results);
-        const cart = results?
+        const cart = results.length>0?
             results.map((classCart) =>
                 <CartItem
                     key={classCart.id}

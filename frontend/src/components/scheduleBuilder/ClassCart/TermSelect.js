@@ -15,12 +15,21 @@ export default class TermSelect extends React.Component {
     constructor(props) {
         super(props);
         this.state = {terms:[]};
+        this.handleOnChange = this.handleOnChange.bind(this);
+    }
+
+    handleOnChange(e){
+        this.props.handleChosenTermChange(e);
+        //Clear out courses in the schedule grid
+        this.props.setCoursesSelected([]);
     }
 
     componentDidMount() {
         axios.get(process.env.REACT_APP_API_URL + "/api/terms/")
             .then(res => {
-                this.setState({terms:res.data.results});
+                this.setState({terms:res.data.results,});
+                //Set the chosen term to the first loaded one
+                this.props.setChosenTerm(this.state.terms[0].id);
             });
     }
 
@@ -39,7 +48,7 @@ export default class TermSelect extends React.Component {
                     <Form>
                         <FormGroup>
                             {/*<Label for="termSelect">Term</Label>*/}
-                            <Input type="select" name="term" id="termSelect" onChange={this.props.handleChosenTermChange} value={this.props.chosenTerm}>
+                            <Input type="select" name="term" id="termSelect" onChange={this.handleOnChange} value={this.props.chosenTerm}>
                                 {termOptions}
                             </Input>
                         </FormGroup>
