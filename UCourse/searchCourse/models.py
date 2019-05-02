@@ -93,6 +93,7 @@ class ClassCart(models.Model):
     courseClass = models.ForeignKey('CourseClass', on_delete=models.CASCADE)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
+    isInSchedule = models.BooleanField(default=False, blank=False, null=False)
 
 # class Textbook(models.Model):
 #     code = models.CharField(max_length=16,unique=True,null=False)

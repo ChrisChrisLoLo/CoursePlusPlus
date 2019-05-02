@@ -68,7 +68,7 @@ class ClassCartRelatedSerializer(ClassCartSerializer):
         model = ClassCart
         fields = '__all__'
 
-    courseClass = CourseClassSerializer(read_only=True)
+    courseClass = CourseClassRelatedSerializer(read_only=True)
 
 
 
