@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/ScheduleGrid.css";
+import "../styles/ScheduleGrid.scss";
 
 export default class ScheduleItem extends React.Component {
     constructor(props){
