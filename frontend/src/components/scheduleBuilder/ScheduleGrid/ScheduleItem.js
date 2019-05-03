@@ -8,11 +8,13 @@ export default class ScheduleItem extends React.Component {
     }
 
     render() {
-        console.log(this.state);
-        // const style = "grid-column-start:"+this.props.col+";"+
-        //                 "grid-column-end:"+(this.props.col+1)+";"+
-        //                 "grid-row-start:"+this.props.rowStart+";"+
-        //                 "grid-row-end:"+this.props.rowEnd;
+
+        const courseClass = this.props.courseClass;
+        const asString = courseClass.asString.split(" ");
+        const courseString = asString[0]+" "+asString[1];
+        const courseClassString = asString[2]+" "+asString[3];
+        const classtime = courseClass.classtime_set[0];
+
         const style = {
             gridColumnStart:this.props.col,
             gridColumnEnd:this.props.col+1,
@@ -22,9 +24,10 @@ export default class ScheduleItem extends React.Component {
 
         return (
             <div className={"grid-item"} style={style}>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>{courseString}</p>
+                <p>{courseClassString}</p>
+                <p>{classtime.id}</p>
+                <p>{classtime.location}</p>
             </div>
         );
     }

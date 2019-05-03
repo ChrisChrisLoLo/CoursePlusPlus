@@ -18,3 +18,8 @@
   grid-row-start: 5;
   grid-row-end: 7;
 }
+
+/*A bit gross, but making a css class for each row/col header, since using styles is faster than using in line styling*/
+.grid-col-monday{
+
+}

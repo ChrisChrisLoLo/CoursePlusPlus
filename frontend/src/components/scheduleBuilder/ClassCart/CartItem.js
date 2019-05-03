@@ -29,13 +29,21 @@ export default class ClassCart extends React.Component {
 
 
     render() {
+
         const button = this.state.courseAdded ?
             <Button onClick={this.removeCourseClass}>Remove Class</Button> :
             <Button onClick={this.addCourseClass}>Add Class</Button> ;
 
+        const course = this.props.course;
+        const asString = course.asString.split(" ");
+        const courseString = asString[0]+" "+asString[1];
+        const courseClassString = asString[2]+" "+asString[3];
+
         return (
             <Card>
-                <p>{this.props.course.id}</p>
+                <p>{courseString}</p>
+                <p>{courseClassString}</p>
+                <p>{course.id}</p>
                 {button}
             </Card>
         );
