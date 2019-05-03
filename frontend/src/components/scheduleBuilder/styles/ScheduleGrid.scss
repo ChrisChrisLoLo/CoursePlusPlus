@@ -10,11 +10,11 @@ $grid-outline-border: 1px solid lightgrey;
 
   grid-template-columns: 60px repeat($grid-col-count,1fr);
   grid-template-rows: 30px repeat($grid-row-count,20px);
-  border: 1px solid;
+  outline: 1px solid;
 }
 
 %grid-child{
-  border: 1px solid;
+  outline: 1px solid;
 }
 
 %grid-item{
@@ -29,7 +29,7 @@ $grid-outline-border: 1px solid lightgrey;
 /*Row outlines*/
 @for $i from 1 through $grid-row-count{
   .grid-row-outline-#{$i}{
-    border: $grid-outline-border;
+    outline: $grid-outline-border;
     grid-row-start: $i+1;
     grid-row-end: $i+5;
     grid-column-start: 2;
@@ -40,7 +40,7 @@ $grid-outline-border: 1px solid lightgrey;
 /*Col outlines*/
 @for $i from 1 through $grid-col-count{
   .grid-col-outline-#{$i}{
-    border: $grid-outline-border;
+    outline: $grid-outline-border;
     grid-row-start: 2;
     grid-row-end: $grid-row-count+2;
     grid-column-start: $i+1;
