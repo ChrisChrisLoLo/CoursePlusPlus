@@ -3,47 +3,69 @@ $grid-row-count:13*4;
 /*Day title row + row for each 15 minute segment from 8 AM to 9 PM*/
 $grid-col-count:7;
 
+$grid-outline-border: 1px solid lightgrey;
+
 .grid-container {
   display: grid;
 
   grid-template-columns: 60px repeat($grid-col-count,1fr);
   grid-template-rows: 30px repeat($grid-row-count,20px);
-  border-style: solid;
-  border-width: 1px;
+  border: 1px solid;
+}
+
+%grid-child{
+  border: 1px solid;
 }
 
 %grid-item{
+  @extend %grid-child;
   background-color: powderblue;
-  border:1px solid;
 }
 
 .grid-item{
   @extend %grid-item;
 }
 
-.grid-test-1{
-  grid-column-start: 4;
-  grid-column-end: 6;
-  grid-row-start: 5;
-  grid-row-end: 7;
+/*Row outlines*/
+@for $i from 1 through $grid-row-count{
+  .grid-row-outline-#{$i}{
+    border: $grid-outline-border;
+    grid-row-start: $i+1;
+    grid-row-end: $i+5;
+    grid-column-start: 2;
+    grid-column-end: 9;
+  }
 }
 
-@for $i from 1 through $grid-col-count {
-  .grid-col-head-#{$i} {
-    @extend %grid-item;
-    grid-row-start: 1;
-    grid-row-end: 2;
+/*Col outlines*/
+@for $i from 1 through $grid-col-count{
+  .grid-col-outline-#{$i}{
+    border: $grid-outline-border;
+    grid-row-start: 2;
+    grid-row-end: $grid-row-count+2;
     grid-column-start: $i+1;
     grid-column-end: $i+2;
   }
 }
 
+/*Row headers*/
 @for $i from 1 through $grid-row-count {
   .grid-row-head-#{$i} {
-    @extend %grid-item;
+    @extend %grid-child;
     grid-row-start: $i+1;
     grid-row-end: $i+5;
     grid-column-start: 1;
     grid-column-end: 2;
+  }
+}
+
+/*Col headers*/
+@for $i from 1 through $grid-col-count {
+  .grid-col-head-#{$i} {
+    @extend %grid-child;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: $i+1;
+    grid-column-end: $i+2;
   }
 }
