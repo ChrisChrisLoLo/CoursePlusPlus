@@ -15,6 +15,8 @@ export default class ScheduleBuilderPage extends React.Component {
         this.handleCourseClassAdd = this.handleCourseClassAdd.bind(this);
         this.handleCourseClassRemove = this.handleCourseClassRemove.bind(this);
         this.handleChosenTermChange = this.handleChosenTermChange.bind(this);
+        this.setChosenTerm = this.setChosenTerm.bind(this);
+        this.setCoursesSelected = this.setCoursesSelected.bind(this);
     }
 
     handleCourseClassAdd(courseClassProp){
@@ -33,6 +35,13 @@ export default class ScheduleBuilderPage extends React.Component {
         this.setState({chosenTerm:e.target.value});
     }
 
+    setChosenTerm(term){
+        this.setState({chosenTerm:term});
+    }
+
+    setCoursesSelected(newCoursesSelected){
+        this.setState({coursesSelected:newCoursesSelected});
+    }
 
     render() {
         return (
@@ -44,7 +53,7 @@ export default class ScheduleBuilderPage extends React.Component {
                 </Row>
                 <Row>
                     <Col sm={"3"}>
-                        <TermSelect handleChosenTermChange={this.handleChosenTermChange} chosenTerm={this.state.chosenTerm}/>
+                        <TermSelect handleChosenTermChange={this.handleChosenTermChange} setChosenTerm={this.setChosenTerm} chosenTerm={this.state.chosenTerm} setCoursesSelected={this.setCoursesSelected}/>
                         <ClassCart handleCourseClassAdd={this.handleCourseClassAdd} handleCourseClassRemove={this.handleCourseClassRemove} chosenTerm={this.state.chosenTerm}/>
                     </Col>
                     <Col sm={"9"}>

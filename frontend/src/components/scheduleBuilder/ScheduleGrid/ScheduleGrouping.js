@@ -54,12 +54,12 @@ export default class ScheduleGrouping extends React.Component {
                         "S":6+COL_OFFSET
                         }
 
-        if (courseClass.classtimes.results === null || courseClass.classtimes.results.length === 0){
+        if (courseClass.classtime_set === null || courseClass.classtime_set.length === 0){
             console.warn("Adding class failed, no classtimes were found");
             return;
         }
 
-        const classtime = courseClass.classtimes.results[0];
+        const classtime = courseClass.classtime_set[0];
         console.log(classtime)
 
         //Determine the length of the block(s)
