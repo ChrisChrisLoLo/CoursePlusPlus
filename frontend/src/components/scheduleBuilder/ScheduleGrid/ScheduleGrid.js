@@ -1,7 +1,7 @@
 import React from "react";
-import ScheduleItem from "./ScheduleItem";
 import ScheduleGrouping from "./ScheduleGrouping";
-import "../styles/ScheduleGrid.css";
+import "../styles/ScheduleGrid.scss";
+import ScheduleGridConsts from "./ScheduleGridConsts";
 
 export default class ScheduleGrid extends React.Component {
     constructor(props){
@@ -27,6 +27,7 @@ export default class ScheduleGrid extends React.Component {
         return (
             <div>
                 <div className={"grid-container"}>
+                    <ScheduleGridConsts/>
                     {scheduleGroupings}
                 </div>
             </div>
