@@ -51,7 +51,7 @@ export default class ClassCart extends React.Component {
         return (
             <Card>
                 <CardHeader><h5>Selected Courses:</h5></CardHeader>
-                <CardBody>
+                <CardBody className={"px-1"}>
                     {cart}
                 </CardBody>
             </Card>

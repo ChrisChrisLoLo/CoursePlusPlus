@@ -20,16 +20,16 @@ export default class ScheduleGrouping extends React.Component {
         else{
             periodOffSet = timeArr[1] === "AM" ? 0.0:12.0;
         }
-        console.log(timeArr)
-        console.log("HOUR:"+hour)
-        console.log("MINUTE:"+minute)
+        // console.log(timeArr);
+        // console.log("HOUR:"+hour);
+        // console.log("MINUTE:"+minute);
         console.log(parseFloat(hour) + parseFloat(minute)/60 + periodOffSet);
         return parseFloat(hour) + parseFloat(minute)/60 + periodOffSet;
     }
 
     courseClassToScheduleItems(courseClass){
-        console.log("COURSECLASS")
-        console.log(courseClass)
+        // console.log("COURSECLASS");
+        // console.log(courseClass);
         //TODO: ONLY CONVERTS THE FIRST CLASS TIME. MAY BE AN ISSUE
         //The first row/col should have table headings, hence the offset
         //Also, grid cols/rows start at one :(
@@ -52,7 +52,7 @@ export default class ScheduleGrouping extends React.Component {
                         "R":4+COL_OFFSET,
                         "F":5+COL_OFFSET,
                         "S":6+COL_OFFSET
-                        }
+                        };
 
         if (courseClass.classtime_set === null || courseClass.classtime_set.length === 0){
             console.warn("Adding class failed, no classtimes were found");
@@ -60,12 +60,12 @@ export default class ScheduleGrouping extends React.Component {
         }
 
         const classtime = courseClass.classtime_set[0];
-        console.log(classtime)
+        // console.log(classtime);
 
         //Determine the length of the block(s)
         const hourStart = this.timeStringToHours(classtime.startTime);
         const hourEnd = this.timeStringToHours(classtime.endTime) + END_TIME_OFFSET;
-        console.log(hourStart,hourEnd);
+        // console.log(hourStart,hourEnd);
         const rowStart = Math.round((hourStart - HOUR_OFFSET)*BLOCKS_PER_HOUR) + ROW_OFFSET;
         const rowEnd = Math.round((hourEnd - HOUR_OFFSET)*BLOCKS_PER_HOUR) + ROW_OFFSET;
 
@@ -115,7 +115,6 @@ export default class ScheduleGrouping extends React.Component {
         }
 
         return `rgb(${color.red},${color.green},${color.blue})`
-
     }
 
 
