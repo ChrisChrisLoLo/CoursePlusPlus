@@ -54,7 +54,7 @@ export default class ScheduleBuilderPage extends React.Component {
                 <Row>
                     <Col sm={"3"}>
                         <TermSelect handleChosenTermChange={this.handleChosenTermChange} setChosenTerm={this.setChosenTerm} chosenTerm={this.state.chosenTerm} setCoursesSelected={this.setCoursesSelected}/>
-                        <ClassCart setCoursesSelected={this.setCoursesSelected} handleCourseClassAdd={this.handleCourseClassAdd} handleCourseClassRemove={this.handleCourseClassRemove} chosenTerm={this.state.chosenTerm}/>
+                        <ClassCart coursesSelected={this.state.coursesSelected} setCoursesSelected={this.setCoursesSelected} handleCourseClassAdd={this.handleCourseClassAdd} handleCourseClassRemove={this.handleCourseClassRemove} chosenTerm={this.state.chosenTerm}/>
                     </Col>
                     <Col sm={"9"}>
                         <ScheduleGrid classCart={this.state.coursesSelected}/>

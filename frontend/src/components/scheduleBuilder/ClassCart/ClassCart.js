@@ -58,14 +58,16 @@ export default class ClassCart extends React.Component {
         let cart;
         if(results.length>0){
             const paginatedResults = results.slice(this.state.page*ITEMS_PER_PAGE,(this.state.page*ITEMS_PER_PAGE)+ITEMS_PER_PAGE);
-            cart = paginatedResults.map((classCart) =>
-                <CartItem
+            cart = paginatedResults.map((classCart) => {
+                const courseAdded = this.props.coursesSelected.includes(classCart);
+                return (<CartItem
                     key={classCart.id}
                     classCart={classCart}
-                    handleCourseClassAdd = {this.props.handleCourseClassAdd}
-                    handleCourseClassRemove = {this.props.handleCourseClassRemove}
-                />
-            );
+                    courseAdded={courseAdded}
+                    handleCourseClassAdd={this.props.handleCourseClassAdd}
+                    handleCourseClassRemove={this.props.handleCourseClassRemove}
+                />);
+            });
         }
         else{
             cart = <p>No Results Found</p>;
