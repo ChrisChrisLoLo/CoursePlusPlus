@@ -19,7 +19,8 @@ export default class ScheduleItem extends React.Component {
             gridColumnStart:this.props.col,
             gridColumnEnd:this.props.col+1,
             gridRowStart:this.props.rowStart,
-            gridRowEnd:this.props.rowEnd
+            gridRowEnd:this.props.rowEnd,
+            backgroundColor:this.props.color,
         };
 
         return (
