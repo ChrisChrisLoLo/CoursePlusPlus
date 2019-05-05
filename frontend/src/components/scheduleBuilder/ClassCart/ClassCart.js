@@ -30,6 +30,14 @@ export default class ClassCart extends React.Component {
                     if (res.data.results !== this.state.classesInCart) {
                         if(this.state.classesInCart !== res.data.results){
                             this.setState({classesInCart: res.data.results});
+
+                            //Read what courses are selected and update it
+                            const selectedCourses = [];
+                            this.state.classesInCart.forEach((el)=>{
+                                if (el.isInSchedule === true) selectedCourses.push(el);
+                            });
+                            console.log(selectedCourses);
+                            this.props.setCoursesSelected(selectedCourses);
                         }
                     }
                 });
@@ -53,7 +61,7 @@ export default class ClassCart extends React.Component {
             cart = paginatedResults.map((classCart) =>
                 <CartItem
                     key={classCart.id}
-                    course={classCart.courseClass}
+                    classCart={classCart}
                     handleCourseClassAdd = {this.props.handleCourseClassAdd}
                     handleCourseClassRemove = {this.props.handleCourseClassRemove}
                 />

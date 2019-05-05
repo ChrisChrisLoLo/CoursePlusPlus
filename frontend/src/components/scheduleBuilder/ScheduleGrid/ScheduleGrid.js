@@ -20,8 +20,8 @@ export default class ScheduleGrid extends React.Component {
     }
 
     render() {
-        const scheduleGroupings = this.props.courseClasses.map((courseClass)=>{
-            return <ScheduleGrouping courseClass={courseClass} key={courseClass.id}/>
+        const scheduleGroupings = this.props.classCart.map((classCart)=>{
+            return <ScheduleGrouping courseClass={classCart.courseClass} key={classCart.courseClass.id}/>
         });
 
         return (

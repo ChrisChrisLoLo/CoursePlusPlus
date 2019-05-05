@@ -21,7 +21,7 @@ export default class TermSelect extends React.Component {
     handleOnChange(e){
         this.props.handleChosenTermChange(e);
         //Clear out courses in the schedule grid
-        this.props.setCoursesSelected([]);
+        // this.props.setCoursesSelected([]);
     }
 
     componentDidMount() {

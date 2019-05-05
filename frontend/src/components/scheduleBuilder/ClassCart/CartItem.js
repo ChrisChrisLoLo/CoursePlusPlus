@@ -19,12 +19,12 @@ export default class ClassCart extends React.Component {
     }
 
     addCourseClass(){
-        this.props.handleCourseClassAdd(this.props.course);
+        this.props.handleCourseClassAdd(this.props.classCart);
         this.setState({courseAdded:true});
     }
 
     removeCourseClass(){
-        this.props.handleCourseClassRemove(this.props.course);
+        this.props.handleCourseClassRemove(this.props.classCart);
         this.setState({courseAdded:false});
     }
 
@@ -35,7 +35,7 @@ export default class ClassCart extends React.Component {
             <Button onClick={this.removeCourseClass} size={"sm"}>Remove Class</Button> :
             <Button onClick={this.addCourseClass} size={"sm"}>Add Class</Button> ;
 
-        const course = this.props.course;
+        const course = this.props.classCart.courseClass;
         const asString = course.asString.split(" ");
         const courseString = asString[0]+" "+asString[1];
         const courseClassString = asString[2]+" "+asString[3];
