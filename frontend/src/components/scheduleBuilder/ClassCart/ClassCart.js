@@ -1,5 +1,7 @@
 import React from "react";
 import {
+    Button,
+    ButtonGroup,
     Card,
     CardBody,
     CardHeader,
@@ -11,9 +13,12 @@ import getAuthToken from "../../../userLib/getAuthToken";
 
 
 export default class ClassCart extends React.Component {
+
     constructor(props) {
         super(props);
-        this.state={classesInCart:[]};
+        this.state={classesInCart:[],page:0};
+        this.handlePageChange = this.handlePageChange.bind(this);
+
     }
 
     componentDidUpdate(prevProps) {
@@ -25,6 +30,14 @@ export default class ClassCart extends React.Component {
                     if (res.data.results !== this.state.classesInCart) {
                         if(this.state.classesInCart !== res.data.results){
                             this.setState({classesInCart: res.data.results});
+
+                            //Read what courses are selected and update it
+                            const selectedCourses = [];
+                            this.state.classesInCart.forEach((el)=>{
+                                if (el.isInSchedule === true) selectedCourses.push(el);
+                            });
+                            console.log(selectedCourses);
+                            this.props.setCoursesSelected(selectedCourses);
                         }
                     }
                 });
@@ -32,27 +45,58 @@ export default class ClassCart extends React.Component {
         }
     }
 
+    handlePageChange(e,increment){
+        this.setState({page : this.state.page+=increment});
+    }
+
+
 
     render() {
-
+        const ITEMS_PER_PAGE = 5;
         const results = this.state.classesInCart;
-        console.log(results);
-        const cart = results.length>0?
-            results.map((classCart) =>
-                <CartItem
+
+        let cart;
+        if(results.length>0){
+            const paginatedResults = results.slice(this.state.page*ITEMS_PER_PAGE,(this.state.page*ITEMS_PER_PAGE)+ITEMS_PER_PAGE);
+            cart = paginatedResults.map((classCart) => {
+                const courseAdded = this.props.coursesSelected.includes(classCart);
+                return (<CartItem
                     key={classCart.id}
-                    course={classCart.courseClass}
-                    handleCourseClassAdd = {this.props.handleCourseClassAdd}
-                    handleCourseClassRemove = {this.props.handleCourseClassRemove}
-                />
-            ):
-            <p>No Results Found</p>;
+                    classCart={classCart}
+                    courseAdded={courseAdded}
+                    handleCourseClassAdd={this.props.handleCourseClassAdd}
+                    handleCourseClassRemove={this.props.handleCourseClassRemove}
+                />);
+            });
+        }
+        else{
+            cart = <p>No Results Found</p>;
+        }
+
+        let buttonGroup = null;
+        if(results.length>0){
+            buttonGroup = "HII";
+            buttonGroup =  (<ButtonGroup>
+                                <Button
+                                    size={"sm"}
+                                    disabled={this.state.page<=0}
+                                    onClick={(e)=>this.handlePageChange(e,-1)}
+                                >prev</Button>
+
+                                <Button
+                                    size={"sm"}
+                                    disabled={results.length-(this.state.page*ITEMS_PER_PAGE)<ITEMS_PER_PAGE}
+                                    onClick={(e)=>this.handlePageChange(e,1)}
+                                >next</Button>
+                            </ButtonGroup>);
+        }
 
         return (
             <Card>
                 <CardHeader><h5>Selected Courses:</h5></CardHeader>
-                <CardBody>
+                <CardBody className={"px-1"}>
                     {cart}
+                    {buttonGroup}
                 </CardBody>
             </Card>
         );

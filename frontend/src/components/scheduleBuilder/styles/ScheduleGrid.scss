@@ -9,7 +9,7 @@ $grid-outline-border: 1px solid lightgrey;
   display: grid;
 
   grid-template-columns: 60px repeat($grid-col-count,1fr);
-  grid-template-rows: 30px repeat($grid-row-count,20px);
+  grid-template-rows: 30px repeat($grid-row-count,15px);
   outline: 1px solid;
 }
 
@@ -51,7 +51,7 @@ $grid-outline-border: 1px solid lightgrey;
 /*Row headers*/
 @for $i from 1 through $grid-row-count {
   .grid-row-head-#{$i} {
-    @extend %grid-child;
+    outline: $grid-outline-border;
     grid-row-start: $i+1;
     grid-row-end: $i+5;
     grid-column-start: 1;
@@ -62,7 +62,7 @@ $grid-outline-border: 1px solid lightgrey;
 /*Col headers*/
 @for $i from 1 through $grid-col-count {
   .grid-col-head-#{$i} {
-    @extend %grid-child;
+    outline: $grid-outline-border;
     grid-row-start: 1;
     grid-row-end: 2;
     grid-column-start: $i+1;

@@ -19,15 +19,16 @@ export default class ScheduleItem extends React.Component {
             gridColumnStart:this.props.col,
             gridColumnEnd:this.props.col+1,
             gridRowStart:this.props.rowStart,
-            gridRowEnd:this.props.rowEnd
+            gridRowEnd:this.props.rowEnd,
+            backgroundColor:this.props.color,
         };
 
         return (
             <div className={"grid-item"} style={style}>
-                <p>{courseString}</p>
-                <p>{courseClassString}</p>
-                <p>{classtime.id}</p>
-                <p>{classtime.location}</p>
+                <p className={"my-0 small"}>{courseString}</p>
+                <p className={"my-0 small"}>{courseClassString}</p>
+                {/*<p className={"my-0 small"}>{classtime.id}</p>*/}
+                <p className={"my-0 small"}>{classtime.location}</p>
             </div>
         );
     }
