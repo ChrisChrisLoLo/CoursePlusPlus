@@ -64,14 +64,13 @@ export default class ResultItem extends React.Component {
             <Card>
                 <CardHeader>{course.asString}</CardHeader>
                 <CardBody>
-
-                    <CardTitle>
-                        <InputGroup>
+                    <CardTitle className={"mb-0"}>
+                        <InputGroup className={"align-middle"}>
                             <h5 className={"mr-2"}> {course.title}</h5>
                             {/*<Button onClick={this.toggleDesc} size="sm">Desc</Button>*/}
                             <FontAwesomeIcon
                                 icon={this.state.descOpen ? "chevron-up" : "chevron-down"}
-                                size={"lg"}
+                                size={"md"}
                                 onClick={this.toggleDesc}
                                 className={"chevron"}
                             />
