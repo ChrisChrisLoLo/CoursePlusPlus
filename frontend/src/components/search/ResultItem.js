@@ -11,12 +11,14 @@ import {
 import axios from "axios";
 
 import ResultItemClass from "./ResultItemClass";
+import ButtonGroup from "reactstrap/es/ButtonGroup";
 
 export default class ResultItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { cardOpen: false, courseClassData: null };
+        this.state = { cardOpen: false, descOpen: false, courseClassData: null };
         this.toggleOpen = this.toggleOpen.bind(this);
+        this.toggleDesc = this.toggleDesc.bind(this);
     }
 
     toggleOpen(e) {
@@ -28,6 +30,10 @@ export default class ResultItem extends React.Component {
                 });
         }
         this.setState({ cardOpen: !this.state.cardOpen });
+    }
+
+    toggleDesc(){
+        this.setState({descOpen:!this.state.descOpen});
     }
 
     render() {
@@ -52,8 +58,17 @@ export default class ResultItem extends React.Component {
             <Card>
                 <CardHeader>{course.asString}</CardHeader>
                 <CardBody>
+
+
                     <h5>{course.title}</h5>
-                    <CardText>{course.description || "No description available."}</CardText>
+                    <Button onClick={this.toggleDesc} size="sm">Desc</Button>
+
+
+                    <Collapse isOpen={this.state.descOpen}>
+                        <CardText className={"small"}>{course.description || "No description available."}</CardText>
+                    </Collapse>
+
+
                     <Button onClick={this.toggleOpen} size="sm">Classes</Button>
                     <Collapse isOpen={this.state.cardOpen}>
                         {output}

@@ -1,30 +1,12 @@
 import React from "react";
 
-import ScheduleItem from "./ScheduleItem"
+import ScheduleItem from "./ScheduleItem";
+import timeStringToHours from "../../../userLib/timeStringToHours";
 
 export default class ScheduleGrouping extends React.Component {
     constructor(props){
         super(props);
         this.courseClassToScheduleItems = this.courseClassToScheduleItems.bind(this);
-    }
-
-    timeStringToHours(timeString){
-        const timeArr = timeString.trim().split(" ");
-
-        const hour = timeArr[0].split(":")[0];
-        const minute = timeArr[0].split(":")[1];
-        let periodOffSet = 0.0;
-        if (parseInt(hour) === 12){
-            periodOffSet = timeArr[1] === "PM" ? 0.0:12.0;
-        }
-        else{
-            periodOffSet = timeArr[1] === "AM" ? 0.0:12.0;
-        }
-        // console.log(timeArr);
-        // console.log("HOUR:"+hour);
-        // console.log("MINUTE:"+minute);
-        console.log(parseFloat(hour) + parseFloat(minute)/60 + periodOffSet);
-        return parseFloat(hour) + parseFloat(minute)/60 + periodOffSet;
     }
 
     courseClassToScheduleItems(courseClass){
@@ -63,8 +45,8 @@ export default class ScheduleGrouping extends React.Component {
         // console.log(classtime);
 
         //Determine the length of the block(s)
-        const hourStart = this.timeStringToHours(classtime.startTime);
-        const hourEnd = this.timeStringToHours(classtime.endTime) + END_TIME_OFFSET;
+        const hourStart = timeStringToHours(classtime.startTime);
+        const hourEnd = timeStringToHours(classtime.endTime) + END_TIME_OFFSET;
         // console.log(hourStart,hourEnd);
         const rowStart = Math.round((hourStart - HOUR_OFFSET)*BLOCKS_PER_HOUR) + ROW_OFFSET;
         const rowEnd = Math.round((hourEnd - HOUR_OFFSET)*BLOCKS_PER_HOUR) + ROW_OFFSET;
