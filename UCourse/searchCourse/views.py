@@ -146,7 +146,7 @@ class ClassTimeViewSet(searchModelViewSet):
         return self.returnPaginatedResponse(queryset)
 
 
-class ClassCartViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,searchModelViewSet):
+class ClassCartViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,mixins.UpdateModelMixin,searchModelViewSet):
 
     queryset = ClassCart.objects.all()
     serializer_class = ClassCartSerializer
@@ -159,6 +159,8 @@ class ClassCartViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,searchMo
         if self.action == 'retrieve':
             return ClassCartRelatedSerializer
         if self.action == 'create':
+            return ClassCartSerializer
+        if self.action == 'partial_update':
             return ClassCartSerializer
         return serializers.Default  # I dont' know what you want for create/destroy/update
 

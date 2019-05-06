@@ -9,23 +9,34 @@ import {
     Input,
 } from 'reactstrap';
 import CardText from "reactstrap/es/CardText";
+import axios from "axios";
+import getAuthToken from "../../../userLib/getAuthToken";
 
 export default class ClassCart extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {courseAdded:false};
         this.addCourseClass = this.addCourseClass.bind(this);
         this.removeCourseClass = this.removeCourseClass.bind(this);
     }
 
     addCourseClass(){
         this.props.handleCourseClassAdd(this.props.classCart);
-        this.setState({courseAdded:true});
+        axios.patch(process.env.REACT_APP_API_URL + "/api/classCart/" + this.props.classCart.id + "/", {
+                isInSchedule: true,
+            },{headers: {Authorization: getAuthToken()},
+            }).then((res) => {
+                console.log("update successful");
+            });
     }
 
     removeCourseClass(){
         this.props.handleCourseClassRemove(this.props.classCart);
-        this.setState({courseAdded:false});
+        axios.patch(process.env.REACT_APP_API_URL + "/api/classCart/" + this.props.classCart.id + "/", {
+                isInSchedule: false,
+            },{headers: {Authorization: getAuthToken()},
+            }).then((res) => {
+                console.log("update successful");
+            });
     }
 
 
