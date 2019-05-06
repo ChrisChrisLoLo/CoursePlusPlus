@@ -4,14 +4,20 @@ import {
     Card,
     CardBody,
     CardHeader,
+    CardTitle,
     CardText,
     Collapse,
 
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import "./styles/ResultItem.css";
+
 import axios from "axios";
 
 import ResultItemClass from "./ResultItemClass";
-import ButtonGroup from "reactstrap/es/ButtonGroup";
+import InputGroup from "reactstrap/es/InputGroup";
+
 
 export default class ResultItem extends React.Component {
     constructor(props) {
@@ -59,10 +65,18 @@ export default class ResultItem extends React.Component {
                 <CardHeader>{course.asString}</CardHeader>
                 <CardBody>
 
-
-                    <h5>{course.title}</h5>
-                    <Button onClick={this.toggleDesc} size="sm">Desc</Button>
-
+                    <CardTitle>
+                        <InputGroup>
+                            <h5 className={"mr-2"}> {course.title}</h5>
+                            {/*<Button onClick={this.toggleDesc} size="sm">Desc</Button>*/}
+                            <FontAwesomeIcon
+                                icon={this.state.descOpen ? "chevron-up" : "chevron-down"}
+                                size={"lg"}
+                                onClick={this.toggleDesc}
+                                className={"chevron"}
+                            />
+                        </InputGroup>
+                    </CardTitle>
 
                     <Collapse isOpen={this.state.descOpen}>
                         <CardText className={"small"}>{course.description || "No description available."}</CardText>
