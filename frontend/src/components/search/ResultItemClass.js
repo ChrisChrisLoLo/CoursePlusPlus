@@ -30,7 +30,6 @@ export default class ResultItemClass extends React.Component {
         const courseClass = this.props.courseClass;
         return (
             <Card >
-                <CardHeader></CardHeader>
                 <CardBody className={"small"}>
                     <p>Code: {courseClass.calendarCode}</p>
                     <p>Date: ({courseClass.startDate}) - ({courseClass.endDate}) TO REMOVE</p>
@@ -39,7 +38,7 @@ export default class ResultItemClass extends React.Component {
                     <p>Term: NEED TO JOIN TERM </p>
                     <p>Status: {courseClass.enrollStatus}</p>
 
-                    <CardText>{"Notes: "+courseClass.notes || "No notes available."}</CardText>
+                    <CardText>{"Notes: "+(courseClass.notes || "No notes available.")}</CardText>
                     <Button size="sm" onClick={this.addCourseClass}>Add to builder</Button>
                 </CardBody>
             </Card>
