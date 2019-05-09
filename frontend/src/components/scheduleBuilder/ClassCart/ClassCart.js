@@ -75,7 +75,6 @@ export default class ClassCart extends React.Component {
 
         let buttonGroup = null;
         if(results.length>0){
-            buttonGroup = "HII";
             buttonGroup =  (<ButtonGroup>
                                 <Button
                                     size={"sm"}
@@ -94,7 +93,7 @@ export default class ClassCart extends React.Component {
         return (
             <Card>
                 <CardHeader><h5>Selected Courses:</h5></CardHeader>
-                <CardBody className={"px-1"}>
+                <CardBody className={"p-1"}>
                     {cart}
                     {buttonGroup}
                 </CardBody>

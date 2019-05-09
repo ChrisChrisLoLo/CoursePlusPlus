@@ -29,7 +29,7 @@ export default class SearchPage extends React.Component {
 			.then(res => {
 				const coursesData = res.data;
 				this.setState({ courseListData: coursesData });
-			})
+			});
 		event.preventDefault();
 	}
 
@@ -46,7 +46,7 @@ export default class SearchPage extends React.Component {
 			.then(res => {
 				const coursesData = res.data;
 				this.setState({ courseListData: coursesData });
-			})
+			});
 		event.preventDefault();
 	}
 

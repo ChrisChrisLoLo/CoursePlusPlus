@@ -9,6 +9,14 @@ import SearchPage from "./components/search/index.js";
 import ScheduleBuilderPage from "./components/scheduleBuilder";
 import NotFoundErrPage from "./components/pages/NotFoundErrPage.js";
 
+//Import FA icons
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {faChevronUp,faChevronDown} from "@fortawesome/free-solid-svg-icons";
+
+library.add(faChevronUp,faChevronDown);
+//
+
+
 
 
 //import "./App.css";

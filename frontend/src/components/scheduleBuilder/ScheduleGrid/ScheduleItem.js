@@ -11,8 +11,19 @@ export default class ScheduleItem extends React.Component {
 
         const courseClass = this.props.courseClass;
         const asString = courseClass.asString.split(" ");
-        const courseString = asString[0]+" "+asString[1];
-        const courseClassString = asString[2]+" "+asString[3];
+        let courseString;
+        let courseClassString;
+
+        //Some subjects can have spaces in them (AN SC); This handles the case where that occurs
+        if (asString.length === 5){
+            courseString = asString[0] + " " + asString[1] + " "+ asString[2];
+            courseClassString = asString[3] + " " + asString[4];
+        }
+        else{
+            courseString = asString[0] + " " + asString[1];
+            courseClassString = asString[2] + " " + asString[3];
+        }
+
         const classtime = courseClass.classtime_set[0];
 
         const style = {

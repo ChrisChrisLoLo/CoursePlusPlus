@@ -4,19 +4,27 @@ import {
     Card,
     CardBody,
     CardHeader,
+    CardTitle,
     CardText,
     Collapse,
 
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import "./styles/ResultItem.css";
+
 import axios from "axios";
 
 import ResultItemClass from "./ResultItemClass";
+import InputGroup from "reactstrap/es/InputGroup";
+
 
 export default class ResultItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { cardOpen: false, courseClassData: null };
+        this.state = { cardOpen: false, descOpen: false, courseClassData: null };
         this.toggleOpen = this.toggleOpen.bind(this);
+        this.toggleDesc = this.toggleDesc.bind(this);
     }
 
     toggleOpen(e) {
@@ -28,6 +36,10 @@ export default class ResultItem extends React.Component {
                 });
         }
         this.setState({ cardOpen: !this.state.cardOpen });
+    }
+
+    toggleDesc(){
+        this.setState({descOpen:!this.state.descOpen});
     }
 
     render() {
@@ -52,8 +64,24 @@ export default class ResultItem extends React.Component {
             <Card>
                 <CardHeader>{course.asString}</CardHeader>
                 <CardBody>
-                    <h5>{course.title}</h5>
-                    <CardText>{course.description || "No description available."}</CardText>
+                    <CardTitle className={"mb-0"}>
+                        <InputGroup className={"align-middle"}>
+                            <h5 className={"mr-2"}> {course.title}</h5>
+                            {/*<Button onClick={this.toggleDesc} size="sm">Desc</Button>*/}
+                            <FontAwesomeIcon
+                                icon={this.state.descOpen ? "chevron-up" : "chevron-down"}
+                                size={"md"}
+                                onClick={this.toggleDesc}
+                                className={"chevron"}
+                            />
+                        </InputGroup>
+                    </CardTitle>
+
+                    <Collapse isOpen={this.state.descOpen}>
+                        <CardText className={"small"}>{course.description || "No description available."}</CardText>
+                    </Collapse>
+
+
                     <Button onClick={this.toggleOpen} size="sm">Classes</Button>
                     <Collapse isOpen={this.state.cardOpen}>
                         {output}

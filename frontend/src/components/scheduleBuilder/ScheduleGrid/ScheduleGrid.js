@@ -2,20 +2,17 @@ import React from "react";
 import ScheduleGrouping from "./ScheduleGrouping";
 import "../styles/ScheduleGrid.scss";
 import ScheduleGridConsts from "./ScheduleGridConsts";
+import timeStringToHours from "../../../userLib/timeStringToHours";
+
 
 export default class ScheduleGrid extends React.Component {
     constructor(props){
         super(props);
         this.checkTimeOverlap = this.checkTimeOverlap.bind(this);
-        this.convertTimes = this.convertTimes.bind(this);
     }
 
-    convertTimes(){
-        const courses = this.props.courseClasses;
-
-    }
-
-    checkTimeOverlap(){
+    //Check if a grouping overlaps with other groupings on the grid
+    checkTimeOverlap(targetGroupingIndex,groupingArr){
 
     }
 
