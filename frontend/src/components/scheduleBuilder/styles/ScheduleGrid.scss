@@ -4,22 +4,19 @@ $grid-row-count:13*4;
 $grid-col-count:7;
 
 $grid-outline-border: 1px solid lightgrey;
+$default-border-radius: 5px;
 
 .grid-container {
   display: grid;
-
   grid-template-columns: 60px repeat($grid-col-count,1fr);
   grid-template-rows: 30px repeat($grid-row-count,15px);
-  outline: 1px solid;
-}
-
-%grid-child{
-  outline: 1px solid;
+  border-radius: $default-border-radius;
+  border: $grid-outline-border;
 }
 
 %grid-item{
-  @extend %grid-child;
-  background-color: powderblue;
+  outline: 1px solid black;
+  border-radius: 1px;
 }
 
 .grid-item{
@@ -51,6 +48,7 @@ $grid-outline-border: 1px solid lightgrey;
 /*Row headers*/
 @for $i from 1 through $grid-row-count {
   .grid-row-head-#{$i} {
+    text-align:center;
     outline: $grid-outline-border;
     grid-row-start: $i+1;
     grid-row-end: $i+5;
@@ -62,6 +60,7 @@ $grid-outline-border: 1px solid lightgrey;
 /*Col headers*/
 @for $i from 1 through $grid-col-count {
   .grid-col-head-#{$i} {
+    text-align:center;
     outline: $grid-outline-border;
     grid-row-start: 1;
     grid-row-end: 2;
