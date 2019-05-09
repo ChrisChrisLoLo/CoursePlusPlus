@@ -28,8 +28,16 @@ export default class TermSelect extends React.Component {
         axios.get(process.env.REACT_APP_API_URL + "/api/terms/")
             .then(res => {
                 this.setState({terms:res.data.results,});
+                const previousLoadedTerm = localStorage.getItem("chosenTerm");
+
                 //Set the chosen term to the first loaded one
-                this.props.setChosenTerm(this.state.terms[0].id);
+                console.log(previousLoadedTerm);
+                if (previousLoadedTerm === null){
+                    this.props.setChosenTerm(this.state.terms[0].id);
+                }
+                else{
+                    this.props.setChosenTerm(previousLoadedTerm);
+                }
             });
     }
 
