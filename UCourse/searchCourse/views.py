@@ -109,6 +109,7 @@ class TermViewSet(viewsets.ReadOnlyModelViewSet):
 class CourseClassViewSet(searchModelViewSet):
     queryset = CourseClass.objects.all()
     serializer_class = CourseClassSerializer
+    pagination_class = CourseClassListPagination
 
     def handleUrlParam(self, urlParamName, queryset):
         # print(urlParamName)
@@ -122,7 +123,11 @@ class CourseClassViewSet(searchModelViewSet):
         queryset = self.filter_queryset(self.get_queryset())
         queryset = self.filterWithUrlParams(queryset)
 
-        queryset = queryset.order_by("-startDate")[:5]
+        queryset = queryset.prefetch_related("term")
+        queryset = queryset.prefetch_related("course")
+
+
+        queryset = queryset.order_by("-startDate")
 
         return self.returnPaginatedResponse(queryset)
 

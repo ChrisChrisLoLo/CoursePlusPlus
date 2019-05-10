@@ -43,6 +43,10 @@ class CourseClassSerializer(serializers.ModelSerializer):
         model = CourseClass
         fields = '__all__'
 
+    course = CourseSerializer(read_only=True)
+    term = TermSerializer(read_only=True)
+
+
 class CourseClassRelatedSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseClass

@@ -70,7 +70,7 @@ export default class ResultItem extends React.Component {
                             {/*<Button onClick={this.toggleDesc} size="sm">Desc</Button>*/}
                             <FontAwesomeIcon
                                 icon={this.state.descOpen ? "chevron-up" : "chevron-down"}
-                                size={"md"}
+                                size={"1x"}
                                 onClick={this.toggleDesc}
                                 className={"chevron"}
                             />
@@ -82,7 +82,7 @@ export default class ResultItem extends React.Component {
                     </Collapse>
 
 
-                    <Button onClick={this.toggleOpen} size="sm">Classes</Button>
+                    <Button onClick={this.toggleOpen} size="sm" className={"mt-2"}>Classes</Button>
                     <Collapse isOpen={this.state.cardOpen}>
                         {output}
                     </Collapse>
