@@ -91,7 +91,7 @@ export default class ResultItem extends React.Component {
                     </Collapse>
 
 
-                    <Button onClick={this.toggleOpen} size="sm" className={"mt-2"}>Classes</Button>
+                    <Button outline onClick={this.toggleOpen} size="sm" className={"mt-2"} >Classes</Button>
                     <Collapse isOpen={this.state.cardOpen}>
                         {output}
                         {data &&
