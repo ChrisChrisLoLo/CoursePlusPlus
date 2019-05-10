@@ -103,7 +103,6 @@ export default class ScheduleGrouping extends React.Component {
     render() {
         const scheduleItems = this.courseClassToScheduleItems(this.props.courseClass);
 
-
         return (
             <React.Fragment>
                 {scheduleItems}

@@ -8,6 +8,7 @@ import {
 } from 'reactstrap';
 import axios from "axios";
 import getAuthToken from "../../userLib/getAuthToken";
+import "./styles/ResultItemClass.css";
 
 export default class ResultItemClass extends React.Component {
     constructor(props) {
@@ -29,8 +30,8 @@ export default class ResultItemClass extends React.Component {
     render() {
         const courseClass = this.props.courseClass;
         return (
-            <Card >
-                <CardBody className={"small"}>
+            <Card className={"mt-2"}>
+                <CardBody className={"small course-class-container"}>
                     <p>Code: {courseClass.calendarCode}</p>
                     <p>Date: ({courseClass.startDate}) - ({courseClass.endDate}) TO REMOVE</p>
                     <p>Days: NEED TO JOIN CLASSTIMES </p>

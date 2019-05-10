@@ -33,6 +33,7 @@ export default class ScheduleBuilderPage extends React.Component {
 
     handleChosenTermChange(e){
         this.setState({chosenTerm:e.target.value});
+        window.localStorage.setItem("chosenTerm",e.target.value);
     }
 
     setChosenTerm(term){
