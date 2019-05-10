@@ -46,7 +46,7 @@ export default class ClassCart extends React.Component {
     }
 
     handlePageChange(e,increment){
-        this.setState({page : this.state.page+=increment});
+        this.setState({page : this.state.page+increment});
     }
 
 
