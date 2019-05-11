@@ -124,7 +124,7 @@ class CourseClassViewSet(searchModelViewSet):
         queryset = self.filterWithUrlParams(queryset)
 
         queryset = queryset.prefetch_related("term")
-        queryset = queryset.prefetch_related("course")
+        queryset = queryset.prefetch_related("classtime_set")
 
 
         queryset = queryset.order_by("-startDate")

@@ -29,15 +29,22 @@ export default class ResultItemClass extends React.Component {
 
     render() {
         const courseClass = this.props.courseClass;
+
+        const classtimes = courseClass.classtime_set;
+        let classtime = null;
+        if(classtimes){
+            classtime = classtimes[0]
+        }
+
         return (
             <Card className={"mt-2"}>
                 <CardBody className={"small course-class-container"}>
+                    <h6>{courseClass.asString}</h6>
                     <p>Code: {courseClass.calendarCode}</p>
-                    <p>Date: ({courseClass.startDate}) - ({courseClass.endDate}) TO REMOVE</p>
-                    <p>Days: NEED TO JOIN CLASSTIMES </p>
-                    <p>Location: NEED TO JOIN LOCATION</p>
-                    <p>Term: NEED TO JOIN TERM </p>
-                    <p>Status: {courseClass.enrollStatus}</p>
+                    <p>Days: {classtime ? classtime.day : "N/A"} </p>
+                    <p>Location: {classtime ? classtime.location : "N/A"} </p>
+                    <p>Term: {courseClass.term.title} </p>
+                    {/*ONLY USE IF DATA IS LIVE <p>Status: {courseClass.enrollStatus}</p>*/}
 
                     <CardText>{"Notes: "+(courseClass.notes || "No notes available.")}</CardText>
                     <Button size="sm" onClick={this.addCourseClass}>Add to builder</Button>

@@ -43,7 +43,7 @@ class CourseClassSerializer(serializers.ModelSerializer):
         model = CourseClass
         fields = '__all__'
 
-    course = CourseSerializer(read_only=True)
+    classtime_set = ClassTimeSerializer(read_only=True, many=True)
     term = TermSerializer(read_only=True)
 
 

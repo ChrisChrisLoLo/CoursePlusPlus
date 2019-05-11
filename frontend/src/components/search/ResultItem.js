@@ -6,7 +6,7 @@ import {
     CardHeader,
     CardTitle,
     CardText,
-    Collapse,
+    Collapse, Row, Col,
 
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -25,6 +25,7 @@ export default class ResultItem extends React.Component {
         this.state = { cardOpen: false, descOpen: false, courseClassData: null };
         this.toggleOpen = this.toggleOpen.bind(this);
         this.toggleDesc = this.toggleDesc.bind(this);
+        this.changePaginationURL = this.changePaginationURL.bind(this);
     }
 
     toggleOpen(e) {
@@ -40,6 +41,14 @@ export default class ResultItem extends React.Component {
 
     toggleDesc(){
         this.setState({descOpen:!this.state.descOpen});
+    }
+
+    changePaginationURL(resourceURL){
+        axios.get(resourceURL)
+            .then(res => {
+                const courseClassResData = res.data;
+                this.setState({ courseClassData: courseClassResData });
+            });
     }
 
     render() {
@@ -82,9 +91,23 @@ export default class ResultItem extends React.Component {
                     </Collapse>
 
 
-                    <Button onClick={this.toggleOpen} size="sm" className={"mt-2"}>Classes</Button>
+                    <Button outline onClick={this.toggleOpen} size="sm" className={"mt-2"} >Classes</Button>
                     <Collapse isOpen={this.state.cardOpen}>
                         {output}
+                        {data &&
+                            <Row className="justify-content-between">
+                                <Col sm={{ size: "auto" }}>
+                                    {data.previous &&
+                                        <Button color="primary" onClick={() => { this.changePaginationURL(data.previous) }}>Prev</Button>
+                                    }
+                                </Col>
+                                <Col sm={{ size: "auto" }}>
+                                    {data.next &&
+                                        <Button color="primary" onClick={() => { this.changePaginationURL(data.next) }}>Next</Button>
+                                    }
+                                </Col>
+                            </Row>
+					    }
                     </Collapse>
                 </CardBody>
             </Card>
