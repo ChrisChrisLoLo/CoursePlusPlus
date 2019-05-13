@@ -87,7 +87,6 @@ export default class SearchPage extends React.Component {
 		}
 	}
 
-
 	render() {
 		console.log(this.state);
 		return (

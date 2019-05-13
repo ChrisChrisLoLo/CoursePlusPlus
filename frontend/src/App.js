@@ -35,8 +35,8 @@ class App extends Component {
                 <Route path="/search" component={SearchPage} />
                 <Route path="/scheduleBuilder" render={()=>{
                   return isAuthenticated() === true ?
-                  <ScheduleBuilderPage/> :
-                  <Redirect to={{pathname:"/auth"}}/>;
+                  <ScheduleBuilderPage /> :
+                  <Redirect to={{pathname:"/auth", state:{redirectReason:"Please log in to use the schedule builder"}}} />;
                 }}/>
                 <Route path="/auth" component={AuthPage} />
                 <Route component={NotFoundErrPage} />
@@ -44,7 +44,7 @@ class App extends Component {
             </Container>
           </div>
         </BrowserRouter>
-      </div >
+      </div>
     );
   }
 }
