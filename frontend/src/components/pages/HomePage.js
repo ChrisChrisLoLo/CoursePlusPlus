@@ -48,7 +48,7 @@ export default class HomePage extends React.Component {
 
                                 </Col>
                                 <Col lg={"3"} md={"6"} className={"mb-5 mb-lg-0 text-center"}>
-                                    <h5>Move to Beartracks</h5>
+                                    <h5>Beartracks Compatible</h5>
                                     <FontAwesomeIcon icon={"paw"} size={"3x"}/>
 
                                 </Col>
