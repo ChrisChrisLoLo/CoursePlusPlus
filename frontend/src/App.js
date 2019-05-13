@@ -13,14 +13,9 @@ import isAuthenticated from "./userLib/isAuthenticated";
 
 //Import FA icons
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faChevronUp,faChevronDown} from "@fortawesome/free-solid-svg-icons";
-library.add(faChevronUp,faChevronDown);
+import {faChevronUp,faChevronDown,faSearch,faCalendarAlt,faRandom,faPaw} from "@fortawesome/free-solid-svg-icons";
+library.add(faChevronUp,faChevronDown,faSearch,faCalendarAlt,faRandom, faPaw);
 //
-
-
-
-
-//import "./App.css";
 
 class App extends Component {
   render() {
