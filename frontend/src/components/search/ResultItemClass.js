@@ -15,17 +15,28 @@ export default class ResultItemClass extends React.Component {
     constructor(props) {
         super(props);
         this.addCourseClass = this.addCourseClass.bind(this);
+        this.removeCourseClass = this.removeCourseClass.bind(this);
+        this.state = {added:false};
     }
 
     addCourseClass(e){
-
         axios.post(process.env.REACT_APP_API_URL + "/api/classCart/", {
             courseClass : this.props.courseClass.id
         },{
             headers:{Authorization:getAuthToken()}
         }).then(res => {
+            this.setState({added:true})
         });
+    }
 
+    removeCourseClass(e){
+        axios.delete(process.env.REACT_APP_API_URL + "/api/classCart/", {
+            courseClass : this.props.courseClass.id
+        },{
+            headers:{Authorization:getAuthToken()}
+        }).then(res => {
+            this.setState({added:false})
+        });
     }
 
     render() {
@@ -36,6 +47,19 @@ export default class ResultItemClass extends React.Component {
         if(classtimes){
             classtime = classtimes[0]
         }
+        let button;
+        if(!isAuthenticated()){
+            button = <Button disabled={true} size="sm">Log in to add</Button>
+        }
+        else if(this.state.added === false){
+            button = <Button size="sm" onClick={this.addCourseClass}>Add to builder</Button>
+        }
+        else{
+            button = <Button size="sm" onClick={this.removeCourseClass}>Remove from builder</Button>
+        }
+
+
+
 
         return (
             <Card className={"mt-2"}>
@@ -48,11 +72,7 @@ export default class ResultItemClass extends React.Component {
                     {/*ONLY USE IF DATA IS LIVE <p>Status: {courseClass.enrollStatus}</p>*/}
 
                     <CardText>{"Notes: "+(courseClass.notes || "No notes available.")}</CardText>
-                    {isAuthenticated()?
-                        <Button size="sm" onClick={this.addCourseClass}>Add to builder</Button>:
-                        <Button disabled={true} size="sm">Log in to add</Button>
-                    }
-
+                    {button}
                 </CardBody>
             </Card>
         );
