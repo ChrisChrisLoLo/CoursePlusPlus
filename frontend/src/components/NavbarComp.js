@@ -11,10 +11,11 @@ import {
 	DropdownItem
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
+import isAuthenticated from "../userLib/isAuthenticated";
 import logo from "./../logo.png";
 
 
-export default class Example extends React.Component {
+export default class NavbarComp extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -46,26 +47,14 @@ export default class Example extends React.Component {
 							<NavItem>
 								<NavLink to="/scheduleBuilder/" className="nav-link">Schedule Builder</NavLink>
 							</NavItem>
-							<NavItem>
-								<NavLink to="/auth/" className="nav-link">Log In</NavLink>
-							</NavItem>
-							<UncontrolledDropdown nav inNavbar>
-								<DropdownToggle nav caret>
-									Options
-				  				</DropdownToggle>
-								<DropdownMenu right>
-									<DropdownItem>
-										Option 1
-									</DropdownItem>
-									<DropdownItem>
-										Option 2
-									</DropdownItem>
-									<DropdownItem divider />
-									<DropdownItem>
-										Reset
-									</DropdownItem>
-								</DropdownMenu>
-							</UncontrolledDropdown>
+							{isAuthenticated()?
+								<NavItem>
+									<NavLink to="/logout/" className="nav-link">Log Out</NavLink>
+								</NavItem>:
+								<NavItem>
+									<NavLink to="/auth/" className="nav-link">Log In</NavLink>
+								</NavItem>
+							}
 						</Nav>
 					</Collapse>
 				</Navbar>

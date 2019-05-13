@@ -14,6 +14,7 @@ import isAuthenticated from "./userLib/isAuthenticated";
 //Import FA icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faChevronUp,faChevronDown,faSearch,faCalendarAlt,faRandom,faPaw} from "@fortawesome/free-solid-svg-icons";
+import LogoutPage from "./components/pages/LogoutPage";
 library.add(faChevronUp,faChevronDown,faSearch,faCalendarAlt,faRandom, faPaw);
 //
 
@@ -34,6 +35,7 @@ class App extends Component {
                   <Redirect to={{pathname:"/auth", state:{redirectReason:"Please log in to use the schedule builder"}}} />;
                 }}/>
                 <Route path="/auth" component={AuthPage} />
+                <Route path="/logout" component={LogoutPage}/>
                 <Route component={NotFoundErrPage} />
               </Switch>
             </Container>

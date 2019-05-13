@@ -8,6 +8,7 @@ import {
 } from 'reactstrap';
 import axios from "axios";
 import getAuthToken from "../../userLib/getAuthToken";
+import isAuthenticated from "../../userLib/isAuthenticated";
 import "./styles/ResultItemClass.css";
 
 export default class ResultItemClass extends React.Component {
@@ -47,7 +48,11 @@ export default class ResultItemClass extends React.Component {
                     {/*ONLY USE IF DATA IS LIVE <p>Status: {courseClass.enrollStatus}</p>*/}
 
                     <CardText>{"Notes: "+(courseClass.notes || "No notes available.")}</CardText>
-                    <Button size="sm" onClick={this.addCourseClass}>Add to builder</Button>
+                    {isAuthenticated()?
+                        <Button size="sm" onClick={this.addCourseClass}>Add to builder</Button>:
+                        <Button disabled={true} size="sm">Log in to add</Button>
+                    }
+
                 </CardBody>
             </Card>
         );
