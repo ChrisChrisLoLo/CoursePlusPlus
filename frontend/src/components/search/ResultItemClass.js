@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardBody,
-  CardHeader,
   CardText,
 } from 'reactstrap';
 import axios from "axios";
@@ -16,25 +15,35 @@ export default class ResultItemClass extends React.Component {
     super(props);
     this.addCourseClass = this.addCourseClass.bind(this);
     this.removeCourseClass = this.removeCourseClass.bind(this);
-    this.state = {added: false};
+    // this.state = {added: false};
   }
 
-  addCourseClass(e) {
-    axios.post(process.env.REACT_APP_API_URL + "/api/classCart/", {
-      courseClass: this.props.courseClass.id
-    }, {
-      headers: {Authorization: getAuthToken()}
-    }).then(res => {
-      this.setState({added: true})
-    });
+  addCourseClass(courseClassId) {
+    if(!this.props.checkFromMap(courseClassId)){
+      axios.post(process.env.REACT_APP_API_URL + "/api/classCart/", {
+        courseClass: this.props.courseClass.id
+      }, {
+        headers: {Authorization: getAuthToken()}
+      }).then(res => {
+        this.props.addClassCartToMap(courseClassId,res.data.id);
+      });
+    }
+    else{
+      console.error("Class is already in map")
+    }
   }
 
-  removeCourseClass(e) {
-    axios.delete(process.env.REACT_APP_API_URL + "/api/classCart/?", {
-      headers: {Authorization: getAuthToken()}
-    }).then(res => {
-      this.setState({added: false})
-    });
+  removeCourseClass(courseClassId) {
+    if(this.props.checkFromMap(courseClassId)) {
+      axios.delete(process.env.REACT_APP_API_URL + "/api/classCart/" + this.props.getFromMap(courseClassId) + "/", {
+        headers: {Authorization: getAuthToken()}
+      }).then(res => {
+        this.props.removeClassCartFromMap(courseClassId);
+      });
+    }
+    else{
+      console.error("Class was not in the map to begin with");
+    }
   }
 
   render() {
@@ -48,10 +57,10 @@ export default class ResultItemClass extends React.Component {
     let button;
     if (!isAuthenticated()) {
       button = <Button disabled={true} size="sm">Log in to add</Button>
-    } else if (this.state.added === false) {
-      button = <Button size="sm" onClick={this.addCourseClass}>Add to builder</Button>
+    } else if (!this.props.checkFromMap(courseClass.id)) {
+      button = <Button size="sm" onClick={() => this.addCourseClass(courseClass.id)}>Add to builder</Button>
     } else {
-      button = <Button size="sm" onClick={this.removeCourseClass}>Remove from builder</Button>
+      button = <Button size="sm" onClick={() => this.removeCourseClass(courseClass.id)}>Remove from builder</Button>
     }
 
     return (

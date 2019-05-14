@@ -61,14 +61,24 @@ export default class ResultItem extends React.Component {
     const data = this.state.courseClassData;
 
     if (data) {
+
       results = data.results;
+
       if (results === undefined || results.length === 0) {
         output = <p>No Classes Found.</p>
       } else {
         output = results.map((courseClass) =>
-          <ResultItemClass courseClass={courseClass} key={courseClass.id}/>
+          <ResultItemClass
+            courseClass={courseClass}
+            key={courseClass.id}
+            addClassCartToMap={this.props.addClassCartToMap}
+            removeClassCartFromMap={this.props.removeClassCartFromMap}
+            checkFromMap={this.props.checkFromMap}
+            getFromMap={this.props.getFromMap}
+          />
         );
       }
+
     }
 
     return (

@@ -15,18 +15,32 @@ import getAuthToken from "../../userLib/getAuthToken";
 export default class SearchResults extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {classCartMap:{}};
+    this.state = { classCartMap : new Map() };
     this.addClassCartToMap = this.addClassCartToMap.bind(this);
     this.removeClassCartFromMap = this.removeClassCartFromMap.bind(this);
-
+    this.checkFromMap = this.checkFromMap.bind(this);
+    this.getFromMap = this.getFromMap.bind(this);
   }
 
-  addClassCartToMap(e,classCartId){
-    this.setState({classCartMap:{...this.state.classCartMap, [classCartId]:true}});
+  addClassCartToMap(courseClassId,classCartId){
+    //copy map since mutations are being performed
+    const newMap = new Map(this.state.classCartMap);
+    newMap.set(courseClassId,classCartId);
+    this.setState({classCartMap:newMap});
   }
 
-  removeClassCartFromMap(e,classCartId){
-    const newClassCartMap = {...this.state.classCartMap};
+  removeClassCartFromMap(courseClassId){
+    const newMap = new Map(this.state.classCartMap);
+    newMap.delete(courseClassId);
+    this.setState({classCartMap:newMap});
+  }
+
+  getFromMap(courseClassId){
+    return this.state.classCartMap.get(courseClassId);
+  }
+
+  checkFromMap(courseClassId){
+    return this.state.classCartMap.has(courseClassId);
   }
 
   componentDidMount() {
@@ -36,14 +50,13 @@ export default class SearchResults extends React.Component {
       axios.get(process.env.REACT_APP_API_URL + "/api/classCart/", {
         headers: {Authorization: getAuthToken()}
       }).then((res) => {
-        const classCartMap = {};
+        const newClassCartMap = new Map();
         if (res.data.results) {
-          console.log(res.data.results);
           res.data.results.forEach((classCartItem) => {
-            classCartMap[classCartItem.id] = true;
+            newClassCartMap.set(classCartItem.courseClass.id,classCartItem.id);
           })
         }
-        this.setState({classCartMap: classCartMap});
+        this.setState({classCartMap: newClassCartMap});
       });
     }
   }
@@ -61,7 +74,15 @@ export default class SearchResults extends React.Component {
         output = <h3>No Results Found.</h3>
       } else {
         output = results.map((course) =>
-          <ResultItem course={course} key={course.id} specificTerm={this.props.specificTerm}/>
+          <ResultItem
+            course={course}
+            key={course.id}
+            specificTerm={this.props.specificTerm}
+            addClassCartToMap={this.addClassCartToMap}
+            removeClassCartFromMap={this.removeClassCartFromMap}
+            checkFromMap={this.checkFromMap}
+            getFromMap={this.getFromMap}
+          />
         );
       }
     } else {
