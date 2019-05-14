@@ -44,6 +44,7 @@ export default class SearchResults extends React.Component {
   }
 
   componentDidMount() {
+    this._mounted = true;
     //Get all courseCarts associated to the user.
     //The request is made here to avoid multiple requests to check if a class is in the cart
     if (isAuthenticated()) {
@@ -59,6 +60,12 @@ export default class SearchResults extends React.Component {
         this.setState({classCartMap: newClassCartMap});
       });
     }
+  }
+
+  componentWillUnmount() {
+    //Do this to prevent a callback firing when the component is unmounted.
+    //This supposedly prevents memory leaks.
+    this._mounted = false;
   }
 
   render() {

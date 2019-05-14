@@ -14,6 +14,7 @@ markdown = "*"
 django-filter = "*"
 django-cors-headers = "*"
 django-rest-auth = {extras = ["with_social"],version = "*"}
+python-dotenv = "*"
 
 [requires]
 python_version = "3.6"
