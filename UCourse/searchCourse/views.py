@@ -16,7 +16,7 @@ URL_PARAM_WHITELIST = ["page"]
 
 # A superclass that adds methods to allow for searches via the querystring.
 # handleUrlParam() must be implemented inorder to know how to call filterByParam()
-class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
+class ReadOnlySearchModelViewSet(viewsets.ReadOnlyModelViewSet):
     # Get a query parameter value and filter the queryset against it.
     # Can optionally set the filter parameter name if it does not match that of the one used in the url query
     def filterByParam(self, urlParamName, urlParamIsInt, queryset, filterParamName=None):
@@ -49,6 +49,10 @@ class searchModelViewSet(viewsets.ReadOnlyModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
+# class SearchModelViewSet(ReadOnlySearchModelViewSet,
+#                          mixins.UpdateModelMixin,
+#                          mixins.DestroyModelMixin):
+
 
 class FacultyViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Faculty.objects.all()
@@ -66,7 +70,7 @@ class SubjectViewSet(viewsets.ReadOnlyModelViewSet):
     pagination_class = SubjectListPagination
 
 
-class CourseViewSet(searchModelViewSet):
+class CourseViewSet(ReadOnlySearchModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     pagination_class = CourseListPagination
@@ -106,7 +110,7 @@ class TermViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TermSerializer
 
 
-class CourseClassViewSet(searchModelViewSet):
+class CourseClassViewSet(ReadOnlySearchModelViewSet):
     queryset = CourseClass.objects.all()
     serializer_class = CourseClassSerializer
     pagination_class = CourseClassListPagination
@@ -133,7 +137,7 @@ class CourseClassViewSet(searchModelViewSet):
         return self.returnPaginatedResponse(queryset)
 
 
-class ClassTimeViewSet(searchModelViewSet):
+class ClassTimeViewSet(ReadOnlySearchModelViewSet):
     queryset = ClassTime.objects.all()
     serializer_class = ClassTimeSerializer
 
@@ -152,7 +156,7 @@ class ClassTimeViewSet(searchModelViewSet):
         return self.returnPaginatedResponse(queryset)
 
 
-class ClassCartViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,mixins.UpdateModelMixin,searchModelViewSet):
+class ClassCartViewSet(mixins.CreateModelMixin, mixins.DestroyModelMixin, mixins.UpdateModelMixin, ReadOnlySearchModelViewSet):
 
     queryset = ClassCart.objects.all()
     serializer_class = ClassCartSerializer

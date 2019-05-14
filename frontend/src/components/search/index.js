@@ -8,11 +8,13 @@ import axios from "axios";
 import CourseListForm from "./CourseListForm.js";
 import SearchResults from "./SearchResults.js";
 import CourseSingleForm from "./CourseSingleForm.js";
+import isAuthenticated from "../../userLib/isAuthenticated";
+import getAuthToken from "../../userLib/getAuthToken";
 
 export default class SearchPage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { courseListData: null , specificTerm: null };
+		this.state = { courseListData: null , specificTerm: null , classCartMap: {} };
 		this.onSingleCourseSubmit = this.onSingleCourseSubmit.bind(this);
 		this.onMultiCourseSubmit = this.onMultiCourseSubmit.bind(this);
 		this.changePaginationURL = this.changePaginationURL.bind(this);
@@ -70,12 +72,29 @@ export default class SearchPage extends React.Component {
 			.then(res => {
 				const coursesData = res.data;
 				this.setState({ courseListData: coursesData });
-			})
+			});
+
+		//Get all courseCarts associated to the user.
+		//The request is made here to avoid multiple requests to check if a class is in the cart
+		if(isAuthenticated()) {
+			axios.get(process.env.REACT_APP_API_URL + "/api/classCart/", {
+                    headers: {Authorization: getAuthToken()}
+                }).then((res) => {
+                	const classCartMap = {};
+                	if(res.data.results){
+                		console.log(res.data.results);
+						res.data.results.forEach((classCartItem)=>{
+							classCartMap[classCartItem.id] = true;
+						})
+					}
+					this.setState({classCartMap: classCartMap});
+				});
+		}
 	}
 
-	componentDidUpdate(prevProps) {
+	componentDidUpdate(prevProps){
 		//Scroll to top whenever more results are loaded.
-		window.scrollTo(0, 0)
+		window.scrollTo(0, 0);
 		console.log(this.props);
 		console.log(prevProps);
 		if (this.props.location.search !== prevProps.location.search) {
@@ -112,6 +131,7 @@ export default class SearchPage extends React.Component {
 							courseListData={this.state.courseListData}
 							changePaginationURL={this.changePaginationURL}
 							specificTerm={this.state.specificTerm}
+							courseClassMap={this.state.classCartMap}
 						/>
 					</Col>
 				</Row>

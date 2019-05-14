@@ -1,4 +1,5 @@
 import React from "react";
+
 export default class LogoutPage extends React.Component {
 
   componentWillMount() {
