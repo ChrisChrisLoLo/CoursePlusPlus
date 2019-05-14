@@ -7,6 +7,7 @@ import axios from "axios";
 
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import Alert from "reactstrap/es/Alert";
 
 export default class AuthPage extends React.Component {
     constructor(props) {
@@ -39,11 +40,14 @@ export default class AuthPage extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs="2" sm="3" md="4"></Col>
+                    <Col xs="1" sm="2" md="3"></Col>
                     <Col>
+                        {this.props.location.state && this.props.location.state.redirectReason &&
+                            <Alert color={"warning"}>{this.props.location.state.redirectReason}</Alert>
+                        }
                         {displayedForm}
                     </Col>
-                    <Col xs="2" sm="3" md="4"></Col>
+                    <Col xs="1" sm="2" md="3"></Col>
                 </Row>
             </div>
         );
