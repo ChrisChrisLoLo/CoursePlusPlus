@@ -8,31 +8,48 @@ import {
 } from 'reactstrap';
 
 import ResultItem from "./ResultItem"
+import isAuthenticated from "../../userLib/isAuthenticated";
+import axios from "axios";
+import getAuthToken from "../../userLib/getAuthToken";
 
 export default class SearchResults extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {classCartMap:{}};
+    this.addClassCartToMap = this.addClassCartToMap.bind(this);
+    this.removeClassCartFromMap = this.removeClassCartFromMap.bind(this);
+
   }
 
+  addClassCartToMap(e,classCartId){
+    this.setState({classCartMap:{...this.state.classCartMap, [classCartId]:true}});
+  }
 
-  //Take the pagination URL from the API and push the given page to the react router history.
-  // calcPaginationURL(paginationURL) {
-  // 	console.log(this.props);
-  // 	if (!paginationURL) return;
+  removeClassCartFromMap(e,classCartId){
+    const newClassCartMap = {...this.state.classCartMap};
+  }
 
-  // 	let searchParams = this.props.search || "?";
-  // 	let curURL = this.props.location + searchParams;
-
-  // 	let queryRegExp = new RegExp("(page=)[0-9]+");
-  // 	let pageQuery = paginationURL.match(queryRegExp);
-  // 	this.props.history.push(curURL + pageQuery);
-  // }
+  componentDidMount() {
+    //Get all courseCarts associated to the user.
+    //The request is made here to avoid multiple requests to check if a class is in the cart
+    if (isAuthenticated()) {
+      axios.get(process.env.REACT_APP_API_URL + "/api/classCart/", {
+        headers: {Authorization: getAuthToken()}
+      }).then((res) => {
+        const classCartMap = {};
+        if (res.data.results) {
+          console.log(res.data.results);
+          res.data.results.forEach((classCartItem) => {
+            classCartMap[classCartItem.id] = true;
+          })
+        }
+        this.setState({classCartMap: classCartMap});
+      });
+    }
+  }
 
   render() {
-    //console.log(this.props.courseListData.next)
-    // const resultsList = this.props.courseListData.results.map((course) =>
-    // 	<ResultItem />
-    // );
+
     let results;
     let output;
     let data = this.props.courseListData;
