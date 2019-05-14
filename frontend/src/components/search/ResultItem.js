@@ -29,8 +29,11 @@ export default class ResultItem extends React.Component {
     }
 
     toggleOpen(e) {
+        const termParam = this.props.specificTerm ? "&term=" + this.props.specificTerm : "";
         if (!this.state.courseClassData) {
-            axios.get(process.env.REACT_APP_API_URL + "/api/classes/?course=" + this.props.course.id)
+            axios.get(process.env.REACT_APP_API_URL
+                    + "/api/classes/?course=" + this.props.course.id
+                    + termParam)
                 .then(res => {
                     const courseClassResData = res.data;
                     this.setState({ courseClassData: courseClassResData });

@@ -115,6 +115,8 @@ class CourseClassViewSet(searchModelViewSet):
         # print(urlParamName)
         if urlParamName == "course":
             queryset = self.filterByParam(urlParamName, False, queryset)
+        elif urlParamName == "term":
+            queryset = self.filterByParam(urlParamName, True, queryset)
         else:
             raise ParseError(detail=urlParamName+" is an invalid parameter")
         return queryset
@@ -125,7 +127,6 @@ class CourseClassViewSet(searchModelViewSet):
 
         queryset = queryset.prefetch_related("term")
         queryset = queryset.prefetch_related("classtime_set")
-
 
         queryset = queryset.order_by("-startDate")
 
@@ -166,6 +167,8 @@ class ClassCartViewSet(mixins.CreateModelMixin,mixins.DestroyModelMixin,mixins.U
         if self.action == 'create':
             return ClassCartSerializer
         if self.action == 'partial_update':
+            return ClassCartSerializer
+        if self.action == 'destroy':
             return ClassCartSerializer
         return serializers.Default  # I dont' know what you want for create/destroy/update
 

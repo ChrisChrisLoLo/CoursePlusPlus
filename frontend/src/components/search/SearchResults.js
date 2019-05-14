@@ -45,7 +45,7 @@ export default class SearchResults extends React.Component {
 			}
 			else {
 				output = results.map((course) =>
-					<ResultItem course={course} key={course.id} />
+					<ResultItem course={course} key={course.id} specificTerm={this.props.specificTerm}/>
 				);
 			}
 		}

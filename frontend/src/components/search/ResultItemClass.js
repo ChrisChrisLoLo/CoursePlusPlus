@@ -58,9 +58,6 @@ export default class ResultItemClass extends React.Component {
             button = <Button size="sm" onClick={this.removeCourseClass}>Remove from builder</Button>
         }
 
-
-
-
         return (
             <Card className={"mt-2"}>
                 <CardBody className={"small course-class-container"}>

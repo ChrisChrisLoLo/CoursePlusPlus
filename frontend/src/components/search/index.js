@@ -12,7 +12,7 @@ import CourseSingleForm from "./CourseSingleForm.js";
 export default class SearchPage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { courseListData: null };
+		this.state = { courseListData: null , specificTerm: null };
 		this.onSingleCourseSubmit = this.onSingleCourseSubmit.bind(this);
 		this.onMultiCourseSubmit = this.onMultiCourseSubmit.bind(this);
 		this.changePaginationURL = this.changePaginationURL.bind(this);
@@ -28,7 +28,7 @@ export default class SearchPage extends React.Component {
 		axios.get(process.env.REACT_APP_API_URL + "/api/courses/?asString=" + queryRequest)
 			.then(res => {
 				const coursesData = res.data;
-				this.setState({ courseListData: coursesData });
+				this.setState({ courseListData: coursesData, specificTerm: null });
 			});
 		event.preventDefault();
 	}
@@ -45,7 +45,7 @@ export default class SearchPage extends React.Component {
 		axios.get(process.env.REACT_APP_API_URL + "/api/courses/?" + queryRequest)
 			.then(res => {
 				const coursesData = res.data;
-				this.setState({ courseListData: coursesData });
+				this.setState({ courseListData: coursesData, specificTerm: termNum});
 			});
 		event.preventDefault();
 	}
@@ -111,6 +111,7 @@ export default class SearchPage extends React.Component {
 						<SearchResults
 							courseListData={this.state.courseListData}
 							changePaginationURL={this.changePaginationURL}
+							specificTerm={this.state.specificTerm}
 						/>
 					</Col>
 				</Row>
