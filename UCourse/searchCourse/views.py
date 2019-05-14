@@ -106,7 +106,7 @@ class CourseViewSet(ReadOnlySearchModelViewSet):
 
 
 class TermViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Term.objects.all().order_by("-startDate")
+    queryset = Term.objects.all().order_by("-startDate").exclude(title__startswith="Continuing Ed")
     serializer_class = TermSerializer
 
 
