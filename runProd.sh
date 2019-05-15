@@ -1,3 +1,3 @@
 cd ./UCourse &&
-gunicorn UCourse.wsgi &&
+gunicorn -c gunicorn.py.ini UCourse.wsgi &&
 cd ..
