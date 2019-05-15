@@ -1,3 +1,3 @@
-cd ./UCourse &
-pipenv run gunicorn ./UCourse/wsgi.py &
+cd ./UCourse &&
+gunicorn UCourse.wsgi &&
 cd ..
