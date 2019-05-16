@@ -11,4 +11,8 @@ ssh -i "key.pem" ubuntu@54.202.197.54 "cd /var/www/CoursePlusPlus && git pull"
 #Restart the gunicorn server
 ssh -i "key.pem" ubuntu@54.202.197.54 "cd /var/www/CoursePlusPlus/scripts/ && ./runProd.sh"
 
+#Restart the nginx server
+ssh -i "key.pem" ubuntu@54.202.197.54 "sudo service nginx stop && sudo service nginx start"
+
+
 
