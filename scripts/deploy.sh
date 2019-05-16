@@ -9,6 +9,6 @@ scp -i "key.pem" -r ../frontend/build ubuntu@54.202.197.54:/var/www/CoursePlusPl
 ssh -i "key.pem" ubuntu@54.202.197.54 "cd /var/www/CoursePlusPlus && git pull"
 
 #Restart the gunicorn server
-ssh -i "key.pem" ubuntu@54.202.197.54 "/var/www/CoursePlusPlus/scripts/runProd.sh"
+ssh -i "key.pem" ubuntu@54.202.197.54 "cd /var/www/CoursePlusPlus/scripts/ && ./runProd.sh"
 
 
