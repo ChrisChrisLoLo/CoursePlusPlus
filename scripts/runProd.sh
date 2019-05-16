@@ -2,10 +2,11 @@ cd /var/www/CoursePlusPlus/UCourse
 
 pkill gunicorn
 
-gunicorn --error-logfile /var/log/gunicorn/error.log -c gunicorn.py.ini UCourse.wsgi &
+#/usr/bin/gunicorn --error-logfile /var/log/gunicorn/error.log -c gunicorn.py.ini UCourse.wsgi
+/usr/bin/gunicorn3 -c gunicorn.py.ini UCourse.wsgi &
 
 #Let server boot up
-sleep 5
+sleep 2
 
 #Check if running
 pgrep gunicorn && echo Running
