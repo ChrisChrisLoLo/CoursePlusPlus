@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", "54.202.197.54"]
 
 
 # Application definition
@@ -160,6 +160,7 @@ STATICFILES_DIRS = [
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'http://54.202.197.54'
 ]
 
 APPEND_SLASH = True
