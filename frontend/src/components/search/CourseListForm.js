@@ -53,7 +53,7 @@ export default class CourseListForm extends React.Component {
 
 	render() {
 		let subjOptions;
-		if (this.state.subjData.results) {
+		if (this.state.subjData && this.state.subjData.results) {
 			const subject = this.state.subjData.results;
 			subjOptions = subject.map((subject) =>
 				<option value={subject.id} key={subject.id}>{subject.code + " - " + subject.name}</option>
@@ -61,7 +61,7 @@ export default class CourseListForm extends React.Component {
 		}
 
 		let termOptions;
-		if (this.state.termData.results) {
+		if (this.state.termData && this.state.termData.results) {
 			const term = this.state.termData.results;
 			termOptions = term.map((term) =>
 				<option value={term.id} key={term.id}>{term.title}</option>
