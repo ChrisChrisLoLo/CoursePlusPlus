@@ -152,9 +152,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, './../frontend/dist'),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, './../frontend/dist'),
+# ]
+
+STATIC_ROOT = './../frontend/dist'
 
 # CORS origin whitelist - should only contain localhost and the name of the prod domain
 
