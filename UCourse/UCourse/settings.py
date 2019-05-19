@@ -156,7 +156,7 @@ STATIC_URL = '/djangoStatic/'
 #     os.path.join(BASE_DIR, './../frontend/dist'),
 # ]
 
-STATIC_ROOT = '/var/www/django/static'
+STATIC_ROOT = '/var/www/django/djangoStatic'
 
 # CORS origin whitelist - should only contain localhost and the name of the prod domain
 
