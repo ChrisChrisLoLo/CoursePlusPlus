@@ -15,7 +15,6 @@ export default class SocialAuthButtons extends React.Component {
       headers: {Authorization: res.accessToken}
     }).then((res)=>{
       document.cookie = "accessToken=" + res.data.key;
-
       //console.log(cookieValue)
       this.props.history.push("/");
     });

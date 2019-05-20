@@ -34,7 +34,7 @@ export default class NavbarComp extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="md">
+        <Navbar color="dark" dark expand="md">
           <NavLink to="/" className="navbar-brand">
             <img src={logo} height="30" width="30" alt="Logo" className="d-inline-block mr-1"/>
             UCoursePlus
