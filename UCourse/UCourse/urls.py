@@ -20,6 +20,7 @@ from rest_framework import routers
 from rest_framework.authtoken import views as authTokenViews
 from quickstart import views
 from searchCourse.views import *
+from socialAuth.views import *
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -39,5 +40,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/rest-auth/', include('rest_auth.urls')),
     path('api/rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('api/rest-auth/google/connect/', GoogleConnect.as_view(), name="google_connect"),
     path('', TemplateView.as_view(template_name='index.html'))
 ]
