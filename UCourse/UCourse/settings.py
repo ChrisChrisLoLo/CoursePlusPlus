@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "54.202.197.54"]
+ALLOWED_HOSTS = ["localhost", "54.202.197.54", ".ucourseplus.com", "ucourseplus.com"]
 
 
 # Application definition
@@ -162,7 +162,9 @@ STATIC_ROOT = '/var/www/django/djangoStatic'
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-    'http://54.202.197.54'
+    'http://54.202.197.54',
+    'http://ucourseplus.com',
+    'http://www.ucourseplus.com',
 ]
 
 APPEND_SLASH = True
