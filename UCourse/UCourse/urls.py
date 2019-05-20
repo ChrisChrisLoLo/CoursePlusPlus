@@ -40,7 +40,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/rest-auth/', include('rest_auth.urls')),
     path('api/rest-auth/registration/', include('rest_auth.registration.urls')),
-    path('api/rest-auth/google/login/', GoogleLogin.as_view(), name="google_login"),
+    path('api/rest-auth/google/connect/', GoogleConnect.as_view(), name="google_connect"),
     path('', TemplateView.as_view(template_name='index.html'))
 ]
-

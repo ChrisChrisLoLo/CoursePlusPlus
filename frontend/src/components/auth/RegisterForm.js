@@ -12,7 +12,7 @@ import {
   Input,
 } from 'reactstrap';
 import axios from "axios";
-import SocialAuthButtons from "./SocialAuthButtons";
+import {targetPropType} from "reactstrap/lib/utils";
 
 export default class RegisterForm extends React.Component {
   constructor(props) {
@@ -93,7 +93,6 @@ export default class RegisterForm extends React.Component {
             <Button onClick={this.attemptRegister}>Register</Button>
             <Button onClick={(e) => this.props.changeForm(e, "logIn")} color="link">Log In</Button>
           </Form>
-          <SocialAuthButtons history={this.props.history}/>
         </CardBody>
       </Card>
     );

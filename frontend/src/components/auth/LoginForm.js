@@ -11,8 +11,8 @@ import {
   Input,
 } from 'reactstrap';
 import axios from "axios";
-import SocialAuthButtons from "./SocialAuthButtons";
-
+import {targetPropType} from "reactstrap/lib/utils";
+import FormText from "reactstrap/es/FormText";
 
 export default class LoginForm extends React.Component {
   constructor(props) {
@@ -31,6 +31,8 @@ export default class LoginForm extends React.Component {
     }).then(res => {
       //Store token in a cookie
       document.cookie = "accessToken=" + res.data.key;
+      let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+      // axios.defaults.headers.common['Authorization'] = cookieValue;
 
       //console.log(cookieValue)
       this.props.history.push("/");
@@ -69,7 +71,6 @@ export default class LoginForm extends React.Component {
             <Button onClick={this.attemptLogin}>Login</Button>
             <Button onClick={(e) => this.props.changeForm(e, "register")} color="link">Register</Button>
           </Form>
-          <SocialAuthButtons history={this.props.history}/>
         </CardBody>
       </Card>
     );
