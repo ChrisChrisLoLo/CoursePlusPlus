@@ -202,4 +202,8 @@ class ClassCartViewSet(mixins.CreateModelMixin, mixins.DestroyModelMixin, mixins
         queryset = queryset.prefetch_related("courseClass").prefetch_related("courseClass__classtime_set")
         queryset = self.filterWithUrlParams(queryset)
 
+        # Only retrieve the user's cart
+        if(request.user):
+            queryset = queryset.filter(owner=request.user)
+
         return self.returnPaginatedResponse(queryset)
