@@ -19,7 +19,7 @@ export default class HomePage extends React.Component {
                 <Row>
                   <Col></Col>
                   <Col lg={"10"} md={"10"} sm={"10"} xs={"10"} className={"text-center text-white"}>
-                    <h1>UCourse Builder</h1>
+                    <h1 className={"montserrat"}>UCourse Builder</h1>
                     <p>An unofficial University of Alberta app</p>
                     <p>Schedule building, refined</p>
                   </Col>

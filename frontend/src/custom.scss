@@ -1,0 +1,21 @@
+// Used to customize bootstrap for the application
+
+// Override default variables before the import
+//$body-bg: #000;
+$primary:#338E5F;
+//$secondary:#eed75a;
+//$success:#FEC100;
+//$danger:#703B3B;
+//$info:#63e792;
+//$warning:#FFE869;
+//$light:#FDFBF7;
+//$dark:#2E6A3B;
+//$spacer:1rem;
+//$border-width:1px;
+//$btn-border-radius:.25rem;
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+// Add SASS theme customizations here..
+
