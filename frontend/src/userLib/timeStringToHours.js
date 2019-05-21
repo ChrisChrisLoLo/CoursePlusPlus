@@ -13,6 +13,6 @@ export default (timeString) => {
   // console.log(timeArr);
   // console.log("HOUR:"+hour);
   // console.log("MINUTE:"+minute);
-  console.log(parseFloat(hour) + parseFloat(minute) / 60 + periodOffSet);
+  // console.log(parseFloat(hour) + parseFloat(minute) / 60 + periodOffSet);
   return parseFloat(hour) + parseFloat(minute) / 60 + periodOffSet;
 }

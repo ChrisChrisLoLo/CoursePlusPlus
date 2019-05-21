@@ -65,6 +65,7 @@ export default class ClassCart extends React.Component {
           courseAdded={courseAdded}
           handleCourseClassAdd={this.props.handleCourseClassAdd}
           handleCourseClassRemove={this.props.handleCourseClassRemove}
+          setCoursePreviewed={this.props.setCoursePreviewed}
         />);
       });
     } else {

@@ -16,7 +16,7 @@ export default class ScheduleGrid extends React.Component {
 
   render() {
     const scheduleGroupings = this.props.classCart.map((classCart) => {
-      return <ScheduleGrouping courseClass={classCart.courseClass} key={classCart.courseClass.id}/>
+      return <ScheduleGrouping courseClass={classCart.courseClass} key={classCart.courseClass.id} preview={false}/>
     });
 
     return (
@@ -24,6 +24,9 @@ export default class ScheduleGrid extends React.Component {
         <div className={"grid-container"}>
           <ScheduleGridConsts/>
           {scheduleGroupings}
+          {this.props.classPreviewed !== null &&
+            <ScheduleGrouping courseClass={this.props.classPreviewed} preview={true}/>
+          }
         </div>
       </div>
     );

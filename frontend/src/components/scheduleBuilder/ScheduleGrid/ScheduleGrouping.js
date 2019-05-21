@@ -60,8 +60,9 @@ export default class ScheduleGrouping extends React.Component {
     return dayLetters.map((dayLetter) => {
       const col = DAY_COL_MAP[dayLetter];
       return <ScheduleItem key={col} courseClass={courseClass} rowStart={rowStart} rowEnd={rowEnd} col={col}
-                           color={color}/>;
+                           color={color} preview={this.props.preview}/>;
     });
+
   }
 
   render() {
