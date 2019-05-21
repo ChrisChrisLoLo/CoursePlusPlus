@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont,'Open Sans', "Roboto","Segoe UI", "Oxygen",
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Roboto","Segoe UI", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -28,11 +28,11 @@ code {
   top: 0;
 }
 
-.open-sans{
+.font-primary{
   font-family: "Open Sans", sans-serif;
 }
 
-.montserrat{
+.font-title{
   font-family: "Montserrat", sans-serif;
 }
 
