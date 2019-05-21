@@ -11,6 +11,7 @@ import ResultItem from "./ResultItem"
 import isAuthenticated from "../../userLib/isAuthenticated";
 import axios from "axios";
 import getAuthToken from "../../userLib/getAuthToken";
+import ButtonGroup from "reactstrap/es/ButtonGroup";
 
 export default class SearchResults extends React.Component {
   constructor(props) {
@@ -111,20 +112,20 @@ export default class SearchResults extends React.Component {
           {output}
 
           {data &&
-          <Row className="justify-content-between">
-            <Col sm={{size: "auto"}}>
+          <Row>
+            <Col>
+              <ButtonGroup>
               {data.previous &&
               <Button color="primary" onClick={() => {
                 this.props.changePaginationURL(data.previous)
               }}>Prev</Button>
               }
-            </Col>
-            <Col sm={{size: "auto"}}>
               {data.next &&
               <Button color="primary" onClick={() => {
                 this.props.changePaginationURL(data.next)
               }}>Next</Button>
               }
+              </ButtonGroup>
             </Col>
           </Row>
           }

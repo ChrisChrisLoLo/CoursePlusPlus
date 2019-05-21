@@ -21,7 +21,7 @@ export default class HomePage extends React.Component {
                   <Col></Col>
                   <Col lg={"10"} md={"10"} sm={"10"} xs={"10"} className={"text-center text-white"}>
                     <h1 className={"font-title"}>UCourse Builder</h1>
-                    <p>An unofficial University of Alberta app</p>
+                    <p className={"mb-2"}>An unofficial University of Alberta app</p>
                     <p>Schedule building, refined</p>
                   </Col>
                   <Col></Col>
@@ -31,7 +31,7 @@ export default class HomePage extends React.Component {
           </Col>
         </Row>
 
-        <Row className={"bg-primary text-light"}>
+        <Row className={"bg-primary text-light py-4"}>
           <Col xs={2} sm={2} md={3}>
           </Col>
           <Col>
