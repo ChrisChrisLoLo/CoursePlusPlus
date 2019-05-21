@@ -96,7 +96,7 @@ export default class SearchResults extends React.Component {
       output = <Spinner style={{width: "3rem", height: "3rem", color: "primary"}}/>;
     }
     return (
-      <div>
+      <div ref={this.props.refProp}>
         <Container fluid={true}>
           {data &&
           <Row className="justify-content-between">

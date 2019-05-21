@@ -17,6 +17,8 @@ export default class SearchPage extends React.Component {
 		this.onMultiCourseSubmit = this.onMultiCourseSubmit.bind(this);
 		this.changePaginationURL = this.changePaginationURL.bind(this);
 		this.resultsRef = React.createRef();
+		console.log("resultRefInit");
+		console.log(this.resultsRef);
 	}
 
 	onSingleCourseSubmit(event, subjCode, courseNum) {
@@ -76,9 +78,9 @@ export default class SearchPage extends React.Component {
 
 	componentDidUpdate(prevProps){
 		//Scroll to top whenever more results are loaded.
+		console.log("resultsRef:");
+		console.log(this.resultsRef.current.offsetTop);
 		window.scrollTo(0, this.resultsRef.current.offsetTop);
-		console.log(this.props);
-		console.log(prevProps);
 		if (this.props.location.search !== prevProps.location.search) {
 			axios.get(process.env.REACT_APP_API_URL + "/api/courses/" + this.props.location.search)
 				.then(res => {
@@ -113,7 +115,7 @@ export default class SearchPage extends React.Component {
 							courseListData={this.state.courseListData}
 							changePaginationURL={this.changePaginationURL}
 							specificTerm={this.state.specificTerm}
-              ref={this.resultsRef}
+              refProp={this.resultsRef}
 						/>
 					</Col>
 				</Row>
