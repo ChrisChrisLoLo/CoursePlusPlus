@@ -15,7 +15,8 @@ $default-border-radius: 5px;
 }
 
 %grid-item{
-  outline: 1px solid black;
+  border: 1px solid #444444;
+  //margin: -1px;
   border-radius: 1px;
 }
 
@@ -23,10 +24,14 @@ $default-border-radius: 5px;
   @extend %grid-item;
 }
 
+.preview{
+  opacity: 0.8;
+}
+
 /*Row outlines*/
 @for $i from 1 through $grid-row-count{
   .grid-row-outline-#{$i}{
-    outline: $grid-outline-border;
+    border: $grid-outline-border;
     grid-row-start: $i+1;
     grid-row-end: $i+5;
     grid-column-start: 2;
@@ -37,7 +42,7 @@ $default-border-radius: 5px;
 /*Col outlines*/
 @for $i from 1 through $grid-col-count{
   .grid-col-outline-#{$i}{
-    outline: $grid-outline-border;
+    border: $grid-outline-border;
     grid-row-start: 2;
     grid-row-end: $grid-row-count+2;
     grid-column-start: $i+1;
@@ -49,7 +54,7 @@ $default-border-radius: 5px;
 @for $i from 1 through $grid-row-count {
   .grid-row-head-#{$i} {
     text-align:center;
-    outline: $grid-outline-border;
+    border: $grid-outline-border;
     grid-row-start: $i+1;
     grid-row-end: $i+5;
     grid-column-start: 1;
@@ -61,7 +66,7 @@ $default-border-radius: 5px;
 @for $i from 1 through $grid-col-count {
   .grid-col-head-#{$i} {
     text-align:center;
-    outline: $grid-outline-border;
+    border: $grid-outline-border;
     grid-row-start: 1;
     grid-row-end: 2;
     grid-column-start: $i+1;

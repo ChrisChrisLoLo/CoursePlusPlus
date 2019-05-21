@@ -42,7 +42,9 @@ export default class ClassCart extends React.Component {
 
     const button = this.props.courseAdded === true ?
       <Button onClick={this.removeCourseClass} size={"sm"}>Remove Class</Button> :
-      <Button onClick={this.addCourseClass} size={"sm"}>Add Class</Button>;
+      <Button onClick={this.addCourseClass} size={"sm"}
+              onMouseEnter={() => this.props.setCoursePreviewed(this.props.classCart.courseClass)}
+              onMouseLeave={() => this.props.setCoursePreviewed(null)}>Add Class</Button>;
 
     const course = this.props.classCart.courseClass;
     const asString = course.asString.split(" ");

@@ -10,12 +10,13 @@ import ScheduleGrid from "./ScheduleGrid/ScheduleGrid";
 export default class ScheduleBuilderPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {coursesSelected: [], chosenTerm: ""};
+    this.state = {coursesSelected: [], coursePreviewed: null, chosenTerm: ""};
     this.handleCourseClassAdd = this.handleCourseClassAdd.bind(this);
     this.handleCourseClassRemove = this.handleCourseClassRemove.bind(this);
     this.handleChosenTermChange = this.handleChosenTermChange.bind(this);
     this.setChosenTerm = this.setChosenTerm.bind(this);
     this.setCoursesSelected = this.setCoursesSelected.bind(this);
+    this.setCoursePreviewed = this.setCoursePreviewed.bind(this);
   }
 
   handleCourseClassAdd(courseClassProp) {
@@ -43,6 +44,10 @@ export default class ScheduleBuilderPage extends React.Component {
     this.setState({coursesSelected: newCoursesSelected});
   }
 
+  setCoursePreviewed(course){
+    this.setState({coursePreviewed:course});
+  }
+
   render() {
     return (
       <div className={"my-2"}>
@@ -53,14 +58,19 @@ export default class ScheduleBuilderPage extends React.Component {
         </Row>
         <Row>
           <Col sm={"3"}>
-            <TermSelect handleChosenTermChange={this.handleChosenTermChange} setChosenTerm={this.setChosenTerm}
-                        chosenTerm={this.state.chosenTerm} setCoursesSelected={this.setCoursesSelected}/>
-            <ClassCart coursesSelected={this.state.coursesSelected} setCoursesSelected={this.setCoursesSelected}
+            <TermSelect handleChosenTermChange={this.handleChosenTermChange}
+                        setChosenTerm={this.setChosenTerm}
+                        chosenTerm={this.state.chosenTerm}
+                        setCoursesSelected={this.setCoursesSelected}/>
+            <ClassCart coursesSelected={this.state.coursesSelected}
+                       setCoursesSelected={this.setCoursesSelected}
                        handleCourseClassAdd={this.handleCourseClassAdd}
-                       handleCourseClassRemove={this.handleCourseClassRemove} chosenTerm={this.state.chosenTerm}/>
+                       handleCourseClassRemove={this.handleCourseClassRemove}
+                       setCoursePreviewed={this.setCoursePreviewed}
+                       chosenTerm={this.state.chosenTerm}/>
           </Col>
           <Col sm={"9"}>
-            <ScheduleGrid classCart={this.state.coursesSelected}/>
+            <ScheduleGrid classCart={this.state.coursesSelected} classPreviewed={this.state.coursePreviewed}/>
           </Col>
         </Row>
       </div>

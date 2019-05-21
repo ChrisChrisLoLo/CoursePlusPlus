@@ -29,8 +29,10 @@ export default class ScheduleItem extends React.Component {
       backgroundColor: this.props.color,
     };
 
+    const previewStyle = this.props.preview === true ? "preview" : "";
+
     return (
-      <div className={"grid-item"} style={style}>
+      <div className={"grid-item " + previewStyle} style={style}>
         <p className={"my-0 small"}>{courseString}</p>
         <p className={"my-0 small"}>{courseClassString}</p>
         {/*<p className={"my-0 small"}>{classtime.id}</p>*/}
