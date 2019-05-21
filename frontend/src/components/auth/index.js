@@ -32,7 +32,7 @@ export default class AuthPage extends React.Component {
         break;
     }
     return (
-      <div>
+      <div className={"my-2"}>
         <Row>
           <Col>
             <h3>Login</h3>

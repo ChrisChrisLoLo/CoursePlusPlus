@@ -46,7 +46,7 @@ export default class ScheduleBuilderPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={"my-2"}>
         <Row>
           <Col>
             <h3>Schedule Builder</h3>

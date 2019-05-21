@@ -83,7 +83,7 @@ export default class ResultItem extends React.Component {
     }
 
     return (
-      <Card>
+      <Card className={"my-2"}>
         <CardHeader>{course.asString}</CardHeader>
         <CardBody>
           <CardTitle className={"mb-0"}>

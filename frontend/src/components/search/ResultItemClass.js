@@ -64,7 +64,7 @@ export default class ResultItemClass extends React.Component {
     }
 
     return (
-      <Card className={"mt-2"}>
+      <Card className={"my-2"}>
         <CardBody className={"small course-class-container"}>
           <h6>{courseClass.asString}</h6>
           <p>Code: {courseClass.calendarCode}</p>

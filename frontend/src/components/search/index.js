@@ -18,6 +18,7 @@ export default class SearchPage extends React.Component {
 		this.onSingleCourseSubmit = this.onSingleCourseSubmit.bind(this);
 		this.onMultiCourseSubmit = this.onMultiCourseSubmit.bind(this);
 		this.changePaginationURL = this.changePaginationURL.bind(this);
+		this.resultsRef = React.createRef();
 	}
 
 	onSingleCourseSubmit(event, subjCode, courseNum) {
@@ -77,7 +78,7 @@ export default class SearchPage extends React.Component {
 
 	componentDidUpdate(prevProps){
 		//Scroll to top whenever more results are loaded.
-		window.scrollTo(0, 0);
+		window.scrollTo(0, this.resultsRef.current.offsetTop);
 		console.log(this.props);
 		console.log(prevProps);
 		if (this.props.location.search !== prevProps.location.search) {
@@ -92,7 +93,7 @@ export default class SearchPage extends React.Component {
 	render() {
 		console.log(this.state);
 		return (
-			<div>
+			<div className={"my-2"}>
 				<Row>
 					<Col>
 						<h3>Search</h3>
@@ -114,6 +115,7 @@ export default class SearchPage extends React.Component {
 							courseListData={this.state.courseListData}
 							changePaginationURL={this.changePaginationURL}
 							specificTerm={this.state.specificTerm}
+              ref={this.resultsRef}
 						/>
 					</Col>
 				</Row>
