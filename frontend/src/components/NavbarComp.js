@@ -5,10 +5,6 @@ import {
   NavbarToggler,
   Nav,
   NavItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
 } from "reactstrap";
 import {NavLink} from "react-router-dom";
 import isAuthenticated from "../userLib/isAuthenticated";

@@ -3,10 +3,6 @@ import React from "react";
 import "../styles/ScheduleGrid.scss";
 
 export default class ScheduleItem extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
 
     const courseClass = this.props.courseClass;

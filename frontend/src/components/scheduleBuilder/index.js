@@ -3,7 +3,6 @@ import {
   Row,
   Col
 } from 'reactstrap';
-import axios from "axios/index";
 import ClassCart from "./ClassCart/ClassCart";
 import TermSelect from "./ClassCart/TermSelect";
 import ScheduleGrid from "./ScheduleGrid/ScheduleGrid";

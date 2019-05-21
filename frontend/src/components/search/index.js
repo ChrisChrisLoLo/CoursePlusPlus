@@ -8,8 +8,6 @@ import axios from "axios";
 import CourseListForm from "./CourseListForm.js";
 import SearchResults from "./SearchResults.js";
 import CourseSingleForm from "./CourseSingleForm.js";
-import isAuthenticated from "../../userLib/isAuthenticated";
-import getAuthToken from "../../userLib/getAuthToken";
 
 export default class SearchPage extends React.Component {
 	constructor(props) {

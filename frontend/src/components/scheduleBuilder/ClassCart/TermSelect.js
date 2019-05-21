@@ -1,15 +1,13 @@
 import React from "react";
 import {
-  Button,
   Card,
   CardBody,
   CardHeader,
   Form,
   FormGroup,
-  Input, Label,
+  Input,
 } from 'reactstrap';
 import axios from "axios";
-import getAuthToken from "../../../userLib/getAuthToken";
 
 export default class TermSelect extends React.Component {
   constructor(props) {

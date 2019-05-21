@@ -17,7 +17,6 @@ import axios from "axios";
 
 import ResultItemClass from "./ResultItemClass";
 import InputGroup from "reactstrap/es/InputGroup";
-import intToCSSColor from "../../userLib/intToCSSColor";
 
 
 export default class ResultItem extends React.Component {

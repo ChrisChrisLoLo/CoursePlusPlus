@@ -2,8 +2,6 @@ import React from "react";
 import ScheduleGrouping from "./ScheduleGrouping";
 import "../styles/ScheduleGrid.scss";
 import ScheduleGridConsts from "./ScheduleGridConsts";
-import timeStringToHours from "../../../userLib/timeStringToHours";
-
 
 export default class ScheduleGrid extends React.Component {
   constructor(props) {

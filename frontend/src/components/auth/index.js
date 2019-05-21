@@ -30,6 +30,9 @@ export default class AuthPage extends React.Component {
       case "register":
         displayedForm = <RegisterForm history={this.props.history} changeForm={this.changeForm}/>
         break;
+      default:
+        console.error("Unknown form type!");
+        break;
     }
     return (
       <div className={"my-2"}>

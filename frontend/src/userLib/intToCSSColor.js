@@ -41,6 +41,10 @@ export default (input) => {
       color.red = randColorValue;
       color.green = MIN_COLOR_VALUE;
       color.blue = MAX_COLOR_VALUE;
+      break;
+    default:
+      console.error("Unknown case!");
+      break;
   }
 
   return `rgb(${color.red},${color.green},${color.blue})`
