@@ -18,7 +18,7 @@ export default class ScheduleGridConsts extends React.Component {
     }
 
     const weekColHeaders = WEEK_COL.map((day, i) => {
-      return <div key={i} className={"grid-col-head-" + (i + COL_OFFSET)}>{day}</div>
+      return <div key={i} className={"small grid-col-head-" + (i + COL_OFFSET)}>{day}</div>
     });
 
     const weekColOutlines = WEEK_COL.map((day, i) => {
@@ -26,7 +26,7 @@ export default class ScheduleGridConsts extends React.Component {
     });
 
     const hourRowHeaders = HOUR_ROW.map((hour, i) => {
-      return <div key={i} className={"grid-row-head-" + ((i * ROWS_PER_HOUR) + ROW_OFFSET)}>{hour}</div>
+      return <div key={i} className={"small grid-row-head-" + ((i * ROWS_PER_HOUR) + ROW_OFFSET)}>{hour}</div>
     });
 
     const hourRowOutlines = HOUR_ROW.map((hour, i) => {

@@ -38,7 +38,7 @@ export default class AuthPage extends React.Component {
       <div className={"my-2"}>
         <Row>
           <Col>
-            <h3>Login</h3>
+            <h3 className={"font-title"}>Login</h3>
           </Col>
         </Row>
         <Row>

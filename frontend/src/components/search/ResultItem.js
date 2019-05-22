@@ -83,7 +83,7 @@ export default class ResultItem extends React.Component {
 
     return (
       <Card className={"my-2"}>
-        <CardHeader>{course.asString}</CardHeader>
+        <CardHeader className={"font-title"}>{course.asString}</CardHeader>
         <CardBody>
           <CardTitle className={"mb-0"}>
             <InputGroup className={"align-middle"}>
@@ -108,16 +108,14 @@ export default class ResultItem extends React.Component {
             {output}
             {data &&
             <Row className="justify-content-between">
-              <Col sm={{size: "auto"}}>
+              <Col>
                 {data.previous &&
-                <Button color="primary" onClick={() => {
+                <Button color="primary" className={"float-left"} onClick={() => {
                   this.changePaginationURL(data.previous)
                 }}>Prev</Button>
                 }
-              </Col>
-              <Col sm={{size: "auto"}}>
                 {data.next &&
-                <Button color="primary" onClick={() => {
+                <Button color="primary" className={"float-right"} onClick={() => {
                   this.changePaginationURL(data.next)
                 }}>Next</Button>
                 }

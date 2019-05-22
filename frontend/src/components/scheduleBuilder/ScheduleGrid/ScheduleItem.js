@@ -33,10 +33,10 @@ export default class ScheduleItem extends React.Component {
 
     return (
       <div className={"grid-item " + previewStyle} style={style}>
-        <p className={"my-0 small"}>{courseString}</p>
-        <p className={"my-0 small"}>{courseClassString}</p>
+        <p className={"my-0 py-0 tiny"}>{courseString}</p>
+        <p className={"my-0 py-0 tiny"}>{courseClassString}</p>
         {/*<p className={"my-0 small"}>{classtime.id}</p>*/}
-        <p className={"my-0 small"}>{classtime.location}</p>
+        <p className={"my-0 py-0 tiny"}>{classtime.location}</p>
       </div>
     );
   }

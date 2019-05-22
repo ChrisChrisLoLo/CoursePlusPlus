@@ -8,7 +8,7 @@ $default-border-radius: 5px;
 
 .grid-container {
   display: grid;
-  grid-template-columns: 60px repeat($grid-col-count,1fr);
+  grid-template-columns: 45px repeat($grid-col-count,1fr);
   grid-template-rows: 30px repeat($grid-row-count,15px);
   border-radius: $default-border-radius;
   border: $grid-outline-border;

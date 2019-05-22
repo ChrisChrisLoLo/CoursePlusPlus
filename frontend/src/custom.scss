@@ -4,6 +4,7 @@
 //$body-bg: #000;
 $primary:#338E5F;
 //$secondary:#eed75a;
+$tertiary:#86C246;
 //$success:#FEC100;
 //$danger:#703B3B;
 //$info:#63e792;
@@ -20,3 +21,29 @@ $card-cap-bg:#eeffee;
 
 // Add SASS theme customizations here..
 
+.affix{
+  position:fixed;
+}
+
+.scroll-seg-vert{
+  position: absolute;
+  overflow-y: scroll;
+  height:100vh;
+}
+
+.bg-gradient{
+  background : linear-gradient(to right, $primary 40%, 70% ,$tertiary 100%);
+}
+
+.bg-test{
+  background : linear-gradient(to right, $primary 40%, 70% ,$tertiary 100%);
+  //background : linear-gradient(to right, rgb(5,54,28) 40%, 90% ,rgb(51,142,95) 100%);
+}
+
+.sticky-with-header{
+  @supports (position: sticky) {
+    position: sticky;
+    top: 50px + 20px;
+    z-index: $zindex-sticky;
+  }
+}

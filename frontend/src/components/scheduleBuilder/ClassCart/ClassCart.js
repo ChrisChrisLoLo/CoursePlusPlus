@@ -91,7 +91,7 @@ export default class ClassCart extends React.Component {
 
     return (
       <Card>
-        <CardHeader><h5>Selected Courses:</h5></CardHeader>
+        <CardHeader><h5 className={"font-title"} >Selected Courses:</h5></CardHeader>
         <CardBody className={"p-1"}>
           {cart}
           {buttonGroup}
