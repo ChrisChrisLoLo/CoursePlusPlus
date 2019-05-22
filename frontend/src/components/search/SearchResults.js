@@ -114,18 +114,16 @@ export default class SearchResults extends React.Component {
           {data &&
           <Row>
             <Col>
-              <ButtonGroup>
               {data.previous &&
-              <Button color="primary" onClick={() => {
+              <Button color="primary" className={"float-left"} onClick={() => {
                 this.props.changePaginationURL(data.previous)
               }}>Prev</Button>
               }
               {data.next &&
-              <Button color="primary" onClick={() => {
+              <Button color="primary" className={"float-right"} onClick={() => {
                 this.props.changePaginationURL(data.next)
               }}>Next</Button>
               }
-              </ButtonGroup>
             </Col>
           </Row>
           }
