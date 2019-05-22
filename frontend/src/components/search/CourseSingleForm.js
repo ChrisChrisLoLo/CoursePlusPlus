@@ -12,7 +12,7 @@ import {
 export default class CourseSingleForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {subjCode: "", courseNum: ""}
+    this.state = {subjCode: "", courseNum: ""};
     this.onSubjChange = this.onSubjChange.bind(this);
     this.onCourseChange = this.onCourseChange.bind(this);
     this.handleSingleCourseSubmit = this.handleSingleCourseSubmit.bind(this);

@@ -6,7 +6,7 @@ import {
 import "./styles/homePage.scss";
 import Container from "reactstrap/es/Container";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
+import {faReact,faPython,faSass,faCss3,faUbuntu,faAws,faHtml5,faBootstrap,faJs} from "@fortawesome/free-brands-svg-icons";
 
 export default class HomePage extends React.Component {
   render() {
@@ -31,55 +31,106 @@ export default class HomePage extends React.Component {
           </Col>
         </Row>
 
-        <Row className={"bg-primary text-light py-4"}>
+        <Row className={"bg-gradient text-light py-4"}>
           <Col xs={2} sm={2} md={3}>
           </Col>
           <Col>
-            <h3 className={"font-title"}>Catchy phrase here</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h3 className={"font-title"}>A Modern Upgrade</h3>
+            <p>
+              Adding courses have never been easier. By leveraging modern web technologies, this
+              application allows you to add, remove, and swap courses on the fly,
+              allowing you to rapidly prototype a class schedule.
+            </p>
           </Col>
           <Col xs={2} sm={2} md={3}>
           </Col>
         </Row>
 
-        <Row className={"bg-light py-4"}>
+        <Row className={"bg-light pt-4"}>
           <Col>
             <Container>
               <Row>
                 <Col lg={"3"} md={"6"} className={"mb-5 mb-lg-0 text-center"}>
-                  <h5>Search for Courses</h5>
                   <FontAwesomeIcon icon={"search"} size={"3x"}/>
+                  <h5 className={"font-title"}>Search for Courses</h5>
+                  <p className={"small"}>
+                    Searching for courses is now 2x as fast as before.
+                    Just punch in your criteria and get the results you want.
+                  </p>
                 </Col>
+
                 <Col lg={"3"} md={"6"} className={"mb-5 mb-lg-0 text-center"}>
-                  <h5>Make a Schedule</h5>
                   <FontAwesomeIcon icon={"calendar-alt"} size={"3x"}/>
-
+                  <h5 className={"font-title"}>Make a Schedule</h5>
+                  <p className={"small"}>
+                    Build your schedule for any upcoming term.
+                    Gone are the days of long loading times.
+                  </p>
                 </Col>
+
                 <Col lg={"3"} md={"6"} className={"mb-5 mb-lg-0 text-center"}>
-                  <h5>Mix it Up</h5>
                   <FontAwesomeIcon icon={"random"} size={"3x"}/>
-
+                  <h5 className={"font-title"}>Mix it Up</h5>
+                  <p className={"small"}>
+                    With the new cart system, it's easier than ever to swap any courses around.
+                  </p>
                 </Col>
+
                 <Col lg={"3"} md={"6"} className={"mb-5 mb-lg-0 text-center"}>
-                  <h5>Beartracks Compatible</h5>
                   <FontAwesomeIcon icon={"paw"} size={"3x"}/>
+                  <h5 className={"font-title"}>Beartracks Compatible</h5>
+                  <p className={"small"}>
+                    Once finalized, copy the ID of each class directly into Beartracks,
+                    allowing you to officially register without the official hassle.
+                  </p>
                 </Col>
               </Row>
             </Container>
           </Col>
         </Row>
 
-        <Row className={"bg-test text-light py-4"}>
+        <Row className={"bg-light"}>
           <Col xs={2} sm={2} md={3}>
           </Col>
           <Col>
-            <h3 className={"font-title"}>Catchy phrase here</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h3 className={"font-title"}>Upgrades and such</h3>
+            <p></p>
           </Col>
           <Col xs={2} sm={2} md={3}>
           </Col>
         </Row>
 
+        <Row className={"bg-secondary text-light py-3"}>
+          <Col xs={1} sm={1} md={2}>
+          </Col>
+          <Col>
+            <h4 className={"font-title text-center"}>Powered by the following technologies:</h4>
+            <div className={"d-flex justify-content-between mt-3"}>
+              <FontAwesomeIcon icon={faReact} size={"2x"}/>
+              <FontAwesomeIcon icon={faPython} size={"2x"}/>
+              <FontAwesomeIcon icon={faSass} size={"2x"}/>
+              {/*<FontAwesomeIcon icon={faCss3} size={"2x"}/>*/}
+              <FontAwesomeIcon icon={faUbuntu} size={"2x"}/>
+              <FontAwesomeIcon icon={faAws} size={"2x"}/>
+              {/*<FontAwesomeIcon icon={faHtml5} size={"2x"}/>*/}
+              <FontAwesomeIcon icon={faBootstrap} size={"2x"}/>
+              <FontAwesomeIcon icon={faJs} size={"2x"}/>
+            </div>
+          </Col>
+          <Col xs={1} sm={1} md={2}>
+          </Col>
+        </Row>
+
+        <Row className={"bg-dark text-light py-4"}>
+          <Col xs={2} sm={2} md={3}>
+          </Col>
+          <Col>
+            <h3 className={"font-title"}>Footer</h3>
+            <p></p>
+          </Col>
+          <Col xs={2} sm={2} md={3}>
+          </Col>
+        </Row>
       </div>
     );
   }
