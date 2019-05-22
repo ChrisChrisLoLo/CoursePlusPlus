@@ -96,27 +96,31 @@ export default class SearchPage extends React.Component {
 			<div className={"my-2"}>
 				<Row>
 					<Col>
-						<h3 className={"font-title"}>Search</h3>
+							<h3 className={"font-title"}>Search</h3>
 					</Col>
 				</Row>
 				<Row>
 					<Col sm="3">
-						<CourseSingleForm
-							subjCode={this.state.subjCode}
-							courseNum={this.state.courseNum}
-							onSingleCourseSubmit={this.onSingleCourseSubmit}
-						/>
-						<CourseListForm
-							onMultiCourseSubmit={this.onMultiCourseSubmit}
-						/>
+						<div className={"sticky-with-header"}>
+							<CourseSingleForm
+								subjCode={this.state.subjCode}
+								courseNum={this.state.courseNum}
+								onSingleCourseSubmit={this.onSingleCourseSubmit}
+							/>
+							<CourseListForm
+								onMultiCourseSubmit={this.onMultiCourseSubmit}
+							/>
+						</div>
 					</Col>
-					<Col sm="9">
-						<SearchResults
-							courseListData={this.state.courseListData}
-							changePaginationURL={this.changePaginationURL}
-							specificTerm={this.state.specificTerm}
-              refProp={this.resultsRef}
-						/>
+					<Col sm="9" >
+						<div>
+							<SearchResults
+								courseListData={this.state.courseListData}
+								changePaginationURL={this.changePaginationURL}
+								specificTerm={this.state.specificTerm}
+								refProp={this.resultsRef}
+							/>
+						</div>
 					</Col>
 				</Row>
 			</div>

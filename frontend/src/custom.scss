@@ -19,6 +19,21 @@ $card-cap-bg:#eeffee;
 @import '~bootstrap/scss/bootstrap.scss';
 
 // Add SASS theme customizations here..
-.tiny{
-  font-size:10px;
+
+.affix{
+  position:fixed;
+}
+
+.scroll-seg-vert{
+  position: absolute;
+  overflow-y: scroll;
+  height:100vh;
+}
+
+.sticky-with-header{
+  @supports (position: sticky) {
+    position: sticky;
+    top: 50px + 20px;
+    z-index: $zindex-sticky;
+  }
 }

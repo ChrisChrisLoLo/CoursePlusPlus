@@ -36,6 +36,14 @@ code {
   font-family: "Lato", sans-serif;
 }
 
+.tiny{
+  font-size:10px;
+}
+
+/*offsets the floating navbar*/
+.app-body{
+  padding-top:50px;
+}
 
 /*html {*/
 /*  scroll-behavior: smooth;*/
