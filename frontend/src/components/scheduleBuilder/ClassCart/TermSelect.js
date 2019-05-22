@@ -48,7 +48,7 @@ export default class TermSelect extends React.Component {
 
     return (
       <Card>
-        <CardHeader><h5>Select Term:</h5></CardHeader>
+        <CardHeader><h5 className={"font-title"}>Select Term:</h5></CardHeader>
         <CardBody>
           <Form>
             <FormGroup>

@@ -68,7 +68,7 @@ export default class RegisterForm extends React.Component {
     }
     return (
       <Card>
-        <CardHeader>Register</CardHeader>
+        <CardHeader className={"font-title"}>Register</CardHeader>
         <CardBody>
           <Form>
             {errMessage}

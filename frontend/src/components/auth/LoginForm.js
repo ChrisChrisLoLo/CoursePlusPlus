@@ -54,7 +54,7 @@ export default class LoginForm extends React.Component {
 
     return (
       <Card>
-        <CardHeader>Login</CardHeader>
+        <CardHeader className={"font-title"} >Login</CardHeader>
         <CardBody>
           <Form>
             {errMessage}

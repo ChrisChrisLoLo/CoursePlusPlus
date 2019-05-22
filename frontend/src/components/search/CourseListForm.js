@@ -71,7 +71,7 @@ export default class CourseListForm extends React.Component {
 		return (
 			<Card>
 				<CardHeader>
-					<h5>Search based on criteria:</h5>
+					<h5 className={"font-title"}>Search based on criteria:</h5>
 				</CardHeader>
 				<CardBody>
 					<Form>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans&display=swap');
 
 body {
   margin: 0;
@@ -33,7 +33,7 @@ code {
 }
 
 .font-title{
-  font-family: "Montserrat", sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 

@@ -53,7 +53,7 @@ export default class ScheduleBuilderPage extends React.Component {
       <div className={"my-2"}>
         <Row>
           <Col>
-            <h3>Schedule Builder</h3>
+            <h3 className={"font-title"}>Schedule Builder</h3>
           </Col>
         </Row>
         <Row>

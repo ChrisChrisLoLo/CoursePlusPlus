@@ -96,7 +96,7 @@ export default class SearchPage extends React.Component {
 			<div className={"my-2"}>
 				<Row>
 					<Col>
-						<h3>Search</h3>
+						<h3 className={"font-title"}>Search</h3>
 					</Col>
 				</Row>
 				<Row>

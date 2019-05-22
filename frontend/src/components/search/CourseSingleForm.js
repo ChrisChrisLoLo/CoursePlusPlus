@@ -35,7 +35,7 @@ export default class CourseSingleForm extends React.Component {
   render() {
     return (
       <Card>
-        <CardHeader><h5>Find a specific course:</h5></CardHeader>
+        <CardHeader><h5 className={"font-title"}>Find a specific course:</h5></CardHeader>
         <CardBody>
           <Form>
             <FormGroup>
