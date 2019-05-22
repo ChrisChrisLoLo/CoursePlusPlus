@@ -16,6 +16,7 @@ export default class NavbarComp extends React.Component {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    this.close = this.close.bind(this);
     this.state = {
       isOpen: false
     };
@@ -24,6 +25,12 @@ export default class NavbarComp extends React.Component {
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
+    });
+  }
+
+  close(){
+    this.setState({
+      isOpen: false
     });
   }
 
@@ -39,17 +46,17 @@ export default class NavbarComp extends React.Component {
           <NavbarToggler onClick={this.toggle}/>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
+              <NavItem onClick={this.close}>
                 <NavLink to="/search/" className="nav-link">Search</NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem onClick={this.close}>
                 <NavLink to="/scheduleBuilder/" className="nav-link">Schedule Builder</NavLink>
               </NavItem>
               {isAuthenticated() ?
-                <NavItem>
+                <NavItem onClick={this.close}>
                   <NavLink to="/logout/" className="nav-link">Log Out</NavLink>
                 </NavItem> :
-                <NavItem>
+                <NavItem onClick={this.close}>
                   <NavLink to="/auth/" className="nav-link">Log In</NavLink>
                 </NavItem>
               }
