@@ -7,7 +7,7 @@ export default class ScheduleGridConsts extends React.Component {
     const COL_OFFSET = 1;
     const ROWS_PER_HOUR = 4;
 
-    const WEEK_COL = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const WEEK_COL = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
     //Times of the schedule in 24h time
     const START_HOUR = 8;
     const END_HOUR = 20;
