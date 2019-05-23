@@ -64,13 +64,13 @@ export default class SearchResults extends React.Component {
     else{
       //Unauthenticated mode - use local storage
       const newClassCartMap = new Map();
-      const currClassIds = JSON.parse(localStorage.getItem("courseListData")) || [];
+      const currClassCart = JSON.parse(localStorage.getItem("courseListData")) || [];
 
-      currClassIds.forEach((courseClassId) => {
+      currClassCart.forEach((classCartItem) => {
         //We set an arbitrary value of 1 to the classcart ID value of the map.
         //This can be done since there that value is only used for API requests,
         //which is not made in unauth mode.
-        newClassCartMap.set(courseClassId,1);
+        newClassCartMap.set(classCartItem.courseClass.id,1);
       });
       this.setState({classCartMap: newClassCartMap});
     }
