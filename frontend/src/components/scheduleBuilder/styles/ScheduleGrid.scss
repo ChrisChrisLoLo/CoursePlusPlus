@@ -1,3 +1,9 @@
+@import "../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins/_breakpoints";
+
+
+
 /*Time title col + col for each day*/
 $grid-row-count:13*4;
 /*Day title row + row for each 15 minute segment from 8 AM to 9 PM*/
@@ -6,13 +12,20 @@ $grid-col-count:7;
 $grid-outline-border: 1px solid lightgrey;
 $default-border-radius: 5px;
 
+$grid-font-size: 12px;
+
 .grid-container {
   display: grid;
   grid-template-columns: 45px repeat($grid-col-count,1fr);
   grid-template-rows: 30px repeat($grid-row-count,15px);
   border-radius: $default-border-radius;
   border: $grid-outline-border;
+  overflow-x: scroll;
+
 }
+
+
+
 
 %grid-item{
   border: 1px solid #444444;
@@ -20,8 +33,10 @@ $default-border-radius: 5px;
   border-radius: 1px;
 }
 
+
 .grid-item{
   @extend %grid-item;
+  font-size: $grid-font-size;
 }
 
 .preview{
@@ -59,6 +74,7 @@ $default-border-radius: 5px;
     grid-row-end: $i+5;
     grid-column-start: 1;
     grid-column-end: 2;
+    font-size: $grid-font-size;
   }
 }
 
@@ -71,5 +87,6 @@ $default-border-radius: 5px;
     grid-row-end: 2;
     grid-column-start: $i+1;
     grid-column-end: $i+2;
+    font-size: $grid-font-size;
   }
 }
