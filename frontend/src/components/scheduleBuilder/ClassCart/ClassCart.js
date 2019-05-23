@@ -22,6 +22,7 @@ export default class ClassCart extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    //update the classes based on the given term.
     if (this.props.chosenTerm !== prevProps.chosenTerm) {
       if (this.props.chosenTerm !== "") {
         axios.get(process.env.REACT_APP_API_URL + "/api/classCart/?term=" + this.props.chosenTerm + "/", {

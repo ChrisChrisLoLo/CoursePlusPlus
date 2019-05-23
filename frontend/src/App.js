@@ -29,11 +29,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route path="/search" component={SearchPage} />
-                <Route path="/scheduleBuilder" render={()=>{
-                  return isAuthenticated() === true ?
-                  <ScheduleBuilderPage /> :
-                  <Redirect to={{pathname:"/auth", state:{redirectReason:"Please log in to use the schedule builder"}}} />;
-                }}/>
+                <Route path="/scheduleBuilder" component={ScheduleBuilderPage}/>
                 <Route path="/auth" component={AuthPage} />
                 <Route path="/logout" component={LogoutPage}/>
                 <Route component={NotFoundErrPage} />
