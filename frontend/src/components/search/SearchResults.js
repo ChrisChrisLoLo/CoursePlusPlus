@@ -11,7 +11,6 @@ import ResultItem from "./ResultItem"
 import isAuthenticated from "../../userLib/isAuthenticated";
 import axios from "axios";
 import getAuthToken from "../../userLib/getAuthToken";
-import ButtonGroup from "reactstrap/es/ButtonGroup";
 
 export default class SearchResults extends React.Component {
   constructor(props) {
@@ -23,6 +22,7 @@ export default class SearchResults extends React.Component {
     this.getFromMap = this.getFromMap.bind(this);
   }
 
+  //The Class Cart Map keeps track of added courses so the app doesn't re-ask for added courseClasses
   addClassCartToMap(courseClassId,classCartId){
     //copy map since mutations are being performed
     const newMap = new Map(this.state.classCartMap);
@@ -60,6 +60,19 @@ export default class SearchResults extends React.Component {
         }
         this.setState({classCartMap: newClassCartMap});
       });
+    }
+    else{
+      //Unauthenticated mode - use local storage
+      const newClassCartMap = new Map();
+      const currClassIds = JSON.parse(localStorage.getItem("courseListData")) || [];
+
+      currClassIds.forEach((courseClassId) => {
+        //We set an arbitrary value of 1 to the classcart ID value of the map.
+        //This can be done since there that value is only used for API requests,
+        //which is not made in unauth mode.
+        newClassCartMap.set(courseClassId,1);
+      });
+      this.setState({classCartMap: newClassCartMap});
     }
   }
 
