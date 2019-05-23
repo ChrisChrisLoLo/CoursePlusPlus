@@ -10,6 +10,7 @@ import CartItem from "./CartItem";
 
 import axios from "axios";
 import getAuthToken from "../../../userLib/getAuthToken";
+import isAuthenticated from "../../../userLib/isAuthenticated";
 
 
 export default class ClassCart extends React.Component {
@@ -18,14 +19,25 @@ export default class ClassCart extends React.Component {
     super(props);
     this.state = {classesInCart: [], page: 0};
     this.handlePageChange = this.handlePageChange.bind(this);
-
+    this.loadClassCart = this.loadClassCart.bind(this);
   }
 
   componentDidUpdate(prevProps) {
     //update the classes based on the given term.
     if (this.props.chosenTerm !== prevProps.chosenTerm) {
       if (this.props.chosenTerm !== "") {
-        axios.get(process.env.REACT_APP_API_URL + "/api/classCart/?term=" + this.props.chosenTerm + "/", {
+        if(isAuthenticated()){
+          this.loadClassCart();
+        }
+        else{
+          this.loadClassCartOffline();
+        }
+      }
+    }
+  }
+
+  loadClassCart(){
+    axios.get(process.env.REACT_APP_API_URL + "/api/classCart/?term=" + this.props.chosenTerm + "/", {
           headers: {Authorization: getAuthToken()}
         }).then((res) => {
           if (res.data.results !== this.state.classesInCart) {
@@ -42,9 +54,24 @@ export default class ClassCart extends React.Component {
             }
           }
         });
-      }
+  }
+
+  loadClassCartOffline(){
+    const dataResults = JSON.parse(localStorage.getItem("courseListData"));
+    //Conditional prevents update looping
+    if(this.state.classesInCart !== dataResults){
+      this.setState({classesInCart: dataResults});
+
+      //Read what courses are selected and update it
+      const selectedCourses = [];
+      this.state.classesInCart.forEach((el) => {
+        if (el.isInSchedule === true) selectedCourses.push(el);
+      });
+      console.log(selectedCourses);
+      this.props.setCoursesSelected(selectedCourses);
     }
   }
+
 
   handlePageChange(e, increment) {
     this.setState({page: this.state.page + increment});
