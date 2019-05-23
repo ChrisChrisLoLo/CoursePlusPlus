@@ -37,6 +37,27 @@ export default class ClassCart extends React.Component {
     });
   }
 
+  addCourseClassOffline() {
+    this.props.handleCourseClassAdd(this.props.classCart);
+    axios.patch(process.env.REACT_APP_API_URL + "/api/classCart/" + this.props.classCart.id + "/", {
+      isInSchedule: true,
+    }, {
+      headers: {Authorization: getAuthToken()},
+    }).then((res) => {
+      console.log("update successful");
+    });
+  }
+
+  removeCourseClassOffline() {
+    this.props.handleCourseClassRemove(this.props.classCart);
+    axios.patch(process.env.REACT_APP_API_URL + "/api/classCart/" + this.props.classCart.id + "/", {
+      isInSchedule: false,
+    }, {
+      headers: {Authorization: getAuthToken()},
+    }).then((res) => {
+      console.log("update successful");
+    });
+  }
 
   render() {
 
