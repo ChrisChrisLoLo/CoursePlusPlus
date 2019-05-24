@@ -14,7 +14,12 @@ export default class ScheduleGridConsts extends React.Component {
     const HOUR_ROW = [];
 
     for (let i = START_HOUR; i <= END_HOUR; i++) {
-      HOUR_ROW.push(i + ":00");
+      if(i <= 12){
+        HOUR_ROW.push(i + " AM");
+      }
+      else{
+        HOUR_ROW.push(i%12 + " PM");
+      }
     }
 
     const weekColHeaders = WEEK_COL.map((day, i) => {

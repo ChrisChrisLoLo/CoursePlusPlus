@@ -58,7 +58,11 @@ export default class ClassCart extends React.Component {
 
   render() {
     let button;
-    if(isAuthenticated()) {
+    //Disable button if there are no classtimes
+    if(this.props.classCart.courseClass.classtime_set === null || this.props.classCart.courseClass.classtime_set.length === 0){
+      button = <Button disabled={true} size={"sm"}>This course has no class times</Button>;
+    }
+    else if(isAuthenticated()) {
       button = this.props.courseAdded === true ?
         <Button onClick={this.removeCourseClass} size={"sm"}>Remove Class</Button> :
         <Button onClick={this.addCourseClass} size={"sm"}

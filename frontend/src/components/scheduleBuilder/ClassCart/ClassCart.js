@@ -103,8 +103,8 @@ export default class ClassCart extends React.Component {
       });
     } else {
       cart =  <React.Fragment>
-                <p className={"small"}>No results found for this term.</p>
-                <p className={"small"}>Add classes from the <Link to={"/search"}>Search Page</Link></p>
+                <p>No results found for this term.</p>
+                <p>Add classes from the <Link to={"/search"}>Search Page</Link></p>
               </React.Fragment>;
     }
 

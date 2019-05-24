@@ -114,10 +114,11 @@ export default class ResultItemClass extends React.Component {
       <Card className={"my-2"}>
         <CardBody className={"small course-class-container"}>
           <h6>{courseClass.asString}</h6>
-          <p>Code: {courseClass.calendarCode}</p>
-          <p>Days: {classtime ? classtime.day : "N/A"} </p>
-          <p>Location: {classtime ? classtime.location : "N/A"} </p>
           <p>Term: {courseClass.term.title} </p>
+          <p>Days: {classtime ? classtime.day : "N/A"} </p>
+          <p>Time: {classtime ? classtime.startTime + " - " + classtime.endTime: "N/A"}</p>
+          <p>Location: {classtime ? classtime.location : "N/A"} </p>
+          <p>Code: {courseClass.calendarCode}</p>
           {/*ONLY USE IF DATA IS LIVE <p>Status: {courseClass.enrollStatus}</p>*/}
 
           <CardText>{"Notes: " + (courseClass.notes || "No notes available.")}</CardText>
