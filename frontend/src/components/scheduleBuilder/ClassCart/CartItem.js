@@ -5,6 +5,7 @@ import {
   CardBody,
 } from 'reactstrap';
 import CardText from "reactstrap/es/CardText";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import getAuthToken from "../../../userLib/getAuthToken";
 import isAuthenticated from "../../../userLib/isAuthenticated";
@@ -16,6 +17,8 @@ export default class ClassCart extends React.Component {
     this.removeCourseClass = this.removeCourseClass.bind(this);
     this.addCourseClassOffline = this.addCourseClassOffline.bind(this);
     this.removeCourseClassOffline = this.removeCourseClassOffline.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
+    this.removeFromCartOffline = this.removeCourseClassOffline.bind(this);
   }
 
   addCourseClass() {
@@ -56,6 +59,36 @@ export default class ClassCart extends React.Component {
     localStorage.setItem("courseListData",JSON.stringify(courseCart));
   }
 
+
+  // removeFromCart(){
+  //   if(this.props.checkFromMap(courseClassId)) {
+  //     axios.delete(process.env.REACT_APP_API_URL + "/api/classCart/" + this.props.getFromMap(courseClassId) + "/", {
+  //       headers: {Authorization: getAuthToken()}
+  //     }).then(res => {
+  //       this.props.removeClassCartFromMap(courseClassId);
+  //     });
+  //   }
+  //   else{
+  //     console.error("Class was not in the map to begin with");
+  //   }
+  // }
+  //
+  // removeFromCartOffline(){
+  //   if(this.props.checkFromMap(courseClass.id)) {
+  //     const currClassCart = JSON.parse(localStorage.getItem("courseListData"));
+  //     //Remove the class id from the localStorage array
+  //     const filteredClasses = currClassCart.filter((classCartItem)=>{
+  //       return classCartItem.id !== courseClass.id;
+  //     });
+  //     localStorage.setItem("courseListData",JSON.stringify(filteredClasses));
+  //     this.props.removeClassCartFromMap(courseClass.id);
+  //   }
+  //   else{
+  //     console.error("Class was not in the map to begin with");
+  //   }
+  // }
+
+
   render() {
     let button;
     //Disable button if there are no classtimes
@@ -92,9 +125,11 @@ export default class ClassCart extends React.Component {
     }
 
 
+
     return (
       <Card className={"mx-0 my-1"}>
         <CardBody className={"px-1 py-1"}>
+          <FontAwesomeIcon icon={["far","window-close"]} className={"float-right icon-button"} onClick={this.removeFromCart}/>
           <CardText className={"my-0"}>{courseString}</CardText>
           <CardText className={"mb-0 small"}>{courseClassString}</CardText>
           <CardText className={"mb-2 small"}>{course.id}</CardText>

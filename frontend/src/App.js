@@ -14,8 +14,10 @@ import isAuthenticated from "./userLib/isAuthenticated";
 //Import FA icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {faChevronUp,faChevronDown,faSearch,faCalendarAlt,faRandom,faPaw} from "@fortawesome/free-solid-svg-icons";
+import {faWindowClose} from "@fortawesome/free-regular-svg-icons";
+
 import LogoutPage from "./components/pages/LogoutPage";
-library.add(faChevronUp,faChevronDown,faSearch,faCalendarAlt,faRandom,faPaw);
+library.add(faChevronUp,faChevronDown,faSearch,faCalendarAlt,faRandom,faPaw,faWindowClose);
 //
 
 class App extends Component {

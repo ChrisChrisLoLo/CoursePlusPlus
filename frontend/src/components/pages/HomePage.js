@@ -6,7 +6,7 @@ import {
 import "./styles/homePage.scss";
 import Container from "reactstrap/es/Container";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faReact,faPython,faSass,faCss3,faUbuntu,faAws,faHtml5,faBootstrap,faJs} from "@fortawesome/free-brands-svg-icons";
+import {faReact,faPython,faSass,faUbuntu,faAws,faBootstrap,faJs} from "@fortawesome/free-brands-svg-icons";
 
 export default class HomePage extends React.Component {
   render() {

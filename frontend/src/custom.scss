@@ -47,3 +47,19 @@ $card-cap-bg:#eeffee;
     z-index: $zindex-sticky;
   }
 }
+
+.icon-button{
+  cursor: pointer;
+  color: $secondary;
+  -o-transition:.25s;
+  -ms-transition:.25s;
+  -moz-transition:.25s;
+  -webkit-transition:.25s;
+  /* ...and now for the proper property */
+  transition:.25s;
+}
+
+.icon-button:hover{
+  cursor: pointer;
+  color: darken($secondary, 50%);
+}
