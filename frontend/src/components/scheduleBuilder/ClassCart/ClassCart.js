@@ -57,14 +57,15 @@ export default class ClassCart extends React.Component {
   }
 
   loadClassCartOffline(){
-    const dataResults = JSON.parse(localStorage.getItem("courseListData"));
+    const dataResults = JSON.parse(localStorage.getItem("courseListData")) || [];
+    // debugger;
     //Conditional prevents update looping
     if(this.state.classesInCart !== dataResults){
       this.setState({classesInCart: dataResults});
 
       //Read what courses are selected and update it
       const selectedCourses = [];
-      this.state.classesInCart.forEach((el) => {
+      dataResults.forEach((el) => {
         if (el.isInSchedule === true) selectedCourses.push(el);
       });
       console.log(selectedCourses);
@@ -83,7 +84,7 @@ export default class ClassCart extends React.Component {
     const results = this.state.classesInCart;
 
     let cart;
-    if (results.length > 0) {
+    if (results && results.length > 0) {
       const paginatedResults = results.slice(this.state.page * ITEMS_PER_PAGE, (this.state.page * ITEMS_PER_PAGE) + ITEMS_PER_PAGE);
       cart = paginatedResults.map((classCart) => {
         const courseAdded = this.props.coursesSelected.includes(classCart);
@@ -101,7 +102,7 @@ export default class ClassCart extends React.Component {
     }
 
     let buttonGroup = null;
-    if (results.length > 0) {
+    if (results && results.length > 0) {
       buttonGroup = (<ButtonGroup>
         <Button
           size={"sm"}
