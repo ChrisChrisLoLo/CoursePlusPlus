@@ -29,6 +29,7 @@ export default class SocialAuthButtons extends React.Component {
             onSuccess={this.handleGoogleSuccess}
             onFailure={(res) => console.warn(res)}
             cookiePolicy={'single_host_origin'}
+            className={"mt-2"}
         />
       </React.Fragment>
     );

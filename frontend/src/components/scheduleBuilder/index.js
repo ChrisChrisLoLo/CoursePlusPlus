@@ -1,11 +1,13 @@
 import React from "react";
 import {
+  Alert,
   Row,
   Col
 } from 'reactstrap';
 import ClassCart from "./ClassCart/ClassCart";
 import TermSelect from "./ClassCart/TermSelect";
 import ScheduleGrid from "./ScheduleGrid/ScheduleGrid";
+import isAuthenticated from "../../userLib/isAuthenticated";
 
 export default class ScheduleBuilderPage extends React.Component {
   constructor(props) {
@@ -51,6 +53,16 @@ export default class ScheduleBuilderPage extends React.Component {
   render() {
     return (
       <div className={"my-2"}>
+        {!isAuthenticated() &&
+					<Row>
+						<Col>
+							<Alert color={"warning"}>
+								You are not currently logged in, meaning all changes are local.
+								Log in to save your courses online.
+							</Alert>
+						</Col>
+					</Row>
+				}
         <Row>
           <Col>
             <h3 className={"font-title"}>Schedule Builder</h3>

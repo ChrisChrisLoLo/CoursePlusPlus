@@ -62,7 +62,6 @@ export default class CourseSingleForm extends React.Component {
                 value={this.state.courseNum}
                 onChange={this.onCourseChange}
               />
-
             </FormGroup>
             <Button onClick={(event) => this.handleSingleCourseSubmit(event, this.state.subjCode, this.state.courseNum)}
                     color={"primary"}> Search</Button>

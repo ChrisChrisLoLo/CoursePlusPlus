@@ -7,6 +7,7 @@ import {
   CardHeader,
 } from 'reactstrap';
 import CartItem from "./CartItem";
+import {Link} from "react-router-dom";
 
 import axios from "axios";
 import getAuthToken from "../../../userLib/getAuthToken";
@@ -98,7 +99,7 @@ export default class ClassCart extends React.Component {
         />);
       });
     } else {
-      cart = <p>No Results Found</p>;
+      cart = <p>No Results Found. Add classes from the <Link to={"/search"}>Search Page</Link> to use them in the schedule builder</p>;
     }
 
     let buttonGroup = null;

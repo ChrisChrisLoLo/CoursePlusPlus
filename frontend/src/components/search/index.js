@@ -1,5 +1,6 @@
 import React from "react";
 import {
+	Alert,
 	Row,
 	Col
 } from 'reactstrap';
@@ -8,6 +9,7 @@ import axios from "axios";
 import CourseListForm from "./CourseListForm.js";
 import SearchResults from "./SearchResults.js";
 import CourseSingleForm from "./CourseSingleForm.js";
+import isAuthenticated from "../../userLib/isAuthenticated";
 
 export default class SearchPage extends React.Component {
 	constructor(props) {
@@ -94,6 +96,17 @@ export default class SearchPage extends React.Component {
 		console.log(this.state);
 		return (
 			<div className={"my-2"}>
+				{!isAuthenticated() &&
+					<Row>
+						<Col>
+							<Alert color={"warning"}>
+								You are not currently logged in, meaning all changes are local.
+								Log in to save your courses online.
+							</Alert>
+
+						</Col>
+					</Row>
+				}
 				<Row>
 					<Col>
 							<h3 className={"font-title"}>Search</h3>
