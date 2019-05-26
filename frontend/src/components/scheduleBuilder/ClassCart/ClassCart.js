@@ -21,6 +21,7 @@ export default class ClassCart extends React.Component {
     this.state = {classesInCart: [], page: 0};
     this.handlePageChange = this.handlePageChange.bind(this);
     this.loadClassCart = this.loadClassCart.bind(this);
+    this.removeFromClassCart = this.removeFromClassCart.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -77,6 +78,13 @@ export default class ClassCart extends React.Component {
     }
   }
 
+  removeFromClassCart(cartItem){
+    const newClassCart = [...this.state.classesInCart].filter((classCartItem)=>{
+      return classCartItem.id !== cartItem.id;
+    });
+    this.setState({classesInCart:newClassCart});
+    this.props.handleCourseClassRemove(cartItem);
+  }
 
   handlePageChange(e, increment) {
     this.setState({page: this.state.page + increment});
@@ -99,6 +107,7 @@ export default class ClassCart extends React.Component {
           handleCourseClassAdd={this.props.handleCourseClassAdd}
           handleCourseClassRemove={this.props.handleCourseClassRemove}
           setCoursePreviewed={this.props.setCoursePreviewed}
+          removeFromClassCart={this.removeFromClassCart}
         />);
       });
     } else {

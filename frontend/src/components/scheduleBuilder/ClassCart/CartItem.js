@@ -18,7 +18,7 @@ export default class ClassCart extends React.Component {
     this.addCourseClassOffline = this.addCourseClassOffline.bind(this);
     this.removeCourseClassOffline = this.removeCourseClassOffline.bind(this);
     this.removeFromCart = this.removeFromCart.bind(this);
-    this.removeFromCartOffline = this.removeCourseClassOffline.bind(this);
+    this.removeFromCartOffline = this.removeFromCartOffline.bind(this);
   }
 
   addCourseClass() {
@@ -30,6 +30,8 @@ export default class ClassCart extends React.Component {
     }).then((res) => {
       console.log("update successful");
     });
+    //Button will change, so act as though the mouse is moving off the button
+    this.props.setCoursePreviewed(null)
   }
 
   removeCourseClass() {
@@ -43,12 +45,15 @@ export default class ClassCart extends React.Component {
     });
   }
 
+
   addCourseClassOffline() {
     this.props.handleCourseClassAdd(this.props.classCart);
     const courseCart = JSON.parse(localStorage.getItem("courseListData"));
     const targetClassCart = courseCart.find((classCart)=>{return this.props.classCart.courseClass.id === classCart.courseClass.id});
     targetClassCart.isInSchedule = true;
     localStorage.setItem("courseListData",JSON.stringify(courseCart));
+    //Button will change, so act as though the mouse is moving off the button
+    this.props.setCoursePreviewed(null)
   }
 
   removeCourseClassOffline() {
@@ -60,33 +65,24 @@ export default class ClassCart extends React.Component {
   }
 
 
-  // removeFromCart(){
-  //   if(this.props.checkFromMap(courseClassId)) {
-  //     axios.delete(process.env.REACT_APP_API_URL + "/api/classCart/" + this.props.getFromMap(courseClassId) + "/", {
-  //       headers: {Authorization: getAuthToken()}
-  //     }).then(res => {
-  //       this.props.removeClassCartFromMap(courseClassId);
-  //     });
-  //   }
-  //   else{
-  //     console.error("Class was not in the map to begin with");
-  //   }
-  // }
-  //
-  // removeFromCartOffline(){
-  //   if(this.props.checkFromMap(courseClass.id)) {
-  //     const currClassCart = JSON.parse(localStorage.getItem("courseListData"));
-  //     //Remove the class id from the localStorage array
-  //     const filteredClasses = currClassCart.filter((classCartItem)=>{
-  //       return classCartItem.id !== courseClass.id;
-  //     });
-  //     localStorage.setItem("courseListData",JSON.stringify(filteredClasses));
-  //     this.props.removeClassCartFromMap(courseClass.id);
-  //   }
-  //   else{
-  //     console.error("Class was not in the map to begin with");
-  //   }
-  // }
+  removeFromCart(){
+    axios.delete(process.env.REACT_APP_API_URL + "/api/classCart/" + this.props.classCart.id + "/", {
+      headers: {Authorization: getAuthToken()}
+    }).then(res => {
+      this.props.removeFromClassCart(this.props.classCart);
+    });
+
+  }
+
+  removeFromCartOffline(){
+    const currClassCart = JSON.parse(localStorage.getItem("courseListData"));
+    //Remove the class id from the localStorage array
+    const filteredClasses = currClassCart.filter((classCartItem)=>{
+      return classCartItem.id !== this.props.classCart.id;
+    });
+    localStorage.setItem("courseListData",JSON.stringify(filteredClasses));
+    this.props.removeFromClassCart(this.props.classCart);
+  }
 
 
   render() {
@@ -129,7 +125,7 @@ export default class ClassCart extends React.Component {
     return (
       <Card className={"mx-0 my-1"}>
         <CardBody className={"px-1 py-1"}>
-          <FontAwesomeIcon icon={["far","window-close"]} className={"float-right icon-button"} onClick={this.removeFromCart}/>
+          <FontAwesomeIcon icon={["far","window-close"]} className={"float-right icon-button"} onClick={isAuthenticated()?this.removeFromCart:this.removeFromCartOffline}/>
           <CardText className={"my-0"}>{courseString}</CardText>
           <CardText className={"mb-0 small"}>{courseClassString}</CardText>
           <CardText className={"mb-2 small"}>{course.id}</CardText>
