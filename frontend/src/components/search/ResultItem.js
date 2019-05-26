@@ -11,8 +11,6 @@ import {
 } from 'reactstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
-import "./styles/ResultItem.css";
-
 import axios from "axios";
 
 import ResultItemClass from "./ResultItemClass";
@@ -93,7 +91,7 @@ export default class ResultItem extends React.Component {
                 icon={this.state.descOpen ? "chevron-up" : "chevron-down"}
                 size={"1x"}
                 onClick={this.toggleDesc}
-                className={"chevron"}
+                className={"icon-button"}
               />
             </InputGroup>
           </CardTitle>
