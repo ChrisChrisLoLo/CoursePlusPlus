@@ -45,7 +45,6 @@ export default class ClassCart extends React.Component {
     });
   }
 
-
   addCourseClassOffline() {
     this.props.handleCourseClassAdd(this.props.classCart);
     const courseCart = JSON.parse(localStorage.getItem("courseListData"));
@@ -63,7 +62,6 @@ export default class ClassCart extends React.Component {
     targetClassCart.isInSchedule = false;
     localStorage.setItem("courseListData",JSON.stringify(courseCart));
   }
-
 
   removeFromCart(){
     axios.delete(process.env.REACT_APP_API_URL + "/api/classCart/" + this.props.classCart.id + "/", {
@@ -128,7 +126,7 @@ export default class ClassCart extends React.Component {
           <FontAwesomeIcon icon={["far","window-close"]} className={"float-right icon-button"} onClick={isAuthenticated()?this.removeFromCart:this.removeFromCartOffline}/>
           <CardText className={"my-0"}>{courseString}</CardText>
           <CardText className={"mb-0 small"}>{courseClassString}</CardText>
-          <CardText className={"mb-2 small"}>{course.id}</CardText>
+          <CardText className={"mb-2 small"}>{course.calendarCode}</CardText>
           {button}
         </CardBody>
       </Card>

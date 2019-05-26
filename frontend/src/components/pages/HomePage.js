@@ -12,7 +12,6 @@ export default class HomePage extends React.Component {
   render() {
     return (
       <div>
-
         <Row>
           <Col className={"px-0"}>
             <section className={"bgimage"}>
@@ -22,7 +21,7 @@ export default class HomePage extends React.Component {
                   <Col lg={"10"} md={"10"} sm={"10"} xs={"10"} className={"text-center text-white"}>
                     <h1 className={"font-title"}>UCourse Builder</h1>
                     <p className={"mb-2"}>An unofficial University of Alberta app</p>
-                    <p>Schedule building, refined</p>
+                    <p>Build a schedule faster than ever before</p>
                   </Col>
                   <Col></Col>
                 </Row>
@@ -37,9 +36,9 @@ export default class HomePage extends React.Component {
           <Col>
             <h3 className={"font-title"}>A Modern Upgrade</h3>
             <p>
-              Adding courses have never been easier. By leveraging modern web technologies, this
-              application allows you to add, remove, and swap courses on the fly,
-              allowing you to rapidly prototype a class schedule.
+              Building a course schedule is now fast and fun.
+              With UX and performance in mind, this application seeks to fix many of the flaws of
+              the current system, while still maintaining compatibility.
             </p>
           </Col>
           <Col xs={2} sm={2} md={3}>
@@ -47,6 +46,8 @@ export default class HomePage extends React.Component {
         </Row>
 
         <Row className={"bg-light pt-4"}>
+          <Col xs={1} sm={1} md={2}>
+          </Col>
           <Col>
             <Container>
               <Row>
@@ -54,7 +55,7 @@ export default class HomePage extends React.Component {
                   <FontAwesomeIcon icon={"search"} size={"3x"}/>
                   <h5 className={"font-title"}>Search for Courses</h5>
                   <p className={"small"}>
-                    Searching for courses is now 2x as fast as before.
+                    Searching for courses now gives results in one second, not ten.
                     Just punch in your criteria and get the results you want.
                   </p>
                 </Col>
@@ -63,8 +64,8 @@ export default class HomePage extends React.Component {
                   <FontAwesomeIcon icon={"calendar-alt"} size={"3x"}/>
                   <h5 className={"font-title"}>Make a Schedule</h5>
                   <p className={"small"}>
-                    Build your schedule for any upcoming term.
-                    Gone are the days of long loading times.
+                    Build your schedule for any upcoming term, all on a single page.
+                    Better yet, the new schedule grid is mobile friendly.
                   </p>
                 </Col>
 
@@ -73,6 +74,7 @@ export default class HomePage extends React.Component {
                   <h5 className={"font-title"}>Mix it Up</h5>
                   <p className={"small"}>
                     With the new cart system, it's easier than ever to swap any courses around.
+                    Change out any class you want with the press of a button.
                   </p>
                 </Col>
 
@@ -87,14 +89,51 @@ export default class HomePage extends React.Component {
               </Row>
             </Container>
           </Col>
+          <Col xs={1} sm={1} md={2}>
+          </Col>
         </Row>
 
-        <Row className={"bg-light"}>
+        <Row className={"bg-light pt-4"}>
           <Col xs={2} sm={2} md={3}>
           </Col>
           <Col>
-            <h3 className={"font-title"}>Upgrades and such</h3>
-            <p></p>
+            <h3 className={"font-title"}>Fix Where Broken</h3>
+            <p>
+              Many annoyances that comes with using Beartracks has been fixed.
+              The back button can now be used predictably, the app won't sign out after 30 minutes,
+              and you can now have more than one window of this application open.
+            </p>
+          </Col>
+          <Col xs={2} sm={2} md={3}>
+          </Col>
+        </Row>
+
+        <Row className={"bg-light pt-4"}>
+          <Col xs={2} sm={2} md={3}>
+          </Col>
+          <Col>
+            <h3 className={"font-title"}>Improve Where Needed</h3>
+            <p>
+              The workflow of adding and swapping around courses have been tuned to be more intuitive and convenient.
+              The site is now friendlier on mobile and simpler to use.
+              Great efforts have also been made to make this application accessible to anyone who wishes to use it,
+              having features such as a guest mode, as well as authentication via Google.
+            </p>
+          </Col>
+          <Col xs={2} sm={2} md={3}>
+          </Col>
+        </Row>
+
+        <Row className={"bg-light py-4"}>
+          <Col xs={2} sm={2} md={3}>
+          </Col>
+          <Col>
+            <h3 className={"font-title"}>Expand Where Desired</h3>
+            <p>
+              This application can further be expanded to include a plethora of new features, such as full mobile support,
+              automated database scraping, and progressive web app support.
+              Anyone who wishes to add any new features can submit a PR on <a href={"https://github.com/ChrisChrisLoLo/CoursePlusPlus"} target={"_blank"}>github</a>.
+            </p>
           </Col>
           <Col xs={2} sm={2} md={3}>
           </Col>
@@ -122,13 +161,13 @@ export default class HomePage extends React.Component {
         </Row>
 
         <Row className={"bg-dark text-light py-4"}>
-          <Col xs={2} sm={2} md={3}>
+          <Col xs={1} sm={1} md={2}>
           </Col>
           <Col>
-            <h3 className={"font-title"}>Footer</h3>
-            <p></p>
+            <p>App by <a href={"https://github.com/ChrisChrisLoLo/CoursePlusPlus"} target={"_blank"}>Christian Lo</a></p>
+            <p>Noppyright 2019</p>
           </Col>
-          <Col xs={2} sm={2} md={3}>
+          <Col xs={1} sm={1} md={2}>
           </Col>
         </Row>
       </div>
