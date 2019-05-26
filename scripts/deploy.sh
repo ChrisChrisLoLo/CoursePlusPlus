@@ -6,7 +6,7 @@ npm run build --prefix ../frontend &&
 scp -i "key.pem" -r ../frontend/build ubuntu@54.202.197.54:/var/www/CoursePlusPlus/frontend
 
 #Deploy backend (pull from github)
-ssh -i "key.pem" ubuntu@54.202.197.54 "cd /var/www/CoursePlusPlus && git pull"
+ssh -i "key.pem" ubuntu@54.202.197.54 "cd /var/www/CoursePlusPlus && sudo git pull"
 
 #Restart the gunicorn server
 ssh -i "key.pem" ubuntu@54.202.197.54 "cd /var/www/CoursePlusPlus/scripts/ && ./runProd.sh"
