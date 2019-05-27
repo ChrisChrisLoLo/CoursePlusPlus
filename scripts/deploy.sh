@@ -9,7 +9,7 @@ scp -i "key.pem" -r ../frontend/build ubuntu@54.202.197.54:/var/www/CoursePlusPl
 ssh -i "key.pem" ubuntu@54.202.197.54 "cd /var/www/CoursePlusPlus && sudo git pull"
 
 #Restart the gunicorn server
-ssh -i "key.pem" ubuntu@54.202.197.54 "cd /var/www/CoursePlusPlus/scripts/ && ./runProd.sh"
+ssh -i "key.pem" ubuntu@54.202.197.54 "cd /var/www/CoursePlusPlus/scripts/ && sudo ./runProd.sh"
 
 #Restart the nginx server
 ssh -i "key.pem" ubuntu@54.202.197.54 "sudo service nginx stop && sudo service nginx start"
