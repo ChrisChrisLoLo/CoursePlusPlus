@@ -22,11 +22,11 @@ and automatic data scraping could make this application highly desirable to the 
 
 While I plan spending my time on other projects in the near future, this app can be expanded on in order to learn
 new concepts or if a limited audience (friends/family) find the app useful. 
-###Contributing
+### Contributing
 This app is open to contributions for anyone who wants to improve the app or hone their development skills.
 Feel free to make PRs for any bugfixes, cleanings, or tickets in the projects tab. Contact me if you
 have a cool feature/idea you want to implement.
-###Credits
+### Credits
 Thank you to IST for pointing me to the course calendar database resource.
 
 
