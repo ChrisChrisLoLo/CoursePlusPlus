@@ -162,9 +162,9 @@ STATIC_ROOT = '/var/www/django/djangoStatic'
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-    'http://54.202.197.54',
-    'http://ucourseplus.com',
-    'http://www.ucourseplus.com',
+    'https://54.202.197.54',
+    'https://ucourseplus.com',
+    'https://www.ucourseplus.com',
 ]
 
 APPEND_SLASH = True
