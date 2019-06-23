@@ -33,7 +33,7 @@ Thank you to IST for pointing me to the course calendar database resource.
 ## Developer Information (Nerd Stuff)
 ### Architecture
 This is a monolithic REST API using Django coupled to a Single Page Application (SPA) in React.
-Most choices in technology favoured convience/cost over performance, due to the limited audience of this app,
+Most choices in technology favoured rapid development speed over cost over performance, due to the limited audience of this app,
 and therefore limited traffic.
 
 A React SPA was used to dip my toes into modern front-end software development. While using a SPA arguably made developing
