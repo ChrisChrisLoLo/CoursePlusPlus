@@ -16,6 +16,7 @@ export default class CourseSingleForm extends React.Component {
     this.onSubjChange = this.onSubjChange.bind(this);
     this.onCourseChange = this.onCourseChange.bind(this);
     this.handleSingleCourseSubmit = this.handleSingleCourseSubmit.bind(this);
+    this.handleKeyPressSubmit = this.handleKeyPressSubmit.bind(this);
   }
 
   onSubjChange(event) {
@@ -26,9 +27,14 @@ export default class CourseSingleForm extends React.Component {
     this.setState({courseNum: event.target.value});
   }
 
-  handleSingleCourseSubmit(event, subjCode, courseNum) {
-    console.log(subjCode, courseNum);
-    this.props.onSingleCourseSubmit(event, subjCode, courseNum);
+  handleSingleCourseSubmit(event) {
+    this.props.onSingleCourseSubmit(event, this.state.subjCode, this.state.courseNum);
+  }
+
+  handleKeyPressSubmit(event){
+    if (event.key == "Enter"){
+          this.props.onSingleCourseSubmit(event, this.state.subjCode, this.state.courseNum);
+    }
   }
 
 
@@ -48,6 +54,7 @@ export default class CourseSingleForm extends React.Component {
                 placeholder="COURS"
                 value={this.state.subjCode}
                 onChange={this.onSubjChange}
+                onKeyPress={this.handleKeyPressSubmit}
               />
             </FormGroup>
             <FormGroup>
@@ -61,12 +68,12 @@ export default class CourseSingleForm extends React.Component {
                 placeholder="101"
                 value={this.state.courseNum}
                 onChange={this.onCourseChange}
+                onKeyPress={this.handleKeyPressSubmit}
               />
             </FormGroup>
-            <Button onClick={(event) => this.handleSingleCourseSubmit(event, this.state.subjCode, this.state.courseNum)}
+            <Button onClick={(e) => this.handleSingleCourseSubmit(e)}
                     color={"primary"}> Search</Button>
           </Form>
-
         </CardBody>
       </Card>
     );
